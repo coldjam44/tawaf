@@ -17,8 +17,8 @@ use App\Http\Controllers\Apis\HotelinhomeController;
 use App\Http\Controllers\Apis\TermController;
 use App\Http\Controllers\Apis\HotelinmadinaController;
 use App\Http\Controllers\Apis\HotelinmakkahController;
-
-
+ 
+use App\Http\Controllers\VisitorLocationController;
 
 
 /*
@@ -111,3 +111,34 @@ Route::post('/hotelinmakkah/{id}',[HotelinmakkahController::class,'update']);
 Route::delete('/hotelinmakkah/{id}',[HotelinmakkahController::class,'destroy']);
 
 
+
+
+
+
+
+ 
+
+
+
+/*
+|--------------------------------------------------------------------------
+| API Routes
+|--------------------------------------------------------------------------
+*/
+
+// Visitor location routes
+Route::prefix('visitor')->group(function () {
+    // Get current visitor's country
+    Route::get('/country', [VisitorLocationController::class, 'getVisitorCountry']);
+    
+    // Get visitor's full details
+    Route::get('/details', [VisitorLocationController::class, 'getVisitorDetails']);
+    
+    // Get country by specific IP
+    Route::get('/country/{ip}', [VisitorLocationController::class, 'getCountryByIP'])
+         ->where('ip', '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}');
+});
+
+// Alternative shorter routes
+Route::get('/country', [VisitorLocationController::class, 'getVisitorCountry']);
+Route::get('/my-location', [VisitorLocationController::class, 'getVisitorDetails']);

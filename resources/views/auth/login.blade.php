@@ -101,7 +101,15 @@
                 </a>
               </div>
               <!-- /Logo -->
-              <h4 class="mb-1 pt-2">Welcome to Tawaf! 👋</h4>
+             @php
+    // جلب اسم الدومين بدون www وبدون tld
+    $host = parse_url(request()->getHost(), PHP_URL_HOST) ?: request()->getHost();
+    $parts = explode('.', $host);
+    $siteName = $parts[0]; // أول جزء من الدومين
+@endphp
+
+<h4 class="mb-1 pt-2">Welcome to {{ ucfirst($siteName) }}! 👋</h4>
+
               <p class="mb-4">Please sign-in to your account and start the adventure</p>
 
               <form id="formAuthentication" class="mb-3" action="{{ route('login') }}" method="POST">

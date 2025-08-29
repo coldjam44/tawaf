@@ -11,26 +11,28 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('booknows', function (Blueprint $table) {
-            $table->id();
-            $table->string('fullname');
-            $table->string('phonenumber');
-            $table->text('specialrequest')->nullable();
-            $table->string('check_in_ar')->nullable();
-            $table->string('check_in_en')->nullable();
-            $table->string('check_out_ar')->nullable();
-            $table->string('check_out_en')->nullable();
-            $table->integer('totalprice')->nullable();
-            $table->integer('numberofroom');
-            $table->integer('numberofadult')->nullable();
-            $table->integer('numberofchild')->nullable();
-            $table->json('age_child')->nullable();
-            $table->foreignId('room_id')->constrained('avilablerooms')->onDelete('cascade');
-                      $table->foreignId('offer_id')->constrained('ramadanoffers')->onDelete('cascade');
+        if (!Schema::hasTable('booknows')) {
+            Schema::create('booknows', function (Blueprint $table) {
+                $table->id();
+                $table->string('fullname');
+                $table->string('phonenumber');
+                $table->text('specialrequest')->nullable();
+                $table->string('check_in_ar')->nullable();
+                $table->string('check_in_en')->nullable();
+                $table->string('check_out_ar')->nullable();
+                $table->string('check_out_en')->nullable();
+                $table->integer('totalprice')->nullable();
+                $table->integer('numberofroom');
+                $table->integer('numberofadult')->nullable();
+                $table->integer('numberofchild')->nullable();
+                $table->json('age_child')->nullable();
 
+                $table->foreignId('room_id')->constrained('avilablerooms')->onDelete('cascade');
+                $table->foreignId('offer_id')->constrained('ramadanoffers')->onDelete('cascade');
 
-            $table->timestamps();
-        });
+                $table->timestamps();
+            });
+        }
     }
 
     /**
