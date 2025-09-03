@@ -25,8 +25,12 @@ use App\Http\Controllers\AreaController;
 use App\Http\Controllers\ProjectImageController;
 use App\Http\Controllers\ProjectDescriptionController;
 use App\Http\Controllers\ProjectAmenityController;
+use App\Http\Controllers\ProjectContentBlockController;
+use App\Http\Controllers\ProjectContentBlockImageController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\PropertyController;
 
 
 use App\Models\customerreview;
@@ -93,6 +97,7 @@ Route::group(
         
         Route::resource('projects', ProjectController::class);
 
+
         // Project Details Routes
         Route::get('projects/{project}/details', [ProjectDetailController::class, 'index'])->name('project-details.index');
         Route::get('projects/{project}/details/create', [ProjectDetailController::class, 'create'])->name('project-details.create');
@@ -131,6 +136,21 @@ Route::group(
         Route::post('projects/{project}/amenities/{amenity}/toggle', [ProjectAmenityController::class, 'toggle'])->name('project-amenities.toggle');
         Route::post('projects/{project}/amenities/bulk-update', [ProjectAmenityController::class, 'bulkUpdate'])->name('project-amenities.bulk-update');
         Route::get('projects/{project}/amenities/show', [ProjectAmenityController::class, 'show'])->name('project-amenities.show');
+
+        // Project Content Blocks Routes
+        Route::get('projects/{project}/content-blocks', [ProjectContentBlockController::class, 'index'])->name('project-content-blocks.index');
+        Route::get('projects/{project}/content-blocks/create', [ProjectContentBlockController::class, 'create'])->name('project-content-blocks.create');
+        Route::post('projects/{project}/content-blocks', [ProjectContentBlockController::class, 'store'])->name('project-content-blocks.store');
+        Route::get('projects/{project}/content-blocks/{block}/edit', [ProjectContentBlockController::class, 'edit'])->name('project-content-blocks.edit');
+        Route::put('projects/{project}/content-blocks/{block}', [ProjectContentBlockController::class, 'update'])->name('project-content-blocks.update');
+        Route::delete('projects/{project}/content-blocks/{block}', [ProjectContentBlockController::class, 'destroy'])->name('project-content-blocks.destroy');
+        Route::post('projects/{project}/content-blocks/{block}/toggle', [ProjectContentBlockController::class, 'toggle'])->name('project-content-blocks.toggle');
+        Route::post('projects/{project}/content-blocks/update-order', [ProjectContentBlockController::class, 'updateOrder'])->name('project-content-blocks.update-order');
+        // Project Content Block Images Routes
+        Route::post('projects/{project}/content-blocks/{block}/images', [ProjectContentBlockImageController::class, 'store'])->name('project-content-blocks.images.store');
+        Route::delete('projects/{project}/content-blocks/{block}/images/{image}', [ProjectContentBlockImageController::class, 'destroy'])->name('project-content-blocks.images.destroy');
+        Route::post('projects/{project}/content-blocks/{block}/images/{image}/toggle', [ProjectContentBlockImageController::class, 'toggle'])->name('project-content-blocks.images.toggle');
+        Route::post('projects/{project}/content-blocks/{block}/images/update-order', [ProjectContentBlockImageController::class, 'updateOrder'])->name('project-content-blocks.images.update-order');
 
         // About Us Routes
         Route::get('about-us', [AboutUsController::class, 'index'])->name('about-us.index');
@@ -180,5 +200,22 @@ Route::group(
         Route::put('real-estate-company/{id}', [App\Http\Controllers\RealEstateCompanyController::class, 'update'])->name('real-estate-company.update');
         Route::post('real-estate-company', [App\Http\Controllers\RealEstateCompanyController::class, 'store'])->name('real-estate-company.store');
         Route::delete('real-estate-company/{id}', [App\Http\Controllers\RealEstateCompanyController::class, 'destroy'])->name('real-estate-company.destroy');
+
+        // Contact Us Routes
+        Route::get('contact-us', [App\Http\Controllers\ContactUsController::class, 'index'])->name('contact-us.index');
+        Route::post('contact-us', [App\Http\Controllers\ContactUsController::class, 'store'])->name('contact-us.store');
+        Route::get('contact-us/{id}/edit', [App\Http\Controllers\ContactUsController::class, 'edit'])->name('contact-us.edit');
+        Route::put('contact-us/{id}', [App\Http\Controllers\ContactUsController::class, 'update'])->name('contact-us.update');
+        Route::delete('contact-us/{id}', [App\Http\Controllers\ContactUsController::class, 'destroy'])->name('contact-us.destroy');
+        Route::get('contact-us/{id}', [App\Http\Controllers\ContactUsController::class, 'show'])->name('contact-us.show');
+
+        // Newsletter Routes
+        Route::resource('newsletter', NewsletterController::class);
+
+        // Properties Routes
+Route::resource('properties', PropertyController::class);
+
+Route::post('properties/select-project', [PropertyController::class, 'selectProject'])->name('properties.select-project');
+Route::get('properties/get-project-location/{projectId}', [PropertyController::class, 'getProjectLocation'])->name('properties.get-project-location');
     }
 );
