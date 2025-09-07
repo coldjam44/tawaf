@@ -15,7 +15,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Login Basic - Pages | Tawaf - Bootstrap Admin Template</title>
+    <title>Login - Realestate</title>
 
     <meta name="description" content="" />
 
@@ -97,7 +97,7 @@
                         fill="#7367F0" />
                     </svg>
                   </span>
-                  <span class="app-brand-text demo text-body fw-bold ms-1">Tawaf</span>
+                  <span class="app-brand-text demo text-body fw-bold ms-1">Aura Home</span>
                 </a>
               </div>
               <!-- /Logo -->

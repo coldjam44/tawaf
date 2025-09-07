@@ -1,0 +1,898 @@
+{
+	"info": {
+		"_postman_id": "create-project-with-all-details-api",
+		"name": "Create Project With All Details API",
+		"description": "Postman collection for the Create Project With All Details API endpoint. This collection allows you to create a complete project with all its components (images, details, amenities, content blocks) in one request, returning the same structure as the get project endpoint.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12345"
+	},
+	"item": [
+		{
+			"name": "Create Basic Project (Minimal Data)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "prj_title_ar",
+							"value": "مشروع تجريبي جديد",
+							"type": "text",
+							"description": "Project title in Arabic (required)"
+						},
+						{
+							"key": "prj_title_en",
+							"value": "New Test Project",
+							"type": "text",
+							"description": "Project title in English (required)"
+						},
+						{
+							"key": "prj_description_ar",
+							"value": "وصف المشروع التجريبي الجديد باللغة العربية",
+							"type": "text",
+							"description": "Project description in Arabic"
+						},
+						{
+							"key": "prj_description_en",
+							"value": "Description of the new test project in English",
+							"type": "text",
+							"description": "Project description in English"
+						},
+						{
+							"key": "prj_areaId",
+							"value": "1",
+							"type": "text",
+							"description": "Area ID (required)"
+						},
+						{
+							"key": "company_id",
+							"value": "1",
+							"type": "text",
+							"description": "Company ID (optional)"
+						},
+						{
+							"key": "prj_adm",
+							"value": "ADM-2025-001",
+							"type": "text",
+							"description": "ADM number"
+						},
+						{
+							"key": "prj_cn",
+							"value": "CN-2025-001",
+							"type": "text",
+							"description": "CN number"
+						},
+						{
+							"key": "prj_projectNumber",
+							"value": "PROJ-2025-001",
+							"type": "text",
+							"description": "Project number"
+						},
+						{
+							"key": "prj_MadhmounPermitNumber",
+							"value": "MP-2025-001",
+							"type": "text",
+							"description": "Madhmoun permit number"
+						},
+						{
+							"key": "prj_brochurefile",
+							"type": "file",
+							"description": "Project brochure (PDF only)"
+						},
+						{
+							"key": "prj_floorplan",
+							"type": "file",
+							"description": "Project floorplan (PDF only)"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/projects/create-with-all-details",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"projects",
+						"create-with-all-details"
+					]
+				},
+				"description": "Create a basic project with minimal required data. This demonstrates the simplest form of project creation."
+			},
+			"response": []
+		},
+		{
+			"name": "Create Project with Project Details",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "prj_title_ar",
+							"value": "مشروع مع تفاصيل",
+							"type": "text",
+							"description": "Project title in Arabic"
+						},
+						{
+							"key": "prj_title_en",
+							"value": "Project with Details",
+							"type": "text",
+							"description": "Project title in English"
+						},
+						{
+							"key": "prj_description_ar",
+							"value": "مشروع يحتوي على تفاصيل شاملة",
+							"type": "text",
+							"description": "Project description in Arabic"
+						},
+						{
+							"key": "prj_description_en",
+							"value": "Project containing comprehensive details",
+							"type": "text",
+							"description": "Project description in English"
+						},
+						{
+							"key": "prj_areaId",
+							"value": "1",
+							"type": "text",
+							"description": "Area ID"
+						},
+						{
+							"key": "project_details[0][detail_ar]",
+							"value": "السعر الابتدائي",
+							"type": "text",
+							"description": "Detail title in Arabic"
+						},
+						{
+							"key": "project_details[0][detail_en]",
+							"value": "Starting Price",
+							"type": "text",
+							"description": "Detail title in English"
+						},
+						{
+							"key": "project_details[0][detail_value_ar]",
+							"value": "قريباً",
+							"type": "text",
+							"description": "Detail value in Arabic"
+						},
+						{
+							"key": "project_details[0][detail_value_en]",
+							"value": "Coming Soon",
+							"type": "text",
+							"description": "Detail value in English"
+						},
+						{
+							"key": "project_details[0][order]",
+							"value": "1",
+							"type": "text",
+							"description": "Detail order"
+						},
+						{
+							"key": "project_details[1][detail_ar]",
+							"value": "نوع العرض",
+							"type": "text",
+							"description": "Second detail title in Arabic"
+						},
+						{
+							"key": "project_details[1][detail_en]",
+							"value": "Offering Type",
+							"type": "text",
+							"description": "Second detail title in English"
+						},
+						{
+							"key": "project_details[1][detail_value_ar]",
+							"value": "شقق من 2 إلى 5 غرف نوم",
+							"type": "text",
+							"description": "Second detail value in Arabic"
+						},
+						{
+							"key": "project_details[1][detail_value_en]",
+							"value": "2 to 5 Bedroom Apartments",
+							"type": "text",
+							"description": "Second detail value in English"
+						},
+						{
+							"key": "project_details[1][order]",
+							"value": "2",
+							"type": "text",
+							"description": "Second detail order"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/projects/create-with-all-details",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"projects",
+						"create-with-all-details"
+					]
+				},
+				"description": "Create a project with project details. Shows how to add multiple project detail entries."
+			},
+			"response": []
+		},
+		{
+			"name": "Create Project with Amenities",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "prj_title_ar",
+							"value": "مشروع مع مرافق",
+							"type": "text",
+							"description": "Project title in Arabic"
+						},
+						{
+							"key": "prj_title_en",
+							"value": "Project with Amenities",
+							"type": "text",
+							"description": "Project title in English"
+						},
+						{
+							"key": "prj_description_ar",
+							"value": "مشروع يحتوي على مرافق متعددة",
+							"type": "text",
+							"description": "Project description in Arabic"
+						},
+						{
+							"key": "prj_description_en",
+							"value": "Project containing multiple amenities",
+							"type": "text",
+							"description": "Project description in English"
+						},
+						{
+							"key": "prj_areaId",
+							"value": "1",
+							"type": "text",
+							"description": "Area ID"
+						},
+						{
+							"key": "project_amenities[0][amenity_type]",
+							"value": "infinity_pool",
+							"type": "text",
+							"description": "First amenity type"
+						},
+						{
+							"key": "project_amenities[0][is_active]",
+							"value": "1",
+							"type": "text",
+							"description": "First amenity active status (1 or 0)"
+						},
+						{
+							"key": "project_amenities[1][amenity_type]",
+							"value": "gym",
+							"type": "text",
+							"description": "Second amenity type"
+						},
+						{
+							"key": "project_amenities[1][is_active]",
+							"value": "1",
+							"type": "text",
+							"description": "Second amenity active status (1 or 0)"
+						},
+						{
+							"key": "project_amenities[2][amenity_type]",
+							"value": "concierge_services",
+							"type": "text",
+							"description": "Third amenity type"
+						},
+						{
+							"key": "project_amenities[2][is_active]",
+							"value": "0",
+							"type": "text",
+							"description": "Third amenity active status (1 or 0)"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/projects/create-with-all-details",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"projects",
+						"create-with-all-details"
+					]
+				},
+				"description": "Create a project with amenities. Shows how to add multiple amenity types with their active status."
+			},
+			"response": []
+		},
+		{
+			"name": "Create Project with Content Blocks",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "prj_title_ar",
+							"value": "مشروع مع كتل المحتوى",
+							"type": "text",
+							"description": "Project title in Arabic"
+						},
+						{
+							"key": "prj_title_en",
+							"value": "Project with Content Blocks",
+							"type": "text",
+							"description": "Project title in English"
+						},
+						{
+							"key": "prj_description_ar",
+							"value": "مشروع يحتوي على كتل محتوى متعددة",
+							"type": "text",
+							"description": "Project description in Arabic"
+						},
+						{
+							"key": "prj_description_en",
+							"value": "Project containing multiple content blocks",
+							"type": "text",
+							"description": "Project description in English"
+						},
+						{
+							"key": "prj_areaId",
+							"value": "1",
+							"type": "text",
+							"description": "Area ID"
+						},
+						{
+							"key": "project_content_blocks[0][title_ar]",
+							"value": "وصف المشروع",
+							"type": "text",
+							"description": "First content block title in Arabic"
+						},
+						{
+							"key": "project_content_blocks[0][title_en]",
+							"value": "Project Description",
+							"type": "text",
+							"description": "First content block title in English"
+						},
+						{
+							"key": "project_content_blocks[0][content_ar]",
+							"value": "مشروع فاخر يقع في قلب المدينة مع إطلالات رائعة على البحر",
+							"type": "text",
+							"description": "First content block content in Arabic"
+						},
+						{
+							"key": "project_content_blocks[0][content_en]",
+							"value": "Luxury project located in the heart of the city with stunning sea views",
+							"type": "text",
+							"description": "First content block content in English"
+						},
+						{
+							"key": "project_content_blocks[0][order]",
+							"value": "1",
+							"type": "text",
+							"description": "First content block order"
+						},
+						{
+							"key": "project_content_blocks[0][images][]",
+							"type": "file",
+							"description": "Upload images for first content block"
+						},
+						{
+							"key": "project_content_blocks[1][title_ar]",
+							"value": "الموقع",
+							"type": "text",
+							"description": "Second content block title in Arabic"
+						},
+						{
+							"key": "project_content_blocks[1][title_en]",
+							"value": "Location",
+							"type": "text",
+							"description": "Second content block title in English"
+						},
+						{
+							"key": "project_content_blocks[1][content_ar]",
+							"value": "يقع المشروع في منطقة استراتيجية مع سهولة الوصول لجميع الخدمات",
+							"type": "text",
+							"description": "Second content block content in Arabic"
+						},
+						{
+							"key": "project_content_blocks[1][content_en]",
+							"value": "The project is located in a strategic area with easy access to all services",
+							"type": "text",
+							"description": "Second content block content in English"
+						},
+						{
+							"key": "project_content_blocks[1][order]",
+							"value": "2",
+							"type": "text",
+							"description": "Second content block order"
+						},
+						{
+							"key": "project_content_blocks[1][images][]",
+							"type": "file",
+							"description": "Upload images for second content block"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/projects/create-with-all-details",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"projects",
+						"create-with-all-details"
+					]
+				},
+				"description": "Create a project with content blocks. Shows how to add multiple content blocks with titles and content."
+			},
+			"response": []
+		},
+		{
+			"name": "Create Project with Images",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "prj_title_ar",
+							"value": "مشروع مع صور",
+							"type": "text",
+							"description": "Project title in Arabic"
+						},
+						{
+							"key": "prj_title_en",
+							"value": "Project with Images",
+							"type": "text",
+							"description": "Project title in English"
+						},
+						{
+							"key": "prj_description_ar",
+							"value": "مشروع يحتوي على صور متعددة",
+							"type": "text",
+							"description": "Project description in Arabic"
+						},
+						{
+							"key": "prj_description_en",
+							"value": "Project containing multiple images",
+							"type": "text",
+							"description": "Project description in English"
+						},
+						{
+							"key": "prj_areaId",
+							"value": "1",
+							"type": "text",
+							"description": "Area ID"
+						},
+						{
+							"key": "project_images[interior][]",
+							"type": "file",
+							"description": "Interior images (multiple files allowed)"
+						},
+						{
+							"key": "project_images[exterior][]",
+							"type": "file",
+							"description": "Exterior images (multiple files allowed)"
+						},
+						{
+							"key": "project_images[floorplan][]",
+							"type": "file",
+							"description": "Floorplan images (multiple files allowed)"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/projects/create-with-all-details",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"projects",
+						"create-with-all-details"
+					]
+				},
+				"description": "Create a project with images. Upload multiple images for interior, exterior, and floorplan categories."
+			},
+			"response": []
+		},
+		{
+			"name": "Create Complete Project (All Components)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "prj_title_ar",
+							"value": "مشروع متكامل شامل",
+							"type": "text",
+							"description": "Project title in Arabic"
+						},
+						{
+							"key": "prj_title_en",
+							"value": "Complete Comprehensive Project",
+							"type": "text",
+							"description": "Project title in English"
+						},
+						{
+							"key": "prj_description_ar",
+							"value": "مشروع متكامل يحتوي على جميع المكونات والتفاصيل",
+							"type": "text",
+							"description": "Project description in Arabic"
+						},
+						{
+							"key": "prj_description_en",
+							"value": "Complete project containing all components and details",
+							"type": "text",
+							"description": "Project description in English"
+						},
+						{
+							"key": "prj_areaId",
+							"value": "1",
+							"type": "text",
+							"description": "Area ID"
+						},
+						{
+							"key": "company_id",
+							"value": "1",
+							"type": "text",
+							"description": "Company ID"
+						},
+						{
+							"key": "prj_adm",
+							"value": "ADM-2025-COMPLETE",
+							"type": "text",
+							"description": "ADM number"
+						},
+						{
+							"key": "prj_cn",
+							"value": "CN-2025-COMPLETE",
+							"type": "text",
+							"description": "CN number"
+						},
+						{
+							"key": "prj_projectNumber",
+							"value": "PROJ-2025-COMPLETE",
+							"type": "text",
+							"description": "Project number"
+						},
+						{
+							"key": "prj_MadhmounPermitNumber",
+							"value": "MP-2025-COMPLETE",
+							"type": "text",
+							"description": "Madhmoun permit number"
+						},
+						{
+							"key": "project_details[0][detail_ar]",
+							"value": "السعر",
+							"type": "text",
+							"description": "First detail title in Arabic"
+						},
+						{
+							"key": "project_details[0][detail_en]",
+							"value": "Price",
+							"type": "text",
+							"description": "First detail title in English"
+						},
+						{
+							"key": "project_details[0][detail_value_ar]",
+							"value": "قريباً",
+							"type": "text",
+							"description": "First detail value in Arabic"
+						},
+						{
+							"key": "project_details[0][detail_value_en]",
+							"value": "Coming Soon",
+							"type": "text",
+							"description": "First detail value in English"
+						},
+						{
+							"key": "project_details[0][order]",
+							"value": "1",
+							"type": "text",
+							"description": "First detail order"
+						},
+						{
+							"key": "project_amenities[0][amenity_type]",
+							"value": "infinity_pool",
+							"type": "text",
+							"description": "First amenity type"
+						},
+						{
+							"key": "project_amenities[0][is_active]",
+							"value": "1",
+							"type": "text",
+							"description": "First amenity active status (1 or 0)"
+						},
+						{
+							"key": "project_amenities[1][amenity_type]",
+							"value": "gym",
+							"type": "text",
+							"description": "Second amenity type"
+						},
+						{
+							"key": "project_amenities[1][is_active]",
+							"value": "1",
+							"type": "text",
+							"description": "Second amenity active status (1 or 0)"
+						},
+						{
+							"key": "project_content_blocks[0][title_ar]",
+							"value": "وصف المشروع",
+							"type": "text",
+							"description": "First content block title in Arabic"
+						},
+						{
+							"key": "project_content_blocks[0][title_en]",
+							"value": "Project Description",
+							"type": "text",
+							"description": "First content block title in English"
+						},
+						{
+							"key": "project_content_blocks[0][content_ar]",
+							"value": "مشروع متكامل مع جميع المكونات",
+							"type": "text",
+							"description": "First content block content in Arabic"
+						},
+						{
+							"key": "project_content_blocks[0][content_en]",
+							"value": "Complete project with all components",
+							"type": "text",
+							"description": "First content block content in English"
+						},
+						{
+							"key": "project_content_blocks[0][order]",
+							"value": "1",
+							"type": "text",
+							"description": "First content block order"
+						},
+						{
+							"key": "project_content_blocks[0][images][]",
+							"type": "file",
+							"description": "Upload images for first content block"
+						},
+						{
+							"key": "project_images[interior][]",
+							"type": "file",
+							"description": "Interior images"
+						},
+						{
+							"key": "project_images[exterior][]",
+							"type": "file",
+							"description": "Exterior images"
+						},
+						{
+							"key": "project_images[floorplan][]",
+							"type": "file",
+							"description": "Floorplan images"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/projects/create-with-all-details",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"projects",
+						"create-with-all-details"
+					]
+				},
+				"description": "Create a complete project with all components: basic info, details, amenities, content blocks, and images. This is the most comprehensive example."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Pre-request script",
+					"console.log('Creating project with all details...');",
+					"",
+					"// Log request type and URL",
+					"console.log('Request Method: ' + pm.request.method);",
+					"console.log('Request URL: ' + pm.request.url.toString());",
+					"",
+					"// Log form data if present",
+					"if (pm.request.body && pm.request.body.mode === 'formdata') {",
+					"    console.log('Form Data Fields:');",
+					"    const bodyJson = pm.request.body.toJSON();",
+					"    if (bodyJson && Array.isArray(bodyJson.formdata)) {",
+					"        bodyJson.formdata.forEach(function(item) {",
+					"            if (item.type === 'file') {",
+					"                console.log(`  ${item.key}: [File Upload]`);",
+					"            } else {",
+					"                console.log(`  ${item.key}: ${item.value || ''}`);",
+					"            }",
+					"        });",
+					"    } else {",
+					"        console.log('  (no formdata items)');",
+					"    }",
+					"}"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Test script to validate the response",
+					"pm.test('Status code is 201 (Created)', function () {",
+					"    pm.response.to.have.status(201);",
+					"});",
+					"",
+					"pm.test('Response has success status', function () {",
+					"    const jsonData = pm.response.json();",
+					"    pm.expect(jsonData.status).to.eql('success');",
+					"});",
+					"",
+					"pm.test('Response contains data object', function () {",
+					"    const jsonData = pm.response.json();",
+					"    pm.expect(jsonData.data).to.be.an('object');",
+					"});",
+					"",
+					"pm.test('Project has required fields', function () {",
+					"    const jsonData = pm.response.json();",
+					"    const project = jsonData.data;",
+					"    pm.expect(project).to.have.property('id');",
+					"    pm.expect(project).to.have.property('prj_title_ar');",
+					"    pm.expect(project).to.have.property('prj_title_en');",
+					"    pm.expect(project).to.have.property('prj_description_ar');",
+					"    pm.expect(project).to.have.property('prj_description_en');",
+					"    pm.expect(project).to.have.property('prj_areaId');",
+					"});",
+					"",
+					"pm.test('Project has area object', function () {",
+					"    const jsonData = pm.response.json();",
+					"    const project = jsonData.data;",
+					"    pm.expect(project).to.have.property('area');",
+					"    pm.expect(project.area).to.have.property('name_en');",
+					"    pm.expect(project.area).to.have.property('name_ar');",
+					"});",
+					"",
+					"pm.test('Project has company object', function () {",
+					"    const jsonData = pm.response.json();",
+					"    const project = jsonData.data;",
+					"    pm.expect(project).to.have.property('company');",
+					"    pm.expect(project.company).to.have.property('company_name_ar');",
+					"    pm.expect(project.company).to.have.property('company_name_en');",
+					"});",
+					"",
+					"pm.test('Project has images object', function () {",
+					"    const jsonData = pm.response.json();",
+					"    const project = jsonData.data;",
+					"    pm.expect(project).to.have.property('images');",
+					"    pm.expect(project.images).to.have.property('interior');",
+					"    pm.expect(project.images).to.have.property('exterior');",
+					"    pm.expect(project.images).to.have.property('floorplan');",
+					"});",
+					"",
+					"pm.test('Project has ProjectDetails array', function () {",
+					"    const jsonData = pm.response.json();",
+					"    const project = jsonData.data;",
+					"    pm.expect(project).to.have.property('ProjectDetails');",
+					"    pm.expect(project.ProjectDetails).to.be.an('array');",
+					"});",
+					"",
+					"pm.test('Project has Amenities array', function () {",
+					"    const jsonData = pm.response.json();",
+					"    const project = jsonData.data;",
+					"    pm.expect(project).to.have.property('Amenities');",
+					"    pm.expect(project.Amenities).to.be.an('array');",
+					"});",
+					"",
+					"pm.test('Project has project_content_blocks array', function () {",
+					"    const jsonData = pm.response.json();",
+					"    const project = jsonData.data;",
+					"    pm.expect(project).to.have.property('project_content_blocks');",
+					"    pm.expect(project.project_content_blocks).to.be.an('array');",
+					"});",
+					"",
+					"// Log response time",
+					"console.log('Response time: ' + pm.response.responseTime + 'ms');",
+					"",
+					"// Log created project information",
+					"const jsonData = pm.response.json();",
+					"if (jsonData.data) {",
+					"    const project = jsonData.data;",
+					"    console.log('✅ Project Created Successfully!');",
+					"    console.log('Project ID: ' + project.id);",
+					"    console.log('Project Title (EN): ' + project.prj_title_en);",
+					"    console.log('Project Title (AR): ' + project.prj_title_ar);",
+					"    console.log('Area: ' + project.area.name_en);",
+					"    console.log('Company: ' + (project.company.company_name_en || 'None'));",
+					"    console.log('Interior Images: ' + project.images.interior.length);",
+					"    console.log('Exterior Images: ' + project.images.exterior.length);",
+					"    console.log('Floorplan Images: ' + project.images.floorplan.length);",
+					"    console.log('Project Details: ' + project.ProjectDetails.length);",
+					"    console.log('Amenities: ' + project.Amenities.length);",
+					"    console.log('Content Blocks: ' + project.project_content_blocks.length);",
+					"    ",
+					"    // Log project details",
+					"    if (project.ProjectDetails.length > 0) {",
+					"        console.log('Project Details:');",
+					"        project.ProjectDetails.forEach((detail, index) => {",
+					"            console.log(`  ${index + 1}. ${detail.detail_en}: ${detail.detail_value_en}`);",
+					"        });",
+					"    }",
+					"    ",
+					"    // Log amenities",
+					"    if (project.Amenities.length > 0) {",
+					"        console.log('Amenities:');",
+					"        project.Amenities.forEach((amenity, index) => {",
+					"            console.log(`  ${index + 1}. ${amenity.amenity_type} (Active: ${amenity.is_active})`);",
+					"        });",
+					"    }",
+					"    ",
+					"    // Log content blocks",
+					"    if (project.project_content_blocks.length > 0) {",
+					"        console.log('Content Blocks:');",
+					"        project.project_content_blocks.forEach((block, index) => {",
+					"            console.log(`  ${index + 1}. ${block.title_en} (Order: ${block.order})`);",
+					"            console.log(`     Images: ${block.images.length}`);",
+					"        });",
+					"    }",
+					"}"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://realestate.azsystems.tech",
+			"type": "string",
+			"description": "Base URL for your Real Estate API. This is the production domain."
+		}
+	]
+}

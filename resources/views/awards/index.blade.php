@@ -78,25 +78,13 @@
                             </div>
                         </div>
 
-                        {{-- الترتيب والحالة --}}
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="order_index" class="form-label">{{ trans('main_trans.order') }}</label>
-                                    <input type="number" name="order_index" id="order_index" class="form-control @error('order_index') is-invalid @enderror" value="{{ old('order_index', 0) }}" min="0">
-                                    @error('order_index')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <div class="form-check mt-4">
-                                        <input type="checkbox" name="is_active" id="is_active" class="form-check-input" {{ old('is_active') ? 'checked' : '' }}>
-                                        <label for="is_active" class="form-check-label">{{ trans('main_trans.is_active') }}</label>
-                                    </div>
-                                </div>
-                            </div>
+                        {{-- الترتيب --}}
+                        <div class="mb-3">
+                            <label for="order_index" class="form-label">{{ trans('main_trans.order') }}</label>
+                            <input type="number" name="order_index" id="order_index" class="form-control @error('order_index') is-invalid @enderror" value="{{ old('order_index', 0) }}" min="0">
+                            @error('order_index')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         {{-- زر الحفظ --}}

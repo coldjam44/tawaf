@@ -1,0 +1,448 @@
+{
+	"info": {
+		"_postman_id": "developers-api-collection",
+		"name": "Real Estate Developers API",
+		"description": "Complete API collection for managing real estate developers with image upload support and bilingual content (Arabic/English)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "developers-api"
+	},
+	"item": [
+		{
+			"name": "Get All Developers",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/developers",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"developers"
+					]
+				},
+				"description": "Retrieve all developers with their projects and company information"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Single Developer",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/developers/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"developers",
+						"1"
+					]
+				},
+				"description": "Retrieve a specific developer by ID"
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Developer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name_ar",
+							"value": "إعمار العقارية",
+							"type": "text"
+						},
+						{
+							"key": "name_en",
+							"value": "Emaar Properties",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "info@emaar.com",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "+971 4 366 8888",
+							"type": "text"
+						},
+						{
+							"key": "company_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/developers",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"developers"
+					]
+				},
+				"description": "Create a new developer with image upload using form-data"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Developer",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name_ar",
+							"value": "نخيل العقارية",
+							"type": "text"
+						},
+						{
+							"key": "name_en",
+							"value": "Nakheel Properties",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "info@nakheel.com",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "+971 4 390 3333",
+							"type": "text"
+						},
+						{
+							"key": "company_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/developers/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"developers",
+						"1"
+					]
+				},
+				"description": "Update an existing developer with new image using form-data"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Developer",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/developers/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"developers",
+						"1"
+					]
+				},
+				"description": "Delete a developer (will also delete associated image file)"
+			},
+			"response": []
+		},
+		{
+			"name": "Search Developers",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/developers?q=emaar",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"developers"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "emaar",
+							"description": "Search term (minimum 2 characters)"
+						}
+					]
+				},
+				"description": "Search developers by name, email, or phone in both Arabic and English"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Developer - Meraas",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name_ar",
+							"value": "مراس العقارية",
+							"type": "text"
+						},
+						{
+							"key": "name_en",
+							"value": "Meraas",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "info@meraas.com",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "+971 4 317 7777",
+							"type": "text"
+						},
+						{
+							"key": "company_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/developers",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"developers"
+					]
+				},
+				"description": "Create Meraas developer with image upload"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Developer - Dubai Properties",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name_ar",
+							"value": "دبي للعقارات",
+							"type": "text"
+						},
+						{
+							"key": "name_en",
+							"value": "Dubai Properties",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "info@dubaiproperties.com",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "+971 4 318 8888",
+							"type": "text"
+						},
+						{
+							"key": "company_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/developers",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"developers"
+					]
+				},
+				"description": "Create Dubai Properties developer with image upload"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Developer - Damac",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name_ar",
+							"value": "داماك العقارية",
+							"type": "text"
+						},
+						{
+							"key": "name_en",
+							"value": "Damac Properties",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "info@damac.com",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "+971 4 373 1111",
+							"type": "text"
+						},
+						{
+							"key": "company_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/developers",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"developers"
+					]
+				},
+				"description": "Create Damac Properties developer with image upload"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://realestate.azsystems.tech",
+			"type": "string"
+		}
+	]
+}

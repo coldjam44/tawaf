@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Property;
 use App\Models\Project;
 use App\Models\PaymentPlan;
+use App\Models\Developer;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -31,17 +32,27 @@ class PropertyController extends Controller
         $projects = Project::with('area')->orderBy('id', 'desc')->get();
         $paymentPlans = PaymentPlan::active()->orderBy('name_ar')->get();
         
-        // Get selected project location if project_id is provided
+        // Get selected project location, company info, and employees if project_id is provided
         $selectedProjectLocation = '';
+        $selectedProjectCompany = null;
+        $selectedProjectEmployees = collect();
+        
         if (request('project_id')) {
-            $selectedProject = Project::with('area')->find(request('project_id'));
-            if ($selectedProject && $selectedProject->area) {
-                $currentLocale = app()->getLocale();
-                $selectedProjectLocation = $currentLocale === 'ar' ? $selectedProject->area->name_ar : $selectedProject->area->name_en;
+            $selectedProject = Project::with(['area', 'company.developers'])->find(request('project_id'));
+            if ($selectedProject) {
+                if ($selectedProject->area) {
+                    $currentLocale = app()->getLocale();
+                    $selectedProjectLocation = $currentLocale === 'ar' ? $selectedProject->area->name_ar : $selectedProject->area->name_en;
+                }
+                if ($selectedProject->company) {
+                    $selectedProjectCompany = $selectedProject->company;
+                    // Get employees for this company
+                    $selectedProjectEmployees = $selectedProject->company->developers;
+                }
             }
         }
         
-        return view('properties.create', compact('projects', 'paymentPlans', 'selectedProjectLocation'));
+        return view('properties.create', compact('projects', 'paymentPlans', 'selectedProjectLocation', 'selectedProjectCompany', 'selectedProjectEmployees'));
     }
 
     /**
@@ -59,11 +70,12 @@ class PropertyController extends Controller
             'propertyquantity' => 'required|integer|min:1',
             'propertyloaction' => 'required|string|max:255',
             'propertypaymentplan' => 'required|exists:payment_plans,id',
+            'employee_id' => 'required|exists:developers,id',
             'propertyhandover' => 'nullable|date',
             'propertyfeatures' => 'nullable|array',
-            'propertyfulldetils' => 'nullable|string',
-            'propertyinformation' => 'nullable|string',
-            'propertyimages.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'propertyfulldetils_ar' => 'nullable|string',
+            'propertyfulldetils_en' => 'nullable|string',
+            'propertyimages.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         $data = $request->all();
@@ -101,7 +113,13 @@ class PropertyController extends Controller
         $projects = Project::orderBy('id', 'desc')->get();
         $paymentPlans = PaymentPlan::active()->orderBy('name_ar')->get();
         
-        return view('properties.edit', compact('property', 'projects', 'paymentPlans'));
+        // Get employees for the current project
+        $projectEmployees = collect();
+        if ($property->project && $property->project->company) {
+            $projectEmployees = $property->project->company->developers;
+        }
+        
+        return view('properties.edit', compact('property', 'projects', 'paymentPlans', 'projectEmployees'));
     }
 
     /**
@@ -119,11 +137,12 @@ class PropertyController extends Controller
             'propertyquantity' => 'required|integer|min:1',
             'propertyloaction' => 'required|string|max:255',
             'propertypaymentplan' => 'required|exists:payment_plans,id',
+            'employee_id' => 'required|exists:developers,id',
             'propertyhandover' => 'nullable|date',
-            'propertyfeatures' => 'nullable|array',
-            'propertyfulldetils' => 'nullable|string',
-            'propertyinformation' => 'nullable|string',
-            'propertyimages.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'propertyfeatures' => 'nullable|string',
+            'propertyfulldetils_ar' => 'nullable|string',
+            'propertyfulldetils_en' => 'nullable|string',
+            'propertyimages.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         $data = $request->all();
@@ -184,5 +203,30 @@ class PropertyController extends Controller
 
         return redirect()->route('properties.create', ['project_id' => $request->project_id])
             ->with('success', trans('main_trans.location_filled_successfully', ['location' => $location]));
+    }
+
+    /**
+     * Get employees for a specific project
+     */
+    public function getProjectEmployees(Request $request)
+    {
+        $projectId = $request->input('project_id');
+        $project = Project::with('company.developers')->find($projectId);
+        
+        if (!$project || !$project->company) {
+            return response()->json(['employees' => []]);
+        }
+
+        $employees = $project->company->developers->map(function($employee) {
+            return [
+                'id' => $employee->id,
+                'name' => app()->getLocale() === 'ar' ? $employee->name_ar : $employee->name_en,
+                'email' => $employee->email,
+                'phone' => $employee->phone,
+                'company_name' => app()->getLocale() === 'ar' ? $employee->company->company_name_ar : $employee->company->company_name_en,
+            ];
+        });
+
+        return response()->json(['employees' => $employees]);
     }
 }

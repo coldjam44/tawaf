@@ -1,0 +1,645 @@
+{
+	"info": {
+		"_postman_id": "projects-with-details-api-collection",
+		"name": "Projects With Details API",
+		"description": "Comprehensive Postman collection for the Projects With Details API endpoint. This collection includes all variations of the endpoint with different query parameters, filters, and search options.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12345"
+	},
+	"item": [
+		{
+			"name": "Projects With Details - Basic",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/projects/with-details",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"projects",
+						"with-details"
+					]
+				},
+				"description": "Basic request to get all projects with comprehensive details. Returns paginated results with default settings."
+			},
+			"response": []
+		},
+		{
+			"name": "Projects With Details - With Pagination",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/projects/with-details?per_page=20&page=2",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"projects",
+						"with-details"
+					],
+					"query": [
+						{
+							"key": "per_page",
+							"value": "20",
+							"description": "Number of items per page (default: 10, max: 100)"
+						},
+						{
+							"key": "page",
+							"value": "2",
+							"description": "Page number (default: 1)"
+						}
+					]
+				},
+				"description": "Get projects with custom pagination. This example shows 20 items per page and requests page 2."
+			},
+			"response": []
+		},
+		{
+			"name": "Projects With Details - Filter by Area",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/projects/with-details?area=1&per_page=15",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"projects",
+						"with-details"
+					],
+					"query": [
+						{
+							"key": "area",
+							"value": "1",
+							"description": "Filter by area ID"
+						},
+						{
+							"key": "per_page",
+							"value": "15",
+							"description": "Number of items per page"
+						}
+					]
+				},
+				"description": "Filter projects by specific area. Replace '1' with the actual area ID you want to filter by."
+			},
+			"response": []
+		},
+		{
+			"name": "Projects With Details - Filter by Developer",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/projects/with-details?developer=2&per_page=25",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"projects",
+						"with-details"
+					],
+					"query": [
+						{
+							"key": "developer",
+							"value": "2",
+							"description": "Filter by developer ID"
+						},
+						{
+							"key": "per_page",
+							"value": "25",
+							"description": "Number of items per page"
+						}
+					]
+				},
+				"description": "Filter projects by specific developer. Replace '2' with the actual developer ID you want to filter by."
+			},
+			"response": []
+		},
+		{
+			"name": "Projects With Details - Filter by Company",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/projects/with-details?company=1&per_page=30",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"projects",
+						"with-details"
+					],
+					"query": [
+						{
+							"key": "company",
+							"value": "1",
+							"description": "Filter by company ID"
+						},
+						{
+							"key": "per_page",
+							"value": "30",
+							"description": "Number of items per page"
+						}
+					]
+				},
+				"description": "Filter projects by specific company. Replace '1' with the actual company ID you want to filter by."
+			},
+			"response": []
+		},
+		{
+			"name": "Projects With Details - Search Projects",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/projects/with-details?search=luxury&per_page=20",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"projects",
+						"with-details"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "luxury",
+							"description": "Search term for project titles, descriptions, and numbers"
+						},
+						{
+							"key": "per_page",
+							"value": "20",
+							"description": "Number of items per page"
+						}
+					]
+				},
+				"description": "Search projects by term. The search looks in project titles, descriptions, ADM numbers, CN numbers, project numbers, and Madhmoun permit numbers."
+			},
+			"response": []
+		},
+		{
+			"name": "Projects With Details - Multiple Filters",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/projects/with-details?area=1&developer=2&company=1&per_page=25",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"projects",
+						"with-details"
+					],
+					"query": [
+						{
+							"key": "area",
+							"value": "1",
+							"description": "Filter by area ID"
+						},
+						{
+							"key": "developer",
+							"value": "2",
+							"description": "Filter by developer ID"
+						},
+						{
+							"key": "company",
+							"value": "1",
+							"description": "Filter by company ID"
+						},
+						{
+							"key": "per_page",
+							"value": "25",
+							"description": "Number of items per page"
+						}
+					]
+				},
+				"description": "Combine multiple filters to get very specific results. This example filters by area, developer, and company simultaneously."
+			},
+			"response": []
+		},
+		{
+			"name": "Projects With Details - Search with Filters",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/projects/with-details?search=residential&area=1&developer=2&per_page=20",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"projects",
+						"with-details"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "residential",
+							"description": "Search term"
+						},
+						{
+							"key": "area",
+							"value": "1",
+							"description": "Filter by area ID"
+						},
+						{
+							"key": "developer",
+							"value": "2",
+							"description": "Filter by developer ID"
+						},
+						{
+							"key": "per_page",
+							"value": "20",
+							"description": "Number of items per page"
+						}
+					]
+				},
+				"description": "Search for projects with specific criteria and apply additional filters. This is useful for finding very specific project types."
+			},
+			"response": []
+		},
+		{
+			"name": "Projects With Details - Sort by Creation Date",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/projects/with-details?sort_by=created_at&sort_direction=desc&per_page=15",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"projects",
+						"with-details"
+					],
+					"query": [
+						{
+							"key": "sort_by",
+							"value": "created_at",
+							"description": "Field to sort by"
+						},
+						{
+							"key": "sort_direction",
+							"value": "desc",
+							"description": "Sort direction: asc or desc"
+						},
+						{
+							"key": "per_page",
+							"value": "15",
+							"description": "Number of items per page"
+						}
+					]
+				},
+				"description": "Sort projects by creation date in descending order (newest first). You can change 'created_at' to other fields like 'prj_title_ar', 'prj_title_en', etc."
+			},
+			"response": []
+		},
+		{
+			"name": "Projects With Details - Sort by Title",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/projects/with-details?sort_by=prj_title_en&sort_direction=asc&per_page=20",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"projects",
+						"with-details"
+					],
+					"query": [
+						{
+							"key": "sort_by",
+							"value": "prj_title_en",
+							"description": "Sort by English title"
+						},
+						{
+							"key": "sort_direction",
+							"value": "asc",
+							"description": "Sort direction: asc or desc"
+						},
+						{
+							"key": "per_page",
+							"value": "20",
+							"description": "Number of items per page"
+						}
+					]
+				},
+				"description": "Sort projects alphabetically by English title in ascending order. You can also use 'prj_title_ar' for Arabic titles."
+			},
+			"response": []
+		},
+		{
+			"name": "Projects With Details - Complex Query",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/projects/with-details?search=luxury&area=1&developer=2&company=1&sort_by=created_at&sort_direction=desc&per_page=30&page=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"projects",
+						"with-details"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "luxury",
+							"description": "Search term"
+						},
+						{
+							"key": "area",
+							"value": "1",
+							"description": "Filter by area ID"
+						},
+						{
+							"key": "developer",
+							"value": "2",
+							"description": "Filter by developer ID"
+						},
+						{
+							"key": "company",
+							"value": "1",
+							"description": "Filter by company ID"
+						},
+						{
+							"key": "sort_by",
+							"value": "created_at",
+							"description": "Sort field"
+						},
+						{
+							"key": "sort_direction",
+							"value": "desc",
+							"description": "Sort direction"
+						},
+						{
+							"key": "per_page",
+							"value": "30",
+							"description": "Items per page"
+						},
+						{
+							"key": "page",
+							"value": "1",
+							"description": "Page number"
+						}
+					]
+				},
+				"description": "Complex query combining all available parameters. This demonstrates the full power of the API with search, multiple filters, sorting, and pagination."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Pre-request script to set up any required variables",
+					"console.log('Setting up Projects With Details API request...');"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Test script to validate the response",
+					"pm.test('Status code is 200', function () {",
+					"    pm.response.to.have.status(200);",
+					"});",
+					"",
+					"pm.test('Response has success status', function () {",
+					"    const jsonData = pm.response.json();",
+					"    pm.expect(jsonData.status).to.eql('success');",
+					"});",
+					"",
+					"pm.test('Response contains data', function () {",
+					"    const jsonData = pm.response.json();",
+					"    pm.expect(jsonData.data).to.be.an('object');",
+					"});",
+					"",
+					"pm.test('Data contains projects array', function () {",
+					"    const jsonData = pm.response.json();",
+					"    pm.expect(jsonData.data.data).to.be.an('array');",
+					"});",
+					"",
+					"pm.test('Each project has required fields', function () {",
+					"    const jsonData = pm.response.json();",
+					"    if (jsonData.data.data.length > 0) {",
+					"        const project = jsonData.data.data[0];",
+					"        pm.expect(project).to.have.property('id');",
+					"        pm.expect(project).to.have.property('title');",
+					"        pm.expect(project).to.have.property('description');",
+					"        pm.expect(project).to.have.property('area');",
+					"        pm.expect(project).to.have.property('developer');",
+					"        pm.expect(project).to.have.property('company');",
+					"        pm.expect(project).to.have.property('project_numbers');",
+					"        pm.expect(project).to.have.property('files');",
+					"        pm.expect(project).to.have.property('images');",
+					"        pm.expect(project).to.have.property('amenities');",
+					"        pm.expect(project).to.have.property('content_blocks');",
+					"    }",
+					"});",
+					"",
+					"pm.test('Images are organized by type', function () {",
+					"    const jsonData = pm.response.json();",
+					"    if (jsonData.data.data.length > 0) {",
+					"        const project = jsonData.data.data[0];",
+					"        pm.expect(project.images).to.have.property('interior');",
+					"        pm.expect(project.images).to.have.property('exterior');",
+					"        pm.expect(project.images).to.have.property('floorplan');",
+					"        pm.expect(project.images).to.have.property('featured');",
+					"    }",
+					"});",
+					"",
+					"pm.test('Pagination metadata is present', function () {",
+					"    const jsonData = pm.response.json();",
+					"    pm.expect(jsonData.data).to.have.property('current_page');",
+					"    pm.expect(jsonData.data).to.have.property('per_page');",
+					"    pm.expect(jsonData.data).to.have.property('total');",
+					"    pm.expect(jsonData.data).to.have.property('last_page');",
+					"});",
+					"",
+					"// Log response time",
+					"console.log('Response time: ' + pm.response.responseTime + 'ms');",
+					"",
+					"// Log project count",
+					"const jsonData = pm.response.json();",
+					"if (jsonData.data && jsonData.data.data) {",
+					"    console.log('Projects returned: ' + jsonData.data.data.length);",
+					"    console.log('Total projects: ' + jsonData.data.total);",
+					"    console.log('Current page: ' + jsonData.data.current_page + ' of ' + jsonData.data.last_page);",
+					"}"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://realestate.azsystems.tech",
+			"type": "string",
+			"description": "Base URL for your Real Estate API. This is the production domain."
+		},
+		{
+			"key": "area_id",
+			"value": "1",
+			"type": "string",
+			"description": "Example area ID for testing. Replace with actual area IDs from your system."
+		},
+		{
+			"key": "developer_id",
+			"value": "2",
+			"type": "string",
+			"description": "Example developer ID for testing. Replace with actual developer IDs from your system."
+		},
+		{
+			"key": "company_id",
+			"value": "1",
+			"type": "string",
+			"description": "Example company ID for testing. Replace with actual company IDs from your system."
+		}
+	]
+}

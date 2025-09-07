@@ -103,7 +103,7 @@
                     <div class="mb-3">
                         <label for="image" class="form-label">{{ trans('main_trans.new_image') }} ({{ trans('main_trans.optional') }})</label>
                         <input type="file" name="image" id="image" class="form-control @error('image') is-invalid @enderror" accept="image/*">
-                        <small class="form-text text-muted">{{ trans('main_trans.allowed_files') }}: JPG, JPEG, PNG, GIF ({{ trans('main_trans.max_size') }}: 5MB)</small>
+                        <small class="form-text text-muted">{{ trans('main_trans.allowed_files') }}: JPG, JPEG, PNG, GIF, WebP ({{ trans('main_trans.max_size') }}: 5MB)</small>
                         @error('image')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

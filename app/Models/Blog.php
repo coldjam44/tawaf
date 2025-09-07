@@ -68,7 +68,7 @@ class Blog extends Model
     public function getMainImageUrlAttribute()
     {
         if ($this->main_image) {
-            return asset('blog/main-images/' . $this->main_image);
+            return asset('uploads/blog/main-images/' . $this->main_image);
         }
         return null;
     }

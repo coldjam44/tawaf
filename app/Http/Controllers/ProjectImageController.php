@@ -39,7 +39,7 @@ class ProjectImageController extends Controller
         $validator = Validator::make($request->all(), [
             'type' => 'required|in:interior,exterior,floorplan,featured',
             'images' => 'required|array|min:1|max:10',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:5120', // 5MB max per image
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:5120', // 5MB max per image, now supports WebP
             'title_ar' => 'nullable|string|max:255',
             'title_en' => 'nullable|string|max:255',
             'description_ar' => 'nullable|string',
@@ -139,7 +139,7 @@ class ProjectImageController extends Controller
 
         $validator = Validator::make($request->all(), [
             'type' => 'required|in:interior,exterior,floorplan',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
             'title_ar' => 'nullable|string|max:255',
             'title_en' => 'nullable|string|max:255',
             'description_ar' => 'nullable|string',

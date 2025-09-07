@@ -99,33 +99,31 @@
                             </div>
                         </div>
 
-                        {{-- الترتيب والحالة --}}
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="order_index" class="form-label">{{ trans('main_trans.order') }}</label>
-                                    <input type="number" name="order_index" id="order_index" class="form-control @error('order_index') is-invalid @enderror" value="{{ old('order_index', $award->order_index) }}" min="0">
-                                    @error('order_index')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <div class="form-check mt-4">
-                                        <input type="checkbox" name="is_active" id="is_active" class="form-check-input" {{ old('is_active', $award->is_active) ? 'checked' : '' }}>
-                                        <label for="is_active" class="form-check-label">{{ trans('main_trans.is_active') }}</label>
-                                    </div>
-                                </div>
-                            </div>
+                        {{-- الترتيب --}}
+                        <div class="mb-3">
+                            <label for="order_index" class="form-label">{{ trans('main_trans.order') }}</label>
+                            <input type="number" name="order_index" id="order_index" class="form-control @error('order_index') is-invalid @enderror" value="{{ old('order_index', $award->order_index) }}" min="0">
+                            @error('order_index')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         {{-- أزرار الحفظ --}}
                         <div class="d-flex justify-content-between">
-                            <a href="{{ route('awards.index') }}" class="btn btn-secondary">
-                                <i class="fas fa-arrow-left me-1"></i>
-                                {{ trans('main_trans.back') }}
-                            </a>
+                            <div>
+                                <a href="{{ route('awards.index') }}" class="btn btn-secondary">
+                                    <i class="fas fa-arrow-left me-1"></i>
+                                    {{ trans('main_trans.back') }}
+                                </a>
+                                <form action="{{ route('awards.toggle', $award->id) }}" method="POST" class="d-inline ms-2">
+                                    @csrf
+                                    <button type="submit" class="btn {{ $award->is_active ? 'btn-warning' : 'btn-success' }}" 
+                                            onclick="return confirm('{{ $award->is_active ? trans('main_trans.confirm_deactivate') : trans('main_trans.confirm_activate') }}')">
+                                        <i class="fas {{ $award->is_active ? 'fa-eye-slash' : 'fa-eye' }} me-1"></i>
+                                        {{ $award->is_active ? trans('main_trans.deactivate') : trans('main_trans.activate') }}
+                                    </button>
+                                </form>
+                            </div>
                             <button type="submit" class="btn btn-primary">
                                 <i class="fas fa-save me-1"></i>
                                 {{ trans('main_trans.update') }}

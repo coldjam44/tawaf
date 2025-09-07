@@ -37,7 +37,7 @@ class AboutUsImage extends Model
      */
     public function getImageUrlAttribute()
     {
-        return asset('about-us/images/' . $this->image_path);
+        return asset('uploads/aboutus/images/' . $this->image_path);
     }
 
     /**

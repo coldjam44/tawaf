@@ -1,0 +1,477 @@
+{
+	"info": {
+		"_postman_id": "project-content-blocks-full-api",
+		"name": "Project Content Blocks Full API",
+		"description": "Complete API collection for managing project content blocks and their images",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Content Blocks",
+			"item": [
+				{
+					"name": "Get All Content Blocks",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/projects/{{project_id}}/content-blocks",
+							"host": ["{{base_url}}"],
+							"path": ["api", "projects", "{{project_id}}", "content-blocks"]
+						},
+						"description": "Get all content blocks for a specific project"
+					}
+				},
+				{
+					"name": "Create Content Block",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title_ar",
+									"value": "وصف المشروع",
+									"type": "text"
+								},
+								{
+									"key": "title_en",
+									"value": "Project Description",
+									"type": "text"
+								},
+								{
+									"key": "content_ar",
+									"value": "مشروع فاخر يقع في قلب المدينة مع إطلالات رائعة على البحر",
+									"type": "text"
+								},
+								{
+									"key": "content_en",
+									"value": "Luxury project located in the heart of the city with stunning sea views",
+									"type": "text"
+								},
+								{
+									"key": "order",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "is_active",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "images[]",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "image_title_ar",
+									"value": "صورة المشروع",
+									"type": "text"
+								},
+								{
+									"key": "image_title_en",
+									"value": "Project Image",
+									"type": "text"
+								},
+								{
+									"key": "image_description_ar",
+									"value": "صورة توضيحية للمشروع",
+									"type": "text"
+								},
+								{
+									"key": "image_description_en",
+									"value": "Project illustration image",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/projects/{{project_id}}/content-blocks",
+							"host": ["{{base_url}}"],
+							"path": ["api", "projects", "{{project_id}}", "content-blocks"]
+						},
+						"description": "Create a new content block with images for a project"
+					}
+				},
+				{
+					"name": "Get Single Content Block",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/projects/{{project_id}}/content-blocks/{{block_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "projects", "{{project_id}}", "content-blocks", "{{block_id}}"]
+						},
+						"description": "Get details of a specific content block"
+					}
+				},
+				{
+					"name": "Update Content Block",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title_ar\": \"وصف المشروع المحدث\",\n    \"title_en\": \"Updated Project Description\",\n    \"content_ar\": \"مشروع فاخر محدث مع مميزات جديدة\",\n    \"content_en\": \"Updated luxury project with new features\",\n    \"order\": 2,\n    \"is_active\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/projects/{{project_id}}/content-blocks/{{block_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "projects", "{{project_id}}", "content-blocks", "{{block_id}}"]
+						},
+						"description": "Update content block details"
+					}
+				},
+				{
+					"name": "Delete Content Block",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/projects/{{project_id}}/content-blocks/{{block_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "projects", "{{project_id}}", "content-blocks", "{{block_id}}"]
+						},
+						"description": "Delete a specific content block"
+					}
+				},
+				{
+					"name": "Toggle Content Block Status",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/projects/{{project_id}}/content-blocks/{{block_id}}/toggle",
+							"host": ["{{base_url}}"],
+							"path": ["api", "projects", "{{project_id}}", "content-blocks", "{{block_id}}", "toggle"]
+						},
+						"description": "Toggle content block active/inactive status"
+					}
+				},
+				{
+					"name": "Update Content Blocks Order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"block_orders\": [1, 2, 3, 4]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/projects/{{project_id}}/content-blocks/update-order",
+							"host": ["{{base_url}}"],
+							"path": ["api", "projects", "{{project_id}}", "content-blocks", "update-order"]
+						},
+						"description": "Update the order of content blocks"
+					}
+				},
+				{
+					"name": "Get Active Content Blocks",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/projects/{{project_id}}/content-blocks/active",
+							"host": ["{{base_url}}"],
+							"path": ["api", "projects", "{{project_id}}", "content-blocks", "active"]
+						},
+						"description": "Get only active content blocks"
+					}
+				}
+			]
+		},
+		{
+			"name": "Content Block Images",
+			"item": [
+				{
+					"name": "Get All Images",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/projects/{{project_id}}/content-blocks/{{block_id}}/images",
+							"host": ["{{base_url}}"],
+							"path": ["api", "projects", "{{project_id}}", "content-blocks", "{{block_id}}", "images"]
+						},
+						"description": "Get all images for a specific content block"
+					}
+				},
+				{
+					"name": "Upload Images",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "images[]",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "title_ar",
+									"value": "صورة المشروع",
+									"type": "text"
+								},
+								{
+									"key": "title_en",
+									"value": "Project Image",
+									"type": "text"
+								},
+								{
+									"key": "description_ar",
+									"value": "صورة توضيحية للمشروع",
+									"type": "text"
+								},
+								{
+									"key": "description_en",
+									"value": "Project illustration image",
+									"type": "text"
+								},
+								{
+									"key": "order",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "is_active",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/projects/{{project_id}}/content-blocks/{{block_id}}/images",
+							"host": ["{{base_url}}"],
+							"path": ["api", "projects", "{{project_id}}", "content-blocks", "{{block_id}}", "images"]
+						},
+						"description": "Upload new images to a content block"
+					}
+				},
+				{
+					"name": "Get Single Image",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/projects/{{project_id}}/content-blocks/{{block_id}}/images/{{image_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "projects", "{{project_id}}", "content-blocks", "{{block_id}}", "images", "{{image_id}}"]
+						},
+						"description": "Get details of a specific image"
+					}
+				},
+				{
+					"name": "Update Image",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title_ar\": \"عنوان الصورة المحدث\",\n    \"title_en\": \"Updated Image Title\",\n    \"description_ar\": \"وصف الصورة المحدث\",\n    \"description_en\": \"Updated Image Description\",\n    \"order\": 1,\n    \"is_active\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/projects/{{project_id}}/content-blocks/{{block_id}}/images/{{image_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "projects", "{{project_id}}", "content-blocks", "{{block_id}}", "images", "{{image_id}}"]
+						},
+						"description": "Update image details"
+					}
+				},
+				{
+					"name": "Delete Image",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/projects/{{project_id}}/content-blocks/{{block_id}}/images/{{image_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "projects", "{{project_id}}", "content-blocks", "{{block_id}}", "images", "{{image_id}}"]
+						},
+						"description": "Delete a specific image"
+					}
+				},
+				{
+					"name": "Toggle Image Status",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/projects/{{project_id}}/content-blocks/{{block_id}}/images/{{image_id}}/toggle",
+							"host": ["{{base_url}}"],
+							"path": ["api", "projects", "{{project_id}}", "content-blocks", "{{block_id}}", "images", "{{image_id}}", "toggle"]
+						},
+						"description": "Toggle image active/inactive status"
+					}
+				},
+				{
+					"name": "Update Images Order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"image_orders\": [1, 2, 3, 4]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/projects/{{project_id}}/content-blocks/{{block_id}}/images/update-order",
+							"host": ["{{base_url}}"],
+							"path": ["api", "projects", "{{project_id}}", "content-blocks", "{{block_id}}", "images", "update-order"]
+						},
+						"description": "Update the order of images in a content block"
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://realestate.azsystems.tech"
+		},
+		{
+			"key": "project_id",
+			"value": "2"
+		},
+		{
+			"key": "block_id",
+			"value": "5"
+		},
+		{
+			"key": "image_id",
+			"value": "1"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Pre-request script for logging",
+					"console.log('Making request to: ' + pm.request.url);"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Test script for response validation",
+					"pm.test('Status code is 200 or 201', function () {",
+					"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+					"});",
+					"",
+					"pm.test('Response has status field', function () {",
+					"    const response = pm.response.json();",
+					"    pm.expect(response).to.have.property('status');",
+					"});",
+					"",
+					"pm.test('Response has message field', function () {",
+					"    const response = pm.response.json();",
+					"    pm.expect(response).to.have.property('message');",
+					"});",
+					"",
+					"// Log response for debugging",
+					"console.log('Response:', pm.response.json());"
+				]
+			}
+		}
+	]
+}

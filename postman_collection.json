@@ -1,0 +1,127 @@
+{
+	"info": {
+		"_postman_id": "realestate-projects-collection",
+		"name": "Real Estate Projects API",
+		"description": "Collection for getting all projects basic details",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Projects Basic Details",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/project/basic-details",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"project",
+						"basic-details"
+					]
+				},
+				"description": "Get all available projects with their basic details including main image"
+			},
+			"response": [
+				{
+					"name": "Success Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/project/basic-details",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"project",
+								"basic-details"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"title_ar\": \"مشروع تجريبي\",\n            \"title_en\": \"Sample Project\",\n            \"description_ar\": \"وصف المشروع بالعربية\",\n            \"description_en\": \"Project description in English\",\n            \"main_image\": \"https://realestate.azsystems.tech/projects/images/project1.jpg\"\n        },\n        {\n            \"id\": 2,\n            \"title_ar\": \"مشروع آخر\",\n            \"title_en\": \"Another Project\",\n            \"description_ar\": \"وصف المشروع الثاني\",\n            \"description_en\": \"Second project description\",\n            \"main_image\": \"https://realestate.azsystems.tech/projects/images/project2.jpg\"\n        }\n    ],\n    \"total_projects\": 2\n}"
+				},
+				{
+					"name": "Error Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/project/basic-details",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"project",
+								"basic-details"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"message\": \"Error loading projects\",\n    \"error\": \"Database connection error\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://realestate.azsystems.tech",
+			"type": "string"
+		}
+	]
+}

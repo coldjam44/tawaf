@@ -1,0 +1,719 @@
+{
+	"info": {
+		"_postman_id": "about-us-api-collection",
+		"name": "Real Estate About Us API",
+		"description": "Complete API collection for managing About Us sections with image upload support and bilingual content (Arabic/English)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "about-us-api"
+	},
+	"item": [
+		{
+			"name": "Get All About Us Sections",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/about-us",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"about-us"
+					]
+				},
+				"description": "Retrieve all about us sections with their images ordered by order_index"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Single About Us Section",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/about-us/14",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"about-us",
+						"14"
+					]
+				},
+				"description": "Retrieve a specific about us section by ID with all its images"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Company Introduction Section",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "section_name",
+							"value": "company_intro",
+							"type": "text"
+						},
+						{
+							"key": "title_ar",
+							"value": "مرحباً بكم في شركة العقارات المتميزة",
+							"type": "text"
+						},
+						{
+							"key": "title_en",
+							"value": "Welcome to Our Distinguished Real Estate Company",
+							"type": "text"
+						},
+						{
+							"key": "content_ar",
+							"value": "نحن شركة عقارية رائدة في دبي، متخصصة في تطوير وإدارة المشاريع العقارية الفاخرة. نقدم خدمات شاملة في مجال العقارات مع التركيز على الجودة والابتكار والرضا الكامل للعملاء.",
+							"type": "text"
+						},
+						{
+							"key": "content_en",
+							"value": "We are a leading real estate company in Dubai, specializing in developing and managing luxury real estate projects. We provide comprehensive real estate services with a focus on quality, innovation, and complete customer satisfaction.",
+							"type": "text"
+						},
+						{
+							"key": "order_index",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "is_active",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "main_image",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "images[]",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/about-us",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"about-us"
+					]
+				},
+				"description": "Create company introduction section with main image and additional images"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Our Vision Section",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "section_name",
+							"value": "our_vision",
+							"type": "text"
+						},
+						{
+							"key": "title_ar",
+							"value": "رؤيتنا",
+							"type": "text"
+						},
+						{
+							"key": "title_en",
+							"value": "Our Vision",
+							"type": "text"
+						},
+						{
+							"key": "content_ar",
+							"value": "نسعى لأن نكون الشركة العقارية الأولى في المنطقة، مع التركيز على التطوير المستدام والابتكار في مجال العقارات. نطمح لتقديم تجربة استثمارية فريدة لعملائنا.",
+							"type": "text"
+						},
+						{
+							"key": "content_en",
+							"value": "We strive to be the leading real estate company in the region, focusing on sustainable development and innovation in real estate. We aspire to provide a unique investment experience for our clients.",
+							"type": "text"
+						},
+						{
+							"key": "order_index",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "is_active",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "main_image",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/about-us",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"about-us"
+					]
+				},
+				"description": "Create our vision section with main image"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Our Mission Section",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "section_name",
+							"value": "our_mission",
+							"type": "text"
+						},
+						{
+							"key": "title_ar",
+							"value": "مهمتنا",
+							"type": "text"
+						},
+						{
+							"key": "title_en",
+							"value": "Our Mission",
+							"type": "text"
+						},
+						{
+							"key": "content_ar",
+							"value": "مهمتنا هي تقديم حلول عقارية مبتكرة وعالية الجودة تلبي احتياجات عملائنا المتنوعة. نلتزم بالشفافية والموثوقية في جميع تعاملاتنا.",
+							"type": "text"
+						},
+						{
+							"key": "content_en",
+							"value": "Our mission is to provide innovative and high-quality real estate solutions that meet our clients' diverse needs. We are committed to transparency and reliability in all our dealings.",
+							"type": "text"
+						},
+						{
+							"key": "order_index",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "is_active",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "main_image",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/about-us",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"about-us"
+					]
+				},
+				"description": "Create our mission section with main image"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Our Values Section",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "section_name",
+							"value": "our_values",
+							"type": "text"
+						},
+						{
+							"key": "title_ar",
+							"value": "قيمنا الأساسية",
+							"type": "text"
+						},
+						{
+							"key": "title_en",
+							"value": "Our Core Values",
+							"type": "text"
+						},
+						{
+							"key": "content_ar",
+							"value": "• النزاهة والشفافية في جميع تعاملاتنا\n• الابتكار والتطوير المستمر\n• الجودة العالية في جميع مشاريعنا\n• رضا العملاء كأولوية قصوى\n• المسؤولية الاجتماعية تجاه المجتمع",
+							"type": "text"
+						},
+						{
+							"key": "content_en",
+							"value": "• Integrity and transparency in all our dealings\n• Innovation and continuous development\n• High quality in all our projects\n• Customer satisfaction as top priority\n• Social responsibility towards society",
+							"type": "text"
+						},
+						{
+							"key": "order_index",
+							"value": "4",
+							"type": "text"
+						},
+						{
+							"key": "is_active",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "main_image",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/about-us",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"about-us"
+					]
+				},
+				"description": "Create our values section with main image"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Our Partners Section",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "section_name",
+							"value": "our_partners",
+							"type": "text"
+						},
+						{
+							"key": "title_ar",
+							"value": "شركاؤنا الاستراتيجيون",
+							"type": "text"
+						},
+						{
+							"key": "title_en",
+							"value": "Our Strategic Partners",
+							"type": "text"
+						},
+						{
+							"key": "content_ar",
+							"value": "نعمل مع مجموعة من الشركاء الاستراتيجيين المتميزين في مجال العقارات والبناء والتصميم. هذه الشراكات تمكننا من تقديم أفضل الخدمات لعملائنا.",
+							"type": "text"
+						},
+						{
+							"key": "content_en",
+							"value": "We work with a group of distinguished strategic partners in real estate, construction, and design. These partnerships enable us to provide the best services to our clients.",
+							"type": "text"
+						},
+						{
+							"key": "order_index",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "is_active",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "main_image",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "images[]",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "images[]",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "images[]",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/about-us",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"about-us"
+					]
+				},
+				"description": "Create our partners section with main image and multiple partner logos"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Our Achievements Section",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "section_name",
+							"value": "our_achievements",
+							"type": "text"
+						},
+						{
+							"key": "title_ar",
+							"value": "إنجازاتنا",
+							"type": "text"
+						},
+						{
+							"key": "title_en",
+							"value": "Our Achievements",
+							"type": "text"
+						},
+						{
+							"key": "content_ar",
+							"value": "على مدار سنوات من العمل الجاد والالتزام، حققنا إنجازات عديدة تشمل تطوير أكثر من 50 مشروع عقاري ناجح، وخدمة آلاف العملاء الراضين، والحصول على العديد من الجوائز والتقديرات في مجال العقارات.",
+							"type": "text"
+						},
+						{
+							"key": "content_en",
+							"value": "Over years of hard work and commitment, we have achieved many accomplishments including developing more than 50 successful real estate projects, serving thousands of satisfied clients, and receiving numerous awards and recognitions in the real estate field.",
+							"type": "text"
+						},
+						{
+							"key": "order_index",
+							"value": "6",
+							"type": "text"
+						},
+						{
+							"key": "is_active",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "main_image",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/about-us",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"about-us"
+					]
+				},
+				"description": "Create our achievements section with main image"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Our Team Section",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "section_name",
+							"value": "our_team",
+							"type": "text"
+						},
+						{
+							"key": "title_ar",
+							"value": "فريق العمل المتميز",
+							"type": "text"
+						},
+						{
+							"key": "title_en",
+							"value": "Our Distinguished Team",
+							"type": "text"
+						},
+						{
+							"key": "content_ar",
+							"value": "نفخر بفريق عملنا المتميز من الخبراء والمتخصصين في مجال العقارات. فريقنا يضم نخبة من المهندسين والمصممين والمستشارين العقاريين ذوي الخبرة الطويلة، والذين يعملون بجد لضمان تقديم أفضل الخدمات لعملائنا.",
+							"type": "text"
+						},
+						{
+							"key": "content_en",
+							"value": "We are proud of our distinguished team of experts and specialists in the real estate field. Our team includes elite engineers, designers, and experienced real estate consultants who work hard to ensure providing the best services to our clients.",
+							"type": "text"
+						},
+						{
+							"key": "order_index",
+							"value": "7",
+							"type": "text"
+						},
+						{
+							"key": "is_active",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "main_image",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/about-us",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"about-us"
+					]
+				},
+				"description": "Create our team section with main image"
+			},
+			"response": []
+		},
+		{
+			"name": "Update About Us Section",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title_ar",
+							"value": "رؤيتنا المحدثة",
+							"type": "text"
+						},
+						{
+							"key": "title_en",
+							"value": "Our Updated Vision",
+							"type": "text"
+						},
+						{
+							"key": "content_ar",
+							"value": "رؤيتنا المحدثة هي أن نكون الشركة العقارية الأولى في الشرق الأوسط، مع التركيز على التطوير المستدام والابتكار في مجال العقارات.",
+							"type": "text"
+						},
+						{
+							"key": "content_en",
+							"value": "Our updated vision is to be the leading real estate company in the Middle East, focusing on sustainable development and innovation in real estate.",
+							"type": "text"
+						},
+						{
+							"key": "order_index",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "is_active",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "main_image",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/about-us/15",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"about-us",
+						"15"
+					]
+				},
+				"description": "Update an existing about us section with new content and image"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete About Us Section",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/about-us/21",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"about-us",
+						"21"
+					]
+				},
+				"description": "Delete an about us section (will also delete all associated images)"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Section Image",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/about-us/18/images/13",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"about-us",
+						"18",
+						"images",
+						"13"
+					]
+				},
+				"description": "Delete a specific image from an about us section"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://realestate.azsystems.tech",
+			"type": "string"
+		}
+	]
+}

@@ -12,7 +12,7 @@
                             <i class="fas fa-plus me-1"></i>
                             {{ trans('main_trans.add_about_us_section') }}
                         </a>
-                        <a href="{{ route('awards.create') }}" class="btn btn-success me-2">
+                        <a href="{{ route('awards.index') }}" class="btn btn-success me-2">
                             <i class="fas fa-trophy me-1"></i>
                             {{ trans('main_trans.add_our_awards') }}
                         </a>

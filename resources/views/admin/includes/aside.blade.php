@@ -1,9 +1,9 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
 
 <div class="app-brand demo">
-    <a href="index.html" class="app-brand-link">
+    <a href="https://realestate.azsystems.tech/" class="app-brand-link">
     <span class="app-brand-logo demo">
-               <img src="{{ asset('admin/assets/img/White-logo-700x700.webp') }}" alt="Logo" style="filter: invert(100%);">
+               <img src="{{ asset('admin/assets/img/new-logo.jpg') }}" alt="Logo">
 
 
     </span>
@@ -16,7 +16,7 @@
 
  
 
-    <span class="app-brand-text demo menu-text fw-bold">{{ ucfirst($siteName) }}</span>
+    <span class="app-brand-text demo menu-text fw-bold">Aura Home</span>
     </a>
 
     <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
@@ -30,34 +30,58 @@
 <ul class="menu-inner py-1">
     <!-- Page -->
 
-    <li class="menu-item">
-    <a href="https://royallp.com" target="_blank" rel="noopener" class="menu-link">
+    <li class="menu-item active">
+    <a href="https://aurahome.ae/" target="_blank" class="menu-link">
         <i class="menu-icon tf-icons ti ti-external-link"></i>
-        <div data-i18n="visit_website">{{ trans('main_trans.visit_website') }}</div>
+        <div data-i18n="visit_website">Aura Home</div>
     </a>
     </li>
 
-    <li class="menu-item active">
+    {{-- <li class="menu-item active">
     <a href="{{ route('home') }}" class="menu-link">
         <i class="menu-icon tf-icons ti ti-smart-home"></i>
         <div data-i18n="Home">Home</div>
     </a>
-    </li>
+    </li> --}}
     <li class="menu-item active">
     <a href="{{ route('sliders.index') }}" class="menu-link">
         <i class="menu-icon tf-icons ti ti-layout-grid"></i>
         <div data-i18n="Slider">{{ trans('main_trans.slider') }}</div>
     </a>
 </li>
-    <li class="menu-item">
+    <li class="menu-item active">
     <a href="{{ route('projects.index') }}" class="menu-link">
         <i class="menu-icon tf-icons ti ti-archive"></i>
         <div data-i18n="Projects">{{ trans('main_trans.section_project') }}</div>
     </a>
 </li>
 
+    {{-- Properties Menu Item --}}
+    <li class="menu-item active">
+        <a href="{{ route('properties.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-home"></i>
+            <div data-i18n="Properties">{{ trans('main_trans.property') }}</div>
+        </a>
+    </li>
+
+
+
+    {{-- Search Projects --}}
+    <li class="menu-item active">
+        <div class="menu-link">
+            <div class="d-flex align-items-center">
+                <i class="menu-icon tf-icons ti ti-search me-2"></i>
+                <div class="flex-grow-1">
+                    <input type="text" id="projectSearch" class="form-control form-control-sm" 
+                           placeholder="{{ trans('main_trans.search_projects') }}" 
+                           style="border: none; background: transparent; color: inherit; font-size: 0.875rem;">
+                </div>
+            </div>
+        </div>
+    </li>
+
     {{-- Project Details Dropdown --}}
-    <li class="menu-item dropdown {{ request()->routeIs('project-details.*') ? 'active' : '' }}">
+    <li class="menu-item active dropdown {{ request()->routeIs('project-details.*') ? 'active' : '' }}">
         <a href="javascript:void(0)" class="menu-link dropdown-toggle" data-bs-toggle="dropdown">
             <i class="menu-icon tf-icons ti ti-list-details"></i>
             <div data-i18n="Project Details">{{ trans('main_trans.project_details_management') }}</div>
@@ -91,7 +115,7 @@
     </li>
 
     {{-- Project Images Dropdown --}}
-    <li class="menu-item dropdown {{ request()->routeIs('project-images.*') ? 'active' : '' }}">
+    <li class="menu-item active dropdown {{ request()->routeIs('project-images.*') ? 'active' : '' }}">
         <a href="javascript:void(0)" class="menu-link dropdown-toggle" data-bs-toggle="dropdown">
             <i class="menu-icon tf-icons ti ti-photo"></i>
             <div data-i18n="Project Images">{{ trans('main_trans.project_images_management') }}</div>
@@ -125,7 +149,7 @@
     </li>
 
     {{-- Areas Menu Item --}}
-    <li class="menu-item {{ request()->routeIs('areas.*') ? 'active' : '' }}">
+    <li class="menu-item active {{ request()->routeIs('areas.*') ? 'active' : '' }}">
         <a href="{{ route('areas.index') }}" class="menu-link">
             <i class="menu-icon tf-icons ti ti-map-pin"></i>
             <div data-i18n="Areas">{{ trans('main_trans.areas') }}</div>
@@ -139,7 +163,7 @@
     </a>
     </li>
 
-    <li class="menu-item">
+    <li class="menu-item active">
     <a href="{{ route('real-estate-company.index') }}" class="menu-link">
         <i class="menu-icon tf-icons ti ti-building"></i>
         <div data-i18n="real_estate_company">{{ trans('main_trans.real_estate_company') }}</div>
@@ -160,125 +184,39 @@
       </a>
       </li>
 
-      <li class="menu-item active">
+      {{-- <li class="menu-item active">
       <a href="{{ route('awards.index') }}" class="menu-link">
           <i class="menu-icon tf-icons ti ti-trophy"></i>
           <div data-i18n="Awards">{{ trans('main_trans.awards') }}</div>
+      </a>
+      </li> --}}
+
+      <li class="menu-item active">
+      <a href="{{ route('contact-us.index') }}" class="menu-link">
+          <i class="menu-icon tf-icons ti ti-phone"></i>
+          <div data-i18n="Contact Us">{{ trans('main_trans.contact_us') }}</div>
+      </a>
+      </li>
+
+      <li class="menu-item active">
+      <a href="{{ route('newsletter.index') }}" class="menu-link">
+          <i class="menu-icon tf-icons ti ti-mail"></i>
+          <div data-i18n="Newsletter">{{ trans('main_trans.newsletter') }}</div>
+      </a>
+      </li>
+
+      <li class="menu-item active">
+      <a href="{{ route('bot-offers.index') }}" class="menu-link">
+          <i class="menu-icon tf-icons ti ti-robot"></i>
+          <div data-i18n="Bot Offers">{{ trans('main_trans.bot_offers_link') }}</div>
       </a>
       </li>
       
       <br>
     
-    <br>
-    {{-- <li class="menu-item active">
-    <a href="{{ route('hotels.index') }}" class="menu-link">
-        <i class="menu-icon tf-icons ti ti-smart-home"></i>
-        <div data-i18n="Home">{{ trans('main_trans.hotels') }}</div>
-    </a>
-    </li> --}}
-
-    <li class="menu-item dropdown {{ request()->routeIs('hotels.*') || request()->routeIs('avilablerooms.*') ? 'active' : '' }}">
-        <a href="javascript:void(0)" class="menu-link dropdown-toggle" data-bs-toggle="dropdown">
-            <i class="menu-icon tf-icons ti ti-smart-home"></i>
-            <div data-i18n="Home">{{ trans('main_trans.hotels') }}</div>
-        </a>
-        <ul class="dropdown-menu">
-            <!-- رابط الفنادق -->
-            <li class="dropdown-item {{ request()->routeIs('hotels.index') ? 'active' : '' }}">
-                <a href="{{ route('hotels.index') }}" class="menu-link">
-                    <i class="menu-icon tf-icons ti ti-home"></i>
-                    {{ trans('main_trans.hotels') }}
-                </a>
-            </li>
-
-            <!-- رابط الغرف المتاحة -->
-            <li class="dropdown-item {{ request()->routeIs('avilablerooms.index') ? 'active' : '' }}">
-                <a href="{{ route('avilablerooms.index') }}" class="menu-link">
-                    <i class="menu-icon tf-icons ti ti-door"></i>
-                    {{ trans('main_trans.avilablerooms') }}
-                </a>
-            </li>
-
-            <li class="dropdown-item {{ request()->routeIs('featurea.index') ? 'active' : '' }}">
-                <a href="{{ route('features.index') }}" class="menu-link">
-                    <i class="menu-icon tf-icons ti ti-door"></i>
-                    {{ trans('main_trans.features') }}
-                </a>
-            </li>
-        </ul>
-    </li>
 
 
-    <br>
     <li class="menu-item active">
-    <a href="{{ route('customerreviews.index') }}" class="menu-link">
-        <i class="menu-icon tf-icons ti ti-smart-home"></i>
-        <div data-i18n="Home">{{ trans('main_trans.customerreview') }}</div>
-    </a>
-    </li>
-    <br>
-    <li class="menu-item active">
-    <a href="{{ route('ramadanoffers.index') }}" class="menu-link">
-        <i class="menu-icon tf-icons ti ti-smart-home"></i>
-        <div data-i18n="Home">{{ trans('main_trans.ramadanoffers') }}</div>
-    </a>
-    </li>
-    <br>
-    <li class="menu-item active">
-    <a href="{{ route('amenitys.index') }}" class="menu-link">
-        <i class="menu-icon tf-icons ti ti-smart-home"></i>
-        <div data-i18n="Home">{{ trans('main_trans.amenitys') }}</div>
-    </a>
-    </li>
-    <br>
-    <li class="menu-item active">
-    <a href="{{ route('promocodes.index') }}" class="menu-link">
-        <i class="menu-icon tf-icons ti ti-smart-home"></i>
-        <div data-i18n="Home">{{ trans('main_trans.promocodes') }}</div>
-    </a>
-    </li>
-
-    <br>
-    <li class="menu-item active">
-    <a href="{{ route('reviews.index') }}" class="menu-link">
-        <i class="menu-icon tf-icons ti ti-smart-home"></i>
-        <div data-i18n="Home">{{ trans('main_trans.reviews') }}</div>
-    </a>
-    </li>
-  
-   <br>
-    <li class="menu-item active">
-    <a href="{{ route('booknows.index') }}" class="menu-link">
-        <i class="menu-icon tf-icons ti ti-smart-home"></i>
-        <div data-i18n="Home">{{ trans('main_trans.booknow') }}</div>
-    </a>
-    </li>
-  <br>
-   
-    <li class="menu-item active">
-    <a href="{{ route('hotelinmakkahs.index') }}" class="menu-link">
-        <i class="menu-icon tf-icons ti ti-smart-home"></i>
-        <div data-i18n="Home">{{ trans('main_trans.hotelinmakkahs') }}</div>
-    </a>
-    </li>
-    <br>
-    <li class="menu-item active">
-    <a href="{{ route('hotelinmadinas.index') }}" class="menu-link">
-        <i class="menu-icon tf-icons ti ti-smart-home"></i>
-        <div data-i18n="Home">{{ trans('main_trans.hotelinmadinas') }}</div>
-    </a>
-    </li>
-  
-      <br>
-    <li class="menu-item active">
-    <a href="{{ route('terms.index') }}" class="menu-link">
-        <i class="menu-icon tf-icons ti ti-smart-home"></i>
-        <div data-i18n="Home">{{ trans('main_trans.terms') }}</div>
-    </a>
-    </li>
-
-    <br>
-    <li class="menu-item">
     <a href="javascript::void(0);" onclick="$('#logout_form').submit();" class="menu-link">
         <i class="menu-icon tf-icons ti ti-app-window"></i>
         <div data-i18n="Page 2">Logout</div>

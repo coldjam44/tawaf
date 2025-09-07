@@ -1,0 +1,421 @@
+{
+	"info": {
+		"_postman_id": "expert-team-api-collection",
+		"name": "Expert Team API Collection",
+		"description": "Complete API collection for managing Expert Team members with image upload support",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Expert Team Members",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/expert-team",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"expert-team"
+					]
+				},
+				"description": "Retrieve all expert team members ordered by order_index"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Expert Team Member by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/expert-team/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"expert-team",
+						"1"
+					]
+				},
+				"description": "Retrieve a specific expert team member by ID"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Expert Team Member - CEO",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name_ar",
+							"value": "أحمد محمد",
+							"type": "text"
+						},
+						{
+							"key": "name_en",
+							"value": "Ahmed Mohammed",
+							"type": "text"
+						},
+						{
+							"key": "position_ar",
+							"value": "الرئيس التنفيذي",
+							"type": "text"
+						},
+						{
+							"key": "position_en",
+							"value": "Chief Executive Officer",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "order_index",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/expert-team",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"expert-team"
+					]
+				},
+				"description": "Create a new expert team member with image upload"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Expert Team Member - CFO",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name_ar",
+							"value": "فاطمة علي",
+							"type": "text"
+						},
+						{
+							"key": "name_en",
+							"value": "Fatima Ali",
+							"type": "text"
+						},
+						{
+							"key": "position_ar",
+							"value": "المدير المالي",
+							"type": "text"
+						},
+						{
+							"key": "position_en",
+							"value": "Chief Financial Officer",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "order_index",
+							"value": "2",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/expert-team",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"expert-team"
+					]
+				},
+				"description": "Create CFO expert team member"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Expert Team Member - CTO",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name_ar",
+							"value": "محمد حسن",
+							"type": "text"
+						},
+						{
+							"key": "name_en",
+							"value": "Mohammed Hassan",
+							"type": "text"
+						},
+						{
+							"key": "position_ar",
+							"value": "المدير التقني",
+							"type": "text"
+						},
+						{
+							"key": "position_en",
+							"value": "Chief Technology Officer",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "order_index",
+							"value": "3",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/expert-team",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"expert-team"
+					]
+				},
+				"description": "Create CTO expert team member"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Expert Team Member - Sales Director",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name_ar",
+							"value": "سارة أحمد",
+							"type": "text"
+						},
+						{
+							"key": "name_en",
+							"value": "Sarah Ahmed",
+							"type": "text"
+						},
+						{
+							"key": "position_ar",
+							"value": "مدير المبيعات",
+							"type": "text"
+						},
+						{
+							"key": "position_en",
+							"value": "Sales Director",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "order_index",
+							"value": "4",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/expert-team",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"expert-team"
+					]
+				},
+				"description": "Create Sales Director expert team member"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Expert Team Member - Legal Advisor",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name_ar",
+							"value": "علي محمود",
+							"type": "text"
+						},
+						{
+							"key": "name_en",
+							"value": "Ali Mahmoud",
+							"type": "text"
+						},
+						{
+							"key": "position_ar",
+							"value": "المستشار القانوني",
+							"type": "text"
+						},
+						{
+							"key": "position_en",
+							"value": "Legal Advisor",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "order_index",
+							"value": "5",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/expert-team",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"expert-team"
+					]
+				},
+				"description": "Create Legal Advisor expert team member"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Expert Team Member",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name_ar",
+							"value": "أحمد محمد المحدث",
+							"type": "text"
+						},
+						{
+							"key": "name_en",
+							"value": "Ahmed Mohammed Updated",
+							"type": "text"
+						},
+						{
+							"key": "position_ar",
+							"value": "الرئيس التنفيذي المحدث",
+							"type": "text"
+						},
+						{
+							"key": "position_en",
+							"value": "Updated Chief Executive Officer",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "order_index",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/expert-team/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"expert-team",
+						"1"
+					]
+				},
+				"description": "Update an existing expert team member"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Expert Team Member",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/expert-team/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"expert-team",
+						"1"
+					]
+				},
+				"description": "Delete an expert team member by ID"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://realestate.azsystems.tech",
+			"type": "string"
+		}
+	]
+}

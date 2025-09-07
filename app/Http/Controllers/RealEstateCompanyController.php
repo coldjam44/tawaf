@@ -140,10 +140,12 @@ class RealEstateCompanyController extends Controller
         // Handle company images
         if ($request->hasFile('company_images')) {
             // Delete old images
-            $oldImages = json_decode($company->company_images, true) ?? [];
-            foreach ($oldImages as $oldImage) {
-                if (file_exists(public_path('real-estate-companies/' . $oldImage))) {
-                    unlink(public_path('real-estate-companies/' . $oldImage));
+            $oldImages = $company->company_images ?? [];
+            if (is_array($oldImages)) {
+                foreach ($oldImages as $oldImage) {
+                    if ($oldImage && file_exists(public_path('real-estate-companies/' . $oldImage))) {
+                        unlink(public_path('real-estate-companies/' . $oldImage));
+                    }
                 }
             }
 
@@ -172,10 +174,12 @@ class RealEstateCompanyController extends Controller
         }
 
         // Delete company images
-        $companyImages = json_decode($company->company_images, true) ?? [];
-        foreach ($companyImages as $image) {
-            if (file_exists(public_path('real-estate-companies/' . $image))) {
-                unlink(public_path('real-estate-companies/' . $image));
+        $companyImages = $company->company_images ?? [];
+        if (is_array($companyImages)) {
+            foreach ($companyImages as $image) {
+                if ($image && file_exists(public_path('real-estate-companies/' . $image))) {
+                    unlink(public_path('real-estate-companies/' . $image));
+                }
             }
         }
 

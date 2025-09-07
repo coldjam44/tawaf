@@ -1,0 +1,333 @@
+{
+	"info": {
+		"_postman_id": "services-api-collection",
+		"name": "Services API Collection",
+		"description": "Complete API collection for managing Services with image upload support",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Services",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/services",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"services"
+					]
+				},
+				"description": "Retrieve all services"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Service by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/services/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"services",
+						"1"
+					]
+				},
+				"description": "Retrieve a specific service by ID"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Service - Property Management",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title_ar",
+							"value": "إدارة العقارات",
+							"type": "text"
+						},
+						{
+							"key": "title_en",
+							"value": "Property Management",
+							"type": "text"
+						},
+						{
+							"key": "description_ar",
+							"value": "خدمات إدارة العقارات الشاملة",
+							"type": "text"
+						},
+						{
+							"key": "description_en",
+							"value": "Comprehensive property management services",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "contact_phone",
+							"value": "+971501234567",
+							"type": "text"
+						},
+						{
+							"key": "request_service",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/services",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"services"
+					]
+				},
+				"description": "Create a new service with image upload"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Service - Investment Advisory",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title_ar",
+							"value": "الاستشارات الاستثمارية",
+							"type": "text"
+						},
+						{
+							"key": "title_en",
+							"value": "Investment Advisory",
+							"type": "text"
+						},
+						{
+							"key": "description_ar",
+							"value": "خدمات الاستشارات الاستثمارية العقارية",
+							"type": "text"
+						},
+						{
+							"key": "description_en",
+							"value": "Real estate investment advisory services",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "contact_phone",
+							"value": "+971507654321",
+							"type": "text"
+						},
+						{
+							"key": "request_service",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/services",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"services"
+					]
+				},
+				"description": "Create another service example"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Service - Legal Services",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title_ar",
+							"value": "الخدمات القانونية",
+							"type": "text"
+						},
+						{
+							"key": "title_en",
+							"value": "Legal Services",
+							"type": "text"
+						},
+						{
+							"key": "description_ar",
+							"value": "الخدمات القانونية العقارية",
+							"type": "text"
+						},
+						{
+							"key": "description_en",
+							"value": "Real estate legal services",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "contact_phone",
+							"value": "+971501112223",
+							"type": "text"
+						},
+						{
+							"key": "request_service",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/services",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"services"
+					]
+				},
+				"description": "Create legal services example"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Service",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title_ar",
+							"value": "إدارة العقارات المحدثة",
+							"type": "text"
+						},
+						{
+							"key": "title_en",
+							"value": "Updated Property Management",
+							"type": "text"
+						},
+						{
+							"key": "description_ar",
+							"value": "خدمات إدارة العقارات الشاملة المحدثة",
+							"type": "text"
+						},
+						{
+							"key": "description_en",
+							"value": "Updated comprehensive property management services",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "contact_phone",
+							"value": "+971501234567",
+							"type": "text"
+						},
+						{
+							"key": "request_service",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/services/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"services",
+						"1"
+					]
+				},
+				"description": "Update an existing service"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Service",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/services/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"services",
+						"1"
+					]
+				},
+				"description": "Delete a service by ID"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://realestate.azsystems.tech",
+			"type": "string"
+		}
+	]
+}

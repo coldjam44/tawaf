@@ -69,7 +69,7 @@
                     <div class="mb-3">
                         <label for="images" class="form-label">{{ trans('main_trans.images') }} *</label>
                         <input type="file" name="images[]" id="images" class="form-control @error('images') is-invalid @enderror" accept="image/*" multiple required>
-                        <small class="form-text text-muted">{{ trans('main_trans.allowed_files') }}: JPG, JPEG, PNG, GIF ({{ trans('main_trans.max_size') }}: 5MB لكل صورة)</small>
+                        <small class="form-text text-muted">{{ trans('main_trans.allowed_files') }}: JPG, JPEG, PNG, GIF, WebP ({{ trans('main_trans.max_size') }}: 5MB لكل صورة)</small>
                         <small class="form-text text-muted d-block">{{ trans('main_trans.max_images') }}: 10 صور في المرة الواحدة</small>
                         @error('images')
                         <div class="invalid-feedback">{{ $message }}</div>

@@ -1,0 +1,135 @@
+{
+	"info": {
+		"_postman_id": "simple-projects-with-details-api",
+		"name": "Simple Projects With Details API",
+		"description": "Simple Postman collection for the Projects With Details API endpoint. This collection contains just one endpoint that retrieves all projects with comprehensive details in a single call.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12345"
+	},
+	"item": [
+		{
+			"name": "Get All Projects With Details",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/projects/with-details",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"projects",
+						"with-details"
+					]
+				},
+				"description": "Simple endpoint to get ALL projects with comprehensive details in one call. No parameters needed - just returns all projects with their complete information including images, amenities, content blocks, and more."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Pre-request script",
+					"console.log('Getting all projects with details...');"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Test script to validate the response",
+					"pm.test('Status code is 200', function () {",
+					"    pm.response.to.have.status(200);",
+					"});",
+					"",
+					"pm.test('Response has success status', function () {",
+					"    const jsonData = pm.response.json();",
+					"    pm.expect(jsonData.status).to.eql('success');",
+					"});",
+					"",
+					"pm.test('Response contains data array', function () {",
+					"    const jsonData = pm.response.json();",
+					"    pm.expect(jsonData.data).to.be.an('array');",
+					"});",
+					"",
+					"pm.test('Each project has required fields', function () {",
+					"    const jsonData = pm.response.json();",
+					"    if (jsonData.data.length > 0) {",
+					"        const project = jsonData.data[0];",
+					"        pm.expect(project).to.have.property('id');",
+					"        pm.expect(project).to.have.property('title');",
+					"        pm.expect(project).to.have.property('description');",
+					"        pm.expect(project).to.have.property('area');",
+					"        pm.expect(project).to.have.property('developer');",
+					"        pm.expect(project).to.have.property('company');",
+					"        pm.expect(project).to.have.property('project_numbers');",
+					"        pm.expect(project).to.have.property('files');",
+					"        pm.expect(project).to.have.property('images');",
+					"        pm.expect(project).to.have.property('amenities');",
+					"        pm.expect(project).to.have.property('content_blocks');",
+					"    }",
+					"});",
+					"",
+					"pm.test('Images are organized by type', function () {",
+					"    const jsonData = pm.response.json();",
+					"    if (jsonData.data.length > 0) {",
+					"        const project = jsonData.data[0];",
+					"        pm.expect(project.images).to.have.property('interior');",
+					"        pm.expect(project.images).to.have.property('exterior');",
+					"        pm.expect(project.images).to.have.property('floorplan');",
+					"        pm.expect(project.images).to.have.property('featured');",
+					"    }",
+					"});",
+					"",
+					"// Log response time",
+					"console.log('Response time: ' + pm.response.responseTime + 'ms');",
+					"",
+					"// Log project count",
+					"const jsonData = pm.response.json();",
+					"if (jsonData.data) {",
+					"    console.log('Total projects returned: ' + jsonData.data.length);",
+					"    ",
+					"    // Log sample project info",
+					"    if (jsonData.data.length > 0) {",
+					"        const project = jsonData.data[0];",
+					"        console.log('Sample project: ' + project.title.current);",
+					"        console.log('Area: ' + project.area.name.current);",
+					"        console.log('Interior Images: ' + project.images.interior.length);",
+					"        console.log('Exterior Images: ' + project.images.exterior.length);",
+					"        console.log('Floorplan Images: ' + project.images.floorplan.length);",
+					"        console.log('Featured Images: ' + project.images.featured.length);",
+					"        console.log('Amenities: ' + project.amenities.length);",
+					"        console.log('Content Blocks: ' + project.content_blocks.length);",
+					"    }",
+					"}"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://realestate.azsystems.tech",
+			"type": "string",
+			"description": "Base URL for your Real Estate API. This is the production domain."
+		}
+	]
+}

@@ -172,7 +172,12 @@ Route::group(
         Route::post('awards', [App\Http\Controllers\AwardController::class, 'store'])->name('awards.store');
         Route::get('awards/{id}/edit', [App\Http\Controllers\AwardController::class, 'edit'])->name('awards.edit');
         Route::put('awards/{id}', [App\Http\Controllers\AwardController::class, 'update'])->name('awards.update');
+        Route::post('awards/{id}/toggle', [App\Http\Controllers\AwardController::class, 'toggle'])->name('awards.toggle');
         Route::delete('awards/{id}', [App\Http\Controllers\AwardController::class, 'destroy'])->name('awards.destroy');
+
+        // Bot Offers Routes
+        Route::get('bot-offers', [App\Http\Controllers\BotOffersController::class, 'index'])->name('bot-offers.index');
+        Route::post('bot-offers/{id}/toggle', [App\Http\Controllers\BotOffersController::class, 'toggle'])->name('bot-offers.toggle');
 
         // Expert Team Routes
         Route::get('expert-team', [App\Http\Controllers\ExpertTeamController::class, 'index'])->name('expert-team.index');
@@ -216,6 +221,7 @@ Route::group(
 Route::resource('properties', PropertyController::class);
 
 Route::post('properties/select-project', [PropertyController::class, 'selectProject'])->name('properties.select-project');
+Route::get('properties/get-project-employees', [PropertyController::class, 'getProjectEmployees'])->name('properties.get-project-employees');
 Route::get('properties/get-project-location/{projectId}', [PropertyController::class, 'getProjectLocation'])->name('properties.get-project-location');
     }
 );

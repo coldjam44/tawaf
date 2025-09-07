@@ -1,0 +1,681 @@
+{
+  "info": {
+    "name": "Project Management API Collection",
+    "description": "Complete API collection for Project Management including Images, Details, and Amenities",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://realestate.azsystems.tech",
+      "type": "string"
+    },
+    {
+      "key": "project_id",
+      "value": "12",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Project Images",
+      "item": [
+        {
+          "name": "Get All Project Images",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/projects/{{project_id}}/images",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects", "{{project_id}}", "images"]
+            },
+            "description": "Retrieve all images for a specific project"
+          },
+          "response": []
+        },
+        {
+          "name": "Upload Project Images",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "type",
+                  "value": "interior",
+                  "type": "text",
+                  "description": "Image type (interior, exterior, floorplan, featured)"
+                },
+                {
+                  "key": "images[]",
+                  "type": "file",
+                  "description": "Project images (JPEG, PNG, JPG, GIF) - can upload multiple files - required"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/projects/{{project_id}}/images",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects", "{{project_id}}", "images"]
+            },
+            "description": "Upload multiple images for a project. Only type and images are required. Titles, descriptions, and order are auto-generated."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Project Images by Type",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/projects/{{project_id}}/images/type/interior",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects", "{{project_id}}", "images", "type", "interior"]
+            },
+            "description": "Get project images by specific type (interior, exterior, floorplan, featured)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Featured Project Images",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/projects/{{project_id}}/images/featured",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects", "{{project_id}}", "images", "featured"]
+            },
+            "description": "Get only featured images for a project"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Project Details",
+      "item": [
+        {
+          "name": "Get All Project Details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/projects/{{project_id}}/details",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects", "{{project_id}}", "details"]
+            },
+            "description": "Retrieve all details for a specific project"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Project Detail",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "detail_ar",
+                  "value": "نوع الوحدة",
+                  "type": "text",
+                  "description": "Detail name in Arabic (required)"
+                },
+                {
+                  "key": "detail_en",
+                  "value": "Unit Type",
+                  "type": "text",
+                  "description": "Detail name in English (required)"
+                },
+                {
+                  "key": "detail_value_ar",
+                  "value": "شقة",
+                  "type": "text",
+                  "description": "Detail value in Arabic (required)"
+                },
+                {
+                  "key": "detail_value_en",
+                  "value": "Apartment",
+                  "type": "text",
+                  "description": "Detail value in English (required)"
+                },
+                {
+                  "key": "order",
+                  "value": "1",
+                  "type": "text",
+                  "description": "Display order"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/projects/{{project_id}}/details",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects", "{{project_id}}", "details"]
+            },
+            "description": "Create a new project detail"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Project Details Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"details\": [\n    {\n      \"id\": 1,\n      \"order\": 1\n    },\n    {\n      \"id\": 2,\n      \"order\": 2\n    }\n  ]\n}",
+              "description": "Bulk update project details order"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/projects/{{project_id}}/details/bulk-update-order",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects", "{{project_id}}", "details", "bulk-update-order"]
+            },
+            "description": "Update the order of multiple project details at once"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Project Amenities",
+      "item": [
+        {
+          "name": "Get All Project Amenities",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/projects/{{project_id}}/amenities",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects", "{{project_id}}", "amenities"]
+            },
+            "description": "Retrieve all amenities for a specific project with statistics and available types"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Project Amenity",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "amenity_type",
+                  "value": "gym",
+                  "type": "text",
+                  "description": "Amenity type (gym, pool, spa, etc.)"
+                },
+                {
+                  "key": "is_active",
+                  "value": "true",
+                  "type": "text",
+                  "description": "Is amenity active (true/false)"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/projects/{{project_id}}/amenities",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects", "{{project_id}}", "amenities"]
+            },
+            "description": "Add a new amenity to a project"
+          },
+          "response": []
+        },
+        {
+          "name": "Toggle Amenity Status",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/projects/{{project_id}}/amenities/1/toggle",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects", "{{project_id}}", "amenities", "1", "toggle"]
+            },
+            "description": "Toggle the active status of an amenity"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Active Amenities Only",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/projects/{{project_id}}/amenities/active",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects", "{{project_id}}", "amenities", "active"]
+            },
+            "description": "Get only active amenities for a project"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Available Amenity Types",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/projects/{{project_id}}/amenities/available-types",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects", "{{project_id}}", "amenities", "available-types"]
+            },
+            "description": "Get available amenity types that can be added to the project"
+          },
+          "response": []
+        },
+        {
+          "name": "Bulk Update Amenities",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amenities\": [\n    {\n      \"amenity_type\": \"gym\",\n      \"is_active\": true\n    },\n    {\n      \"amenity_type\": \"pool\",\n      \"is_active\": true\n    },\n    {\n      \"amenity_type\": \"spa\",\n      \"is_active\": false\n    }\n  ]\n}",
+              "description": "Bulk update project amenities"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/projects/{{project_id}}/amenities/bulk-update",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects", "{{project_id}}", "amenities", "bulk-update"]
+            },
+            "description": "Update multiple amenities at once (replaces all existing amenities)"
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Pre-request script to set up environment variables",
+          "if (pm.environment.get('base_url') === undefined) {",
+          "    pm.environment.set('base_url', 'https://realestate.azsystems.tech');",
+          "}",
+          "",
+          "// Set default project ID if not exists",
+          "if (pm.environment.get('project_id') === undefined) {",
+          "    pm.environment.set('project_id', '12');",
+          "}"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Test script to validate responses",
+          "pm.test('Status code is 200 or 201', function () {",
+          "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+          "});",
+          "",
+          "pm.test('Response has required fields', function () {",
+          "    const response = pm.response.json();",
+          "    pm.expect(response).to.have.property('status');",
+          "    pm.expect(response).to.have.property('message');",
+          "});",
+          "",
+          "pm.test('Status is success', function () {",
+          "    const response = pm.response.json();",
+          "    pm.expect(response.status).to.eql('success');",
+          "});",
+          "",
+          "// Store project ID for subsequent requests",
+          "if (pm.response.code === 201) {",
+          "    const response = pm.response.json();",
+          "    if (response.data && response.data.id) {",
+          "        pm.environment.set('project_id', response.data.id.toString());",
+          "    }",
+          "}"
+        ]
+      }
+    },
+    {
+      "name": "Project Content Blocks",
+      "item": [
+        {
+          "name": "Get All Project Content Blocks",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/projects/{{project_id}}/content-blocks",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects", "{{project_id}}", "content-blocks"]
+            },
+            "description": "Retrieve all content blocks for a specific project"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Project Content Block",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "title_ar",
+                  "value": "عنوان القسم",
+                  "type": "text",
+                  "description": "Content block title in Arabic - required"
+                },
+                {
+                  "key": "title_en",
+                  "value": "Section Title",
+                  "type": "text",
+                  "description": "Content block title in English - required"
+                },
+                {
+                  "key": "content_ar",
+                  "value": "محتوى القسم باللغة العربية",
+                  "type": "text",
+                  "description": "Content block content in Arabic - required"
+                },
+                {
+                  "key": "content_en",
+                  "value": "Section content in English",
+                  "type": "text",
+                  "description": "Content block content in English - required"
+                },
+                {
+                  "key": "images[]",
+                  "type": "file",
+                  "description": "Content block images (JPEG, PNG, JPG, GIF) - optional"
+                },
+                {
+                  "key": "order",
+                  "value": "1",
+                  "type": "text",
+                  "description": "Display order - optional (auto-generated if not provided)"
+                },
+                {
+                  "key": "is_active",
+                  "value": "true",
+                  "type": "text",
+                  "description": "Is active (true/false) - optional (default: true)"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/projects/{{project_id}}/content-blocks",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects", "{{project_id}}", "content-blocks"]
+            },
+            "description": "Create a new content block for a project (e.g., project description, payment policy, features, etc.)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Project Content Block",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/projects/{{project_id}}/content-blocks/{{block_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects", "{{project_id}}", "content-blocks", "{{block_id}}"]
+            },
+            "description": "Retrieve a specific content block for a project"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Project Content Block",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "title_ar",
+                  "value": "عنوان القسم المحدث",
+                  "type": "text",
+                  "description": "Content block title in Arabic - optional"
+                },
+                {
+                  "key": "title_en",
+                  "value": "Updated Section Title",
+                  "type": "text",
+                  "description": "Content block title in English - optional"
+                },
+                {
+                  "key": "content_ar",
+                  "value": "محتوى القسم المحدث باللغة العربية",
+                  "type": "text",
+                  "description": "Content block content in Arabic - optional"
+                },
+                {
+                  "key": "content_en",
+                  "value": "Updated section content in English",
+                  "type": "text",
+                  "description": "Content block content in English - optional"
+                },
+                {
+                  "key": "images[]",
+                  "type": "file",
+                  "description": "Content block images (JPEG, PNG, JPG, GIF) - optional"
+                },
+                {
+                  "key": "order",
+                  "value": "2",
+                  "type": "text",
+                  "description": "Display order - optional"
+                },
+                {
+                  "key": "is_active",
+                  "value": "true",
+                  "type": "text",
+                  "description": "Is active (true/false) - optional"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/projects/{{project_id}}/content-blocks/{{block_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects", "{{project_id}}", "content-blocks", "{{block_id}}"]
+            },
+            "description": "Update a specific content block for a project"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Project Content Block",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/projects/{{project_id}}/content-blocks/{{block_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects", "{{project_id}}", "content-blocks", "{{block_id}}"]
+            },
+            "description": "Delete a specific content block for a project"
+          },
+          "response": []
+        },
+        {
+          "name": "Toggle Content Block Status",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/projects/{{project_id}}/content-blocks/{{block_id}}/toggle",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects", "{{project_id}}", "content-blocks", "{{block_id}}", "toggle"]
+            },
+            "description": "Toggle active/inactive status of a content block"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Content Blocks Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"blocks\": [\n    {\n      \"id\": 1,\n      \"order\": 1\n    },\n    {\n      \"id\": 2,\n      \"order\": 2\n    },\n    {\n      \"id\": 3,\n      \"order\": 3\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/projects/{{project_id}}/content-blocks/update-order",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects", "{{project_id}}", "content-blocks", "update-order"]
+            },
+            "description": "Update the display order of multiple content blocks"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Active Content Blocks",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/projects/{{project_id}}/content-blocks/active",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects", "{{project_id}}", "content-blocks", "active"]
+            },
+            "description": "Retrieve only active content blocks for a project"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

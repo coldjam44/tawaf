@@ -1,0 +1,332 @@
+{
+	"info": {
+		"_postman_id": "single-project-with-details-api",
+		"name": "Single Project With Details API",
+		"description": "Postman collection for the Single Project With Details API endpoint. This collection allows you to get comprehensive details for a specific project using its ID.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12345"
+	},
+	"item": [
+		{
+			"name": "Get Project With Details by ID - Basic",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/projects/with-details-using-id/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"projects",
+						"with-details-using-id",
+						"1"
+					]
+				},
+				"description": "Basic request to get a single project with comprehensive details using project ID 1. Replace '1' with any valid project ID you want to retrieve."
+			},
+			"response": []
+		},
+		{
+			"name": "Get Project With Details by ID - Project 2",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/projects/with-details-using-id/2",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"projects",
+						"with-details-using-id",
+						"2"
+					]
+				},
+				"description": "Get project with ID 2 and all its details. This example shows how to retrieve a different project."
+			},
+			"response": []
+		},
+		{
+			"name": "Get Project With Details by ID - Project 5",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/projects/with-details-using-id/5",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"projects",
+						"with-details-using-id",
+						"5"
+					]
+				},
+				"description": "Get project with ID 5 and all its details. Use this to test with different project IDs."
+			},
+			"response": []
+		},
+		{
+			"name": "Get Project With Details by ID - Dynamic ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/projects/with-details-using-id/{{project_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"projects",
+						"with-details-using-id",
+						"{{project_id}}"
+					]
+				},
+				"description": "Dynamic request using environment variable {{project_id}}. Set this variable in your environment to test with different project IDs."
+			},
+			"response": []
+		},
+		{
+			"name": "Get Project With Details by ID - Invalid ID (404)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/projects/with-details-using-id/999999",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"projects",
+						"with-details-using-id",
+						"999999"
+					]
+				},
+				"description": "Test error handling by requesting a project ID that doesn't exist. This should return a 404 error."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Pre-request script",
+					"console.log('Getting project with details by ID...');",
+					"",
+					"// Extract project ID from URL for logging",
+					"const url = pm.request.url.toString();",
+					"const projectId = url.split('/').pop();",
+					"console.log('Requesting project ID: ' + projectId);"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Test script to validate the response",
+					"pm.test('Status code is 200', function () {",
+					"    pm.response.to.have.status(200);",
+					"});",
+					"",
+					"pm.test('Response has success status', function () {",
+					"    const jsonData = pm.response.json();",
+					"    pm.expect(jsonData.status).to.eql('success');",
+					"});",
+					"",
+					"pm.test('Response contains data object', function () {",
+					"    const jsonData = pm.response.json();",
+					"    const project = jsonData.data;",
+					"    pm.expect(project).to.be.an('object');",
+					"});",
+					"",
+					"pm.test('Project has required fields', function () {",
+					"    const jsonData = pm.response.json();",
+					"    const project = jsonData.data;",
+					"    pm.expect(project).to.have.property('id');",
+					"    pm.expect(project).to.have.property('prj_title_ar');",
+					"    pm.expect(project).to.have.property('prj_title_en');",
+					"    pm.expect(project).to.have.property('prj_description_ar');",
+					"    pm.expect(project).to.have.property('prj_description_en');",
+					"    pm.expect(project).to.have.property('prj_adm');",
+					"    pm.expect(project).to.have.property('prj_cn');",
+					"    pm.expect(project).to.have.property('prj_projectNumber');",
+					"    pm.expect(project).to.have.property('prj_MadhmounPermitNumber');",
+					"    pm.expect(project).to.have.property('prj_brochurefile');",
+					"    pm.expect(project).to.have.property('prj_floorplan');",
+					"});",
+					"",
+					"pm.test('Project has area object', function () {",
+					"    const jsonData = pm.response.json();",
+					"    const project = jsonData.data;",
+					"    pm.expect(project).to.have.property('area');",
+					"    pm.expect(project.area).to.have.property('name_en');",
+					"    pm.expect(project.area).to.have.property('name_ar');",
+					"});",
+					"",
+					"pm.test('Project has company object', function () {",
+					"    const jsonData = pm.response.json();",
+					"    const project = jsonData.data;",
+					"    pm.expect(project).to.have.property('company');",
+					"    pm.expect(project.company).to.have.property('company_name_ar');",
+					"    pm.expect(project.company).to.have.property('company_name_en');",
+					"});",
+					"",
+					"pm.test('Project has images object', function () {",
+					"    const jsonData = pm.response.json();",
+					"    const project = jsonData.data;",
+					"    pm.expect(project).to.have.property('images');",
+					"    pm.expect(project.images).to.have.property('interior');",
+					"    pm.expect(project.images).to.have.property('exterior');",
+					"    pm.expect(project.images).to.have.property('floorplan');",
+					"});",
+					"",
+					"pm.test('Project has ProjectDetails array', function () {",
+					"    const jsonData = pm.response.json();",
+					"    const project = jsonData.data;",
+					"    pm.expect(project).to.have.property('ProjectDetails');",
+					"    pm.expect(project.ProjectDetails).to.be.an('array');",
+					"});",
+					"",
+					"pm.test('Project has Amenities array', function () {",
+					"    const jsonData = pm.response.json();",
+					"    const project = jsonData.data;",
+					"    pm.expect(project).to.have.property('Amenities');",
+					"    pm.expect(project.Amenities).to.be.an('array');",
+					"});",
+					"",
+					"pm.test('Project has project_content_blocks array', function () {",
+					"    const jsonData = pm.response.json();",
+					"    const project = jsonData.data;",
+					"    pm.expect(project).to.have.property('project_content_blocks');",
+					"    pm.expect(project.project_content_blocks).to.be.an('array');",
+					"});",
+					"",
+					"pm.test('Content blocks have correct structure', function () {",
+					"    const jsonData = pm.response.json();",
+					"    const project = jsonData.data;",
+					"    if (project.project_content_blocks.length > 0) {",
+					"        const block = project.project_content_blocks[0];",
+					"        pm.expect(block).to.have.property('order');",
+					"        pm.expect(block).to.have.property('title_ar');",
+					"        pm.expect(block).to.have.property('title_en');",
+					"        pm.expect(block).to.have.property('content_ar');",
+					"        pm.expect(block).to.have.property('content_en');",
+					"        pm.expect(block).to.have.property('images');",
+					"        pm.expect(block.images).to.be.an('array');",
+					"    }",
+					"});",
+					"",
+					"// Log response time",
+					"console.log('Response time: ' + pm.response.responseTime + 'ms');",
+					"",
+					"// Log project information",
+					"const jsonData = pm.response.json();",
+					"if (jsonData.data) {",
+					"    const project = jsonData.data;",
+					"    console.log('Project ID: ' + project.id);",
+					"    console.log('Project Title (EN): ' + project.prj_title_en);",
+					"    console.log('Project Title (AR): ' + project.prj_title_ar);",
+					"    console.log('Area (EN): ' + project.area.name_en);",
+					"    console.log('Area (AR): ' + project.area.name_ar);",
+					"    console.log('Company (EN): ' + project.company.company_name_en);",
+					"    console.log('Company (AR): ' + project.company.company_name_ar);",
+					"    console.log('Interior Images: ' + project.images.interior.length);",
+					"    console.log('Exterior Images: ' + project.images.exterior.length);",
+					"    console.log('Floorplan Images: ' + project.images.floorplan.length);",
+					"    console.log('Project Details: ' + project.ProjectDetails.length);",
+					"    console.log('Amenities: ' + project.Amenities.length);",
+					"    console.log('Content Blocks: ' + project.project_content_blocks.length);",
+					"    ",
+					"    // Log content block details",
+					"    if (project.project_content_blocks.length > 0) {",
+					"        project.project_content_blocks.forEach((block, index) => {",
+					"            console.log(`Content Block ${index + 1}: ${block.title_en} (Order: ${block.order})`);",
+					"            console.log(`  - Images: ${block.images.length}`);",
+					"        });",
+					"    }",
+					"}"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://realestate.azsystems.tech",
+			"type": "string",
+			"description": "Base URL for your Real Estate API. This is the production domain."
+		},
+		{
+			"key": "project_id",
+			"value": "1",
+			"type": "string",
+			"description": "Default project ID for testing. Change this value to test with different projects."
+		}
+	]
+}

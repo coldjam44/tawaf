@@ -1,0 +1,304 @@
+{
+	"info": {
+		"_postman_id": "awards-api-collection",
+		"name": "Awards API Collection",
+		"description": "Complete API collection for managing Awards with image upload support",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Awards",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/awards",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"awards"
+					]
+				},
+				"description": "Retrieve all awards ordered by order_index"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Award by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/awards/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"awards",
+						"1"
+					]
+				},
+				"description": "Retrieve a specific award by ID"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Award",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title_ar",
+							"value": "جائزة التميز العقاري",
+							"type": "text"
+						},
+						{
+							"key": "title_en",
+							"value": "Real Estate Excellence Award",
+							"type": "text"
+						},
+						{
+							"key": "description_ar",
+							"value": "جائزة التميز العقاري لعام 2024",
+							"type": "text"
+						},
+						{
+							"key": "description_en",
+							"value": "Real Estate Excellence Award 2024",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "year",
+							"value": "2024",
+							"type": "text"
+						},
+						{
+							"key": "category",
+							"value": "Excellence",
+							"type": "text"
+						},
+						{
+							"key": "order_index",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "is_active",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/awards",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"awards"
+					]
+				},
+				"description": "Create a new award with image upload"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Award - Best Developer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title_ar",
+							"value": "أفضل مطور عقاري",
+							"type": "text"
+						},
+						{
+							"key": "title_en",
+							"value": "Best Real Estate Developer",
+							"type": "text"
+						},
+						{
+							"key": "description_ar",
+							"value": "جائزة أفضل مطور عقاري في دبي",
+							"type": "text"
+						},
+						{
+							"key": "description_en",
+							"value": "Best Real Estate Developer in Dubai Award",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "year",
+							"value": "2024",
+							"type": "text"
+						},
+						{
+							"key": "category",
+							"value": "Developer",
+							"type": "text"
+						},
+						{
+							"key": "order_index",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "is_active",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/awards",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"awards"
+					]
+				},
+				"description": "Create another award example"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Award",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title_ar",
+							"value": "جائزة التميز العقاري المحدثة",
+							"type": "text"
+						},
+						{
+							"key": "title_en",
+							"value": "Updated Real Estate Excellence Award",
+							"type": "text"
+						},
+						{
+							"key": "description_ar",
+							"value": "جائزة التميز العقاري المحدثة لعام 2024",
+							"type": "text"
+						},
+						{
+							"key": "description_en",
+							"value": "Updated Real Estate Excellence Award 2024",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "year",
+							"value": "2024",
+							"type": "text"
+						},
+						{
+							"key": "category",
+							"value": "Excellence",
+							"type": "text"
+						},
+						{
+							"key": "order_index",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "is_active",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/awards/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"awards",
+						"1"
+					]
+				},
+				"description": "Update an existing award"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Award",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/awards/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"awards",
+						"1"
+					]
+				},
+				"description": "Delete an award by ID"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://realestate.azsystems.tech",
+			"type": "string"
+		}
+	]
+}

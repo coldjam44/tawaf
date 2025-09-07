@@ -22,7 +22,12 @@ class Project extends Model
         'prj_cn',
         'prj_projectNumber',
         'prj_MadhmounPermitNumber',
-        'prj_floorplan'
+        'prj_floorplan',
+        'is_sent_to_bot'
+    ];
+
+    protected $casts = [
+        'is_sent_to_bot' => 'boolean',
     ];
 
     public function developer()
@@ -58,6 +63,11 @@ class Project extends Model
     public function amenities()
     {
         return $this->hasMany(ProjectAmenity::class);
+    }
+
+    public function contentBlocks()
+    {
+        return $this->hasMany(ProjectContentBlock::class)->orderBy('order', 'asc');
     }
 
     /**

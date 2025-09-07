@@ -55,7 +55,7 @@
                                     <option value="">{{ trans('main_trans.select_project') }}</option>
                                     @foreach($projects as $project)
                                         <option value="{{ $project->id }}">
-                                            {{ $project->getTitle() }} - {{ $project->area ? (app()->getLocale() === 'ar' ? $project->area->name_ar : $project->area->name_en) : trans('main_trans.no_area') }}
+                                            {{ $project->id }} - {{ $project->getTitle() }} - {{ $project->area ? (app()->getLocale() === 'ar' ? $project->area->name_ar : $project->area->name_en) : trans('main_trans.no_area') }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -72,6 +72,23 @@
 
                 {{-- فورم إضافة العقار (يظهر فقط بعد اختيار المشروع) --}}
                 @if($selectedProjectLocation)
+                
+                {{-- معلومات المشروع والشركة --}}
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <h6 class="card-title text-primary">{{ trans('main_trans.project_info') }}</h6>
+                                <p class="mb-1"><strong>{{ trans('main_trans.project') }}:</strong> {{ request('project_id') }} - {{ $projects->where('id', request('project_id'))->first()->getTitle() }}</p>
+                                <p class="mb-1"><strong>{{ trans('main_trans.location') }}:</strong> {{ $selectedProjectLocation }}</p>
+                                @if($selectedProjectCompany)
+                                <p class="mb-0"><strong>{{ trans('main_trans.company') }}:</strong> {{ app()->getLocale() === 'ar' ? $selectedProjectCompany->company_name_ar : $selectedProjectCompany->company_name_en }}</p>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <form action="{{ route('properties.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
@@ -86,7 +103,7 @@
                                         <option value="{{ $project->id }}" 
                                                 {{ old('propertyproject') == $project->id ? 'selected' : '' }}
                                                 {{ request('project_id') == $project->id ? 'selected' : '' }}>
-                                            {{ $project->getTitle() }} - {{ $project->area ? (app()->getLocale() === 'ar' ? $project->area->name_ar : $project->area->name_en) : trans('main_trans.no_area') }}
+                                            {{ $project->id }} - {{ $project->getTitle() }} - {{ $project->area ? (app()->getLocale() === 'ar' ? $project->area->name_ar : $project->area->name_en) : trans('main_trans.no_area') }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -214,6 +231,31 @@
                                 <label for="propertyhandover" class="form-label">{{ trans('main_trans.handover_date') }}</label>
                                 <input type="date" name="propertyhandover" id="propertyhandover" class="form-control @error('propertyhandover') is-invalid @enderror" value="{{ old('propertyhandover') }}">
                                 @error('propertyhandover')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- الموظف المسؤول --}}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="employee_id" class="form-label">{{ trans('main_trans.responsible_employee') }} *</label>
+                                <select name="employee_id" id="employee_id" class="form-control @error('employee_id') is-invalid @enderror" required>
+                                    <option value="">{{ trans('main_trans.select_employee') }}</option>
+                                    @if($selectedProjectEmployees && $selectedProjectEmployees->count() > 0)
+                                        @foreach($selectedProjectEmployees as $employee)
+                                            <option value="{{ $employee->id }}" {{ old('employee_id') == $employee->id ? 'selected' : '' }}>
+                                                {{ app()->getLocale() === 'ar' ? $employee->name_ar : $employee->name_en }} - {{ $employee->email }} ({{ $employee->phone }})
+                                            </option>
+                                        @endforeach
+                                    @else
+                                        <option value="" disabled>{{ trans('main_trans.no_employees_found') }}</option>
+                                    @endif
+                                </select>
+                                <small class="form-text text-muted">{{ trans('main_trans.employee_help') }}</small>
+                                @error('employee_id')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -434,20 +476,20 @@
                         @enderror
                     </div>
 
-                    {{-- التفاصيل الكاملة --}}
+                    {{-- التفاصيل الكاملة - العربية --}}
                     <div class="mb-3">
-                        <label for="propertyfulldetils" class="form-label">{{ trans('main_trans.full_details') }}</label>
-                        <textarea name="propertyfulldetils" id="propertyfulldetils" class="form-control @error('propertyfulldetils') is-invalid @enderror" rows="5">{{ old('propertyfulldetils') }}</textarea>
-                        @error('propertyfulldetils')
+                        <label for="propertyfulldetils_ar" class="form-label">{{ trans('main_trans.full_details_ar') }}</label>
+                        <textarea name="propertyfulldetils_ar" id="propertyfulldetils_ar" class="form-control @error('propertyfulldetils_ar') is-invalid @enderror" rows="5" placeholder="اكتب التفاصيل الكاملة للعقار باللغة العربية">{{ old('propertyfulldetils_ar') }}</textarea>
+                        @error('propertyfulldetils_ar')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
 
-                    {{-- معلومات إضافية --}}
+                    {{-- التفاصيل الكاملة - الإنجليزية --}}
                     <div class="mb-3">
-                        <label for="propertyinformation" class="form-label">{{ trans('main_trans.additional_information') }}</label>
-                        <textarea name="propertyinformation" id="propertyinformation" class="form-control @error('propertyinformation') is-invalid @enderror" rows="3">{{ old('propertyinformation') }}</textarea>
-                        @error('propertyinformation')
+                        <label for="propertyfulldetils_en" class="form-label">{{ trans('main_trans.full_details_en') }}</label>
+                        <textarea name="propertyfulldetils_en" id="propertyfulldetils_en" class="form-control @error('propertyfulldetils_en') is-invalid @enderror" rows="5" placeholder="Write the full details of the property in English">{{ old('propertyfulldetils_en') }}</textarea>
+                        @error('propertyfulldetils_en')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
@@ -477,3 +519,5 @@
 </div>
 
 @endsection
+
+{{-- تم إزالة JavaScript - الموظفين يتم تحميلهم من الخادم مباشرة --}}

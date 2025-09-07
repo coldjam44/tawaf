@@ -1,0 +1,597 @@
+{
+	"info": {
+		"_postman_id": "search-projects-with-details-api",
+		"name": "Search Projects With Details API",
+		"description": "Postman collection for the Search Projects With Details API endpoint. This collection allows you to search projects with comprehensive details using various criteria, returning the same structure as the single project endpoint.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12345"
+	},
+	"item": [
+		{
+			"name": "Search All Projects (No Criteria)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/projects/search-with-details",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"projects",
+						"search-with-details"
+					]
+				},
+				"description": "Search all projects without any criteria. Returns all projects with full details structure."
+			},
+			"response": []
+		},
+		{
+			"name": "Search by Title",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/projects/search-with-details?title=Burj",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"projects",
+						"search-with-details"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "Burj",
+							"description": "Search for projects with 'Burj' in title (English or Arabic)"
+						}
+					]
+				},
+				"description": "Search projects by title. Searches both English and Arabic titles."
+			},
+			"response": []
+		},
+		{
+			"name": "Search by Description",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/projects/search-with-details?description=luxury",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"projects",
+						"search-with-details"
+					],
+					"query": [
+						{
+							"key": "description",
+							"value": "luxury",
+							"description": "Search for projects with 'luxury' in description (English or Arabic)"
+						}
+					]
+				},
+				"description": "Search projects by description. Searches both English and Arabic descriptions."
+			},
+			"response": []
+		},
+		{
+			"name": "Search by Project Number",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/projects/search-with-details?project_number=BK",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"projects",
+						"search-with-details"
+					],
+					"query": [
+						{
+							"key": "project_number",
+							"value": "BK",
+							"description": "Search for projects with project number containing 'BK'"
+						}
+					]
+				},
+				"description": "Search projects by project number."
+			},
+			"response": []
+		},
+		{
+			"name": "Search by ADM",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/projects/search-with-details?adm=ADM-2024",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"projects",
+						"search-with-details"
+					],
+					"query": [
+						{
+							"key": "adm",
+							"value": "ADM-2024",
+							"description": "Search for projects with ADM containing 'ADM-2024'"
+						}
+					]
+				},
+				"description": "Search projects by ADM number."
+			},
+			"response": []
+		},
+		{
+			"name": "Search by CN",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/projects/search-with-details?cn=CN-2024",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"projects",
+						"search-with-details"
+					],
+					"query": [
+						{
+							"key": "cn",
+							"value": "CN-2024",
+							"description": "Search for projects with CN containing 'CN-2024'"
+						}
+					]
+				},
+				"description": "Search projects by CN number."
+			},
+			"response": []
+		},
+		{
+			"name": "Search by Madhmoun Permit",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/projects/search-with-details?madhmoun_permit=MP-2024",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"projects",
+						"search-with-details"
+					],
+					"query": [
+						{
+							"key": "madhmoun_permit",
+							"value": "MP-2024",
+							"description": "Search for projects with Madhmoun Permit containing 'MP-2024'"
+						}
+					]
+				},
+				"description": "Search projects by Madhmoun Permit Number."
+			},
+			"response": []
+		},
+		{
+			"name": "Filter by Area ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/projects/search-with-details?area_id=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"projects",
+						"search-with-details"
+					],
+					"query": [
+						{
+							"key": "area_id",
+							"value": "1",
+							"description": "Filter projects by area ID 1 (Downtown Dubai)"
+						}
+					]
+				},
+				"description": "Filter projects by specific area ID."
+			},
+			"response": []
+		},
+		{
+			"name": "Filter by Company ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/projects/search-with-details?company_id=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"projects",
+						"search-with-details"
+					],
+					"query": [
+						{
+							"key": "company_id",
+							"value": "1",
+							"description": "Filter projects by company ID 1"
+						}
+					]
+				},
+				"description": "Filter projects by specific company ID."
+			},
+			"response": []
+		},
+		{
+			"name": "Combined Search - Title + Area",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/projects/search-with-details?title=Residences&area_id=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"projects",
+						"search-with-details"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "Residences",
+							"description": "Search for projects with 'Residences' in title"
+						},
+						{
+							"key": "area_id",
+							"value": "1",
+							"description": "Filter by area ID 1"
+						}
+					]
+				},
+				"description": "Combined search using multiple criteria: title and area."
+			},
+			"response": []
+		},
+		{
+			"name": "Complex Search - Multiple Criteria",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/projects/search-with-details?title=Project&description=luxury&area_id=1&company_id=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"projects",
+						"search-with-details"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "Project",
+							"description": "Search for projects with 'Project' in title"
+						},
+						{
+							"key": "description",
+							"value": "luxury",
+							"description": "Search for projects with 'luxury' in description"
+						},
+						{
+							"key": "area_id",
+							"value": "1",
+							"description": "Filter by area ID 1"
+						},
+						{
+							"key": "company_id",
+							"value": "1",
+							"description": "Filter by company ID 1"
+						}
+					]
+				},
+				"description": "Complex search using multiple criteria for precise filtering."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Pre-request script",
+					"console.log('Searching projects with details...');",
+					"",
+					"// Log search criteria",
+					"const url = pm.request.url.toString();",
+					"const searchParams = new URLSearchParams(url.split('?')[1]);",
+					"if (searchParams) {",
+					"    console.log('Search Criteria:');",
+					"    for (let [key, value] of searchParams) {",
+					"        console.log(`  ${key}: ${value}`);",
+					"    }",
+					"} else {",
+					"    console.log('No search criteria - returning all projects');",
+					"}"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Test script to validate the response",
+					"pm.test('Status code is 200', function () {",
+					"    pm.response.to.have.status(200);",
+					"});",
+					"",
+					"pm.test('Response has success status', function () {",
+					"    const jsonData = pm.response.json();",
+					"    pm.expect(jsonData.status).to.eql('success');",
+					"});",
+					"",
+					"pm.test('Response contains data array', function () {",
+					"    const jsonData = pm.response.json();",
+					"    pm.expect(jsonData.data).to.be.an('array');",
+					"});",
+					"",
+					"pm.test('Response contains total_results', function () {",
+					"    const jsonData = pm.response.json();",
+					"    pm.expect(jsonData).to.have.property('total_results');",
+					"    pm.expect(jsonData.total_results).to.be.a('number');",
+					"});",
+					"",
+					"pm.test('Response contains search_criteria', function () {",
+					"    const jsonData = pm.response.json();",
+					"    pm.expect(jsonData).to.have.property('search_criteria');",
+					"});",
+					"",
+					"pm.test('Projects have required structure', function () {",
+					"    const jsonData = pm.response.json();",
+					"    if (jsonData.data.length > 0) {",
+					"        const project = jsonData.data[0];",
+					"        pm.expect(project).to.have.property('id');",
+					"        pm.expect(project).to.have.property('prj_title_ar');",
+					"        pm.expect(project).to.have.property('prj_title_en');",
+					"        pm.expect(project).to.have.property('prj_description_ar');",
+					"        pm.expect(project).to.have.property('prj_description_en');",
+					"    }",
+					"});",
+					"",
+					"pm.test('Projects have area object', function () {",
+					"    const jsonData = pm.response.json();",
+					"    if (jsonData.data.length > 0) {",
+					"        const project = jsonData.data[0];",
+					"        pm.expect(project).to.have.property('area');",
+					"        pm.expect(project.area).to.have.property('name_en');",
+					"        pm.expect(project.area).to.have.property('name_ar');",
+					"});",
+					"",
+					"pm.test('Projects have company object', function () {",
+					"    const jsonData = pm.response.json();",
+					"    if (jsonData.data.length > 0) {",
+					"        const project = jsonData.data[0];",
+					"        pm.expect(project).to.have.property('company');",
+					"        pm.expect(project.company).to.have.property('company_name_ar');",
+					"        pm.expect(project.company).to.have.property('company_name_en');",
+					"});",
+					"",
+					"pm.test('Projects have images object', function () {",
+					"    const jsonData = pm.response.json();",
+					"    if (jsonData.data.length > 0) {",
+					"        const project = jsonData.data[0];",
+					"        pm.expect(project).to.have.property('images');",
+					"        pm.expect(project.images).to.have.property('interior');",
+					"        pm.expect(project.images).to.have.property('exterior');",
+					"        pm.expect(project.images).to.have.property('floorplan');",
+					"});",
+					"",
+					"pm.test('Projects have ProjectDetails array', function () {",
+					"    const jsonData = pm.response.json();",
+					"    if (jsonData.data.length > 0) {",
+					"        const project = jsonData.data[0];",
+					"        pm.expect(project).to.have.property('ProjectDetails');",
+					"        pm.expect(project.ProjectDetails).to.be.an('array');",
+					"});",
+					"",
+					"pm.test('Projects have Amenities array', function () {",
+					"    const jsonData = pm.response.json();",
+					"    if (jsonData.data.length > 0) {",
+					"        const project = jsonData.data[0];",
+					"        pm.expect(project).to.have.property('Amenities');",
+					"        pm.expect(project.Amenities).to.be.an('array');",
+					"});",
+					"",
+					"pm.test('Projects have project_content_blocks array', function () {",
+					"    const jsonData = pm.response.json();",
+					"    if (jsonData.data.length > 0) {",
+					"        const project = jsonData.data[0];",
+					"        pm.expect(project).to.have.property('project_content_blocks');",
+					"        pm.expect(project.project_content_blocks).to.be.an('array');",
+					"});",
+					"",
+					"// Log response time",
+					"console.log('Response time: ' + pm.response.responseTime + 'ms');",
+					"",
+					"// Log search results",
+					"const jsonData = pm.response.json();",
+					"console.log('Total Results: ' + jsonData.total_results);",
+					"console.log('Search Criteria: ' + JSON.stringify(jsonData.search_criteria));",
+					"",
+					"if (jsonData.data.length > 0) {",
+					"    console.log('Sample Project:');",
+					"    const project = jsonData.data[0];",
+					"    console.log('  ID: ' + project.id);",
+					"    console.log('  Title (EN): ' + project.prj_title_en);",
+					"    console.log('  Title (AR): ' + project.prj_title_ar);",
+					"    console.log('  Area: ' + project.area.name_en);",
+					"    console.log('  Company: ' + project.company.company_name_en);",
+					"    console.log('  Interior Images: ' + project.images.interior.length);",
+					"    console.log('  Exterior Images: ' + project.images.exterior.length);",
+					"    console.log('  Floorplan Images: ' + project.images.floorplan.length);",
+					"    console.log('  Project Details: ' + project.ProjectDetails.length);",
+					"    console.log('  Amenities: ' + project.Amenities.length);",
+					"    console.log('  Content Blocks: ' + project.project_content_blocks.length);",
+					"} else {",
+					"    console.log('No projects found matching the search criteria');",
+					"}"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://realestate.azsystems.tech",
+			"type": "string",
+			"description": "Base URL for your Real Estate API. This is the production domain."
+		}
+	]
+}

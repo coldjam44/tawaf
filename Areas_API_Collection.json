@@ -1,0 +1,488 @@
+{
+	"info": {
+		"_postman_id": "areas-api-collection",
+		"name": "Real Estate Areas API",
+		"description": "Complete API collection for managing real estate areas with bilingual support (Arabic/English)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "areas-api"
+	},
+	"item": [
+		{
+			"name": "Get All Areas",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/areas",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"areas"
+					]
+				},
+				"description": "Retrieve all areas with their projects count and details"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Single Area",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/areas/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"areas",
+						"1"
+					]
+				},
+				"description": "Retrieve a specific area by ID"
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Area",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name_ar",
+							"value": "وسط مدينة دبي",
+							"type": "text"
+						},
+						{
+							"key": "name_en",
+							"value": "Downtown Dubai",
+							"type": "text"
+						},
+						{
+							"key": "slug",
+							"value": "downtown-dubai",
+							"type": "text"
+						},
+						{
+							"key": "about_community_overview_ar",
+							"value": "وسط مدينة دبي هو قلب دبي النابض، موطن برج خليفة الشهير ومركز دبي مول للتسوق. تتميز المنطقة بناطحات السحاب الفاخرة والمناظر الخلابة.",
+							"type": "text"
+						},
+						{
+							"key": "about_community_overview_en",
+							"value": "Downtown Dubai is the beating heart of Dubai, home to the iconic Burj Khalifa and The Dubai Mall. The area features luxury skyscrapers and stunning views.",
+							"type": "text"
+						},
+						{
+							"key": "rental_sales_trends_ar",
+							"value": "شهدت المنطقة نمواً مستقراً في أسعار الإيجار والبيع بنسبة 5-8% سنوياً، مع ارتفاع الطلب على الشقق الفاخرة.",
+							"type": "text"
+						},
+						{
+							"key": "rental_sales_trends_en",
+							"value": "The area has seen steady growth in rental and sales prices by 5-8% annually, with high demand for luxury apartments.",
+							"type": "text"
+						},
+						{
+							"key": "roi_ar",
+							"value": "متوسط العائد على الاستثمار في المنطقة يتراوح بين 6-8% سنوياً، مما يجعلها خياراً استثمارياً جذاباً.",
+							"type": "text"
+						},
+						{
+							"key": "roi_en",
+							"value": "Average ROI in the area ranges from 6-8% annually, making it an attractive investment option.",
+							"type": "text"
+						},
+						{
+							"key": "things_to_do_perks_ar",
+							"value": "• زيارة برج خليفة ونافورة دبي\n• التسوق في دبي مول\n• تناول الطعام في المطاعم العالمية\n• الاستمتاع بالحياة الليلية",
+							"type": "text"
+						},
+						{
+							"key": "things_to_do_perks_en",
+							"value": "• Visit Burj Khalifa and Dubai Fountain\n• Shopping at The Dubai Mall\n• Dining at international restaurants\n• Enjoy nightlife",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/areas",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"areas"
+					]
+				},
+				"description": "Create a new area with complete bilingual information using form-data"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Area",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name_ar",
+							"value": "مرسى دبي",
+							"type": "text"
+						},
+						{
+							"key": "name_en",
+							"value": "Dubai Marina",
+							"type": "text"
+						},
+						{
+							"key": "slug",
+							"value": "dubai-marina",
+							"type": "text"
+						},
+						{
+							"key": "about_community_overview_ar",
+							"value": "مرسى دبي هو مجتمع سكني فاخر يطل على الخليج العربي، ويتميز بالعمارة الحديثة والمرافق الترفيهية المتطورة.",
+							"type": "text"
+						},
+						{
+							"key": "about_community_overview_en",
+							"value": "Dubai Marina is a luxury residential community overlooking the Arabian Gulf, featuring modern architecture and sophisticated amenities.",
+							"type": "text"
+						},
+						{
+							"key": "rental_sales_trends_ar",
+							"value": "تتميز المنطقة بأسعار إيجار مرتفعة ومستقرة، مع نمو سنوي يتراوح بين 3-6% في أسعار البيع.",
+							"type": "text"
+						},
+						{
+							"key": "rental_sales_trends_en",
+							"value": "The area features high and stable rental prices, with annual growth of 3-6% in sales prices.",
+							"type": "text"
+						},
+						{
+							"key": "roi_ar",
+							"value": "العائد على الاستثمار في مرسى دبي يتراوح بين 5-7% سنوياً، مع إمكانية تحقيق عوائد أعلى من الإيجار.",
+							"type": "text"
+						},
+						{
+							"key": "roi_en",
+							"value": "ROI in Dubai Marina ranges from 5-7% annually, with potential for higher returns from rentals.",
+							"type": "text"
+						},
+						{
+							"key": "things_to_do_perks_ar",
+							"value": "• المشي على الكورنيش\n• ركوب القوارب السياحية\n• التسوق في مرسى مول\n• تناول الطعام في المطاعم البحرية",
+							"type": "text"
+						},
+						{
+							"key": "things_to_do_perks_en",
+							"value": "• Walking along the promenade\n• Taking boat tours\n• Shopping at Marina Mall\n• Dining at waterfront restaurants",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/areas/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"areas",
+						"1"
+					]
+				},
+				"description": "Update an existing area with new information using form-data"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Area",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/areas/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"areas",
+						"1"
+					]
+				},
+				"description": "Delete an area (only if it has no associated projects)"
+			},
+			"response": []
+		},
+		{
+			"name": "Search Areas",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/areas?q=dubai",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"areas"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "dubai",
+							"description": "Search term (minimum 2 characters)"
+						}
+					]
+				},
+				"description": "Search areas by name in both Arabic and English"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Area - Palm Jumeirah",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name_ar",
+							"value": "جزيرة نخلة الجميرة",
+							"type": "text"
+						},
+						{
+							"key": "name_en",
+							"value": "Palm Jumeirah",
+							"type": "text"
+						},
+						{
+							"key": "slug",
+							"value": "palm-jumeirah",
+							"type": "text"
+						},
+						{
+							"key": "about_community_overview_ar",
+							"value": "جزيرة نخلة الجميرة هي أكبر جزيرة اصطناعية في العالم، تتميز بالفخامة والخصوصية مع إطلالات خلابة على الخليج العربي.",
+							"type": "text"
+						},
+						{
+							"key": "about_community_overview_en",
+							"value": "Palm Jumeirah is the world's largest artificial island, featuring luxury and privacy with stunning views of the Arabian Gulf.",
+							"type": "text"
+						},
+						{
+							"key": "rental_sales_trends_ar",
+							"value": "تتميز المنطقة بأسعار إيجار وبيع مرتفعة جداً، مع نمو مستقر بنسبة 4-7% سنوياً.",
+							"type": "text"
+						},
+						{
+							"key": "rental_sales_trends_en",
+							"value": "The area features very high rental and sales prices, with steady growth of 4-7% annually.",
+							"type": "text"
+						},
+						{
+							"key": "roi_ar",
+							"value": "العائد على الاستثمار في نخلة الجميرة يتراوح بين 7-10% سنوياً، مما يجعلها من أفضل الخيارات الاستثمارية.",
+							"type": "text"
+						},
+						{
+							"key": "roi_en",
+							"value": "ROI in Palm Jumeirah ranges from 7-10% annually, making it one of the best investment options.",
+							"type": "text"
+						},
+						{
+							"key": "things_to_do_perks_ar",
+							"value": "• زيارة أتلانتس النخلة\n• الاستمتاع بالشواطئ الخاصة\n• تناول الطعام في المطاعم الفاخرة\n• ممارسة الرياضات المائية",
+							"type": "text"
+						},
+						{
+							"key": "things_to_do_perks_en",
+							"value": "• Visit Atlantis The Palm\n• Enjoy private beaches\n• Dining at luxury restaurants\n• Water sports activities",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/areas",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"areas"
+					]
+				},
+				"description": "Create Palm Jumeirah area with luxury real estate focus using form-data"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Area - Business Bay",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name_ar",
+							"value": "خليج الأعمال",
+							"type": "text"
+						},
+						{
+							"key": "name_en",
+							"value": "Business Bay",
+							"type": "text"
+						},
+						{
+							"key": "slug",
+							"value": "business-bay",
+							"type": "text"
+						},
+						{
+							"key": "about_community_overview_ar",
+							"value": "خليج الأعمال هو مركز تجاري ومالي مهم في دبي، يتميز بناطحات السحاب الحديثة والبنية التحتية المتطورة.",
+							"type": "text"
+						},
+						{
+							"key": "about_community_overview_en",
+							"value": "Business Bay is an important commercial and financial center in Dubai, featuring modern skyscrapers and sophisticated infrastructure.",
+							"type": "text"
+						},
+						{
+							"key": "rental_sales_trends_ar",
+							"value": "تتميز المنطقة بأسعار إيجار معقولة نسبياً مع إمكانية نمو عالية في المستقبل.",
+							"type": "text"
+						},
+						{
+							"key": "rental_sales_trends_en",
+							"value": "The area features relatively reasonable rental prices with high growth potential in the future.",
+							"type": "text"
+						},
+						{
+							"key": "roi_ar",
+							"value": "العائد على الاستثمار في خليج الأعمال يتراوح بين 5-8% سنوياً، مع إمكانية تحقيق عوائد أعلى.",
+							"type": "text"
+						},
+						{
+							"key": "roi_en",
+							"value": "ROI in Business Bay ranges from 5-8% annually, with potential for higher returns.",
+							"type": "text"
+						},
+						{
+							"key": "things_to_do_perks_ar",
+							"value": "• العمل في المكاتب الفاخرة\n• التسوق في مراكز التسوق القريبة\n• تناول الطعام في المطاعم العالمية\n• الوصول السهل لوسائل النقل",
+							"type": "text"
+						},
+						{
+							"key": "things_to_do_perks_en",
+							"value": "• Work in luxury offices\n• Shopping at nearby malls\n• Dining at international restaurants\n• Easy access to transportation",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/areas",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"areas"
+					]
+				},
+				"description": "Create Business Bay area with commercial focus using form-data"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://realestate.azsystems.tech",
+			"type": "string"
+		}
+	]
+}

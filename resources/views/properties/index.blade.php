@@ -41,10 +41,12 @@
                             <tr>
                                 <th>{{ trans('main_trans.id') }}</th>
                                 <th>{{ trans('main_trans.project') }}</th>
+                                <th>{{ trans('main_trans.company') }}</th>
                                 <th>{{ trans('main_trans.price') }}</th>
                                 <th>{{ trans('main_trans.rooms') }}</th>
                                 <th>{{ trans('main_trans.area') }}</th>
                                 <th>{{ trans('main_trans.location') }}</th>
+                                <th>{{ trans('main_trans.responsible_employee') }}</th>
                                 <th>{{ trans('main_trans.processes') }}</th>
                             </tr>
                         </thead>
@@ -54,7 +56,14 @@
                                 <td>{{ $property->propertyid }}</td>
                                 <td>
                                     @if($property->project)
-                                        {{ $property->project->getTitle() }}
+                                        {{ $property->project->id }} - {{ $property->project->getTitle() }}
+                                    @else
+                                        <span class="text-muted">N/A</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($property->project && $property->project->company)
+                                        {{ app()->getLocale() === 'ar' ? $property->project->company->company_name_ar : $property->project->company->company_name_en }}
                                     @else
                                         <span class="text-muted">N/A</span>
                                     @endif
@@ -63,6 +72,15 @@
                                 <td>{{ $property->propertyrooms }}</td>
                                 <td>{{ $property->getFormattedAreaAttribute() }}</td>
                                 <td>{{ $property->propertyloaction }}</td>
+                                <td>
+                                    @if($property->employee)
+                                        {{ app()->getLocale() === 'ar' ? $property->employee->name_ar : $property->employee->name_en }}
+                                        <br>
+                                        <small class="text-muted">{{ $property->employee->email }}</small>
+                                    @else
+                                        <span class="text-muted">{{ trans('main_trans.no_employee_assigned') }}</span>
+                                    @endif
+                                </td>
                                 <td>
                                     <div class="btn-group" role="group">
                                         <a href="{{ route('properties.show', $property->propertyid) }}" class="btn btn-info btn-sm" title="{{ trans('main_trans.view') }}">
@@ -83,7 +101,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="7" class="text-center">{{ trans('main_trans.no_properties_found') }}</td>
+                                <td colspan="9" class="text-center">{{ trans('main_trans.no_properties_found') }}</td>
                             </tr>
                             @endforelse
                         </tbody>

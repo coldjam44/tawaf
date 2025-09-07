@@ -39,8 +39,7 @@ class AwardController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
             'year' => 'nullable|string|max:4',
             'category' => 'nullable|string|max:255',
-            'order_index' => 'nullable|integer|min:0',
-            'is_active' => 'nullable|boolean'
+            'order_index' => 'nullable|integer|min:0'
         ]);
 
         if ($validator->fails()) {
@@ -56,7 +55,7 @@ class AwardController extends Controller
             $award->year = $request->year;
             $award->category = $request->category;
             $award->order_index = $request->order_index ?: 0;
-            $award->is_active = $request->has('is_active');
+            $award->is_active = true;
 
             // Handle image upload
             if ($request->hasFile('image')) {
@@ -113,8 +112,7 @@ class AwardController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
             'year' => 'nullable|string|max:4',
             'category' => 'nullable|string|max:255',
-            'order_index' => 'nullable|integer|min:0',
-            'is_active' => 'nullable|boolean'
+            'order_index' => 'nullable|integer|min:0'
         ]);
 
         if ($validator->fails()) {
@@ -155,7 +153,7 @@ class AwardController extends Controller
                 'year' => $request->year,
                 'category' => $request->category,
                 'order_index' => $request->order_index ?: 0,
-                'is_active' => $request->has('is_active')
+                'is_active' => true
             ]);
 
             return redirect()->route('awards.index')
@@ -163,6 +161,28 @@ class AwardController extends Controller
 
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'An error occurred while updating the award: ' . $e->getMessage())->withInput();
+        }
+    }
+
+    /**
+     * Toggle the active status of the specified award.
+     */
+    public function toggle(string $id)
+    {
+        try {
+            $award = Award::findOrFail($id);
+            $oldStatus = $award->is_active;
+            $award->is_active = !$award->is_active;
+            $award->save();
+            
+            $message = $award->is_active ? 
+                trans('main_trans.award_activated_successfully') : 
+                trans('main_trans.award_deactivated_successfully');
+            
+            return redirect()->back()->with('success', $message);
+            
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred while toggling the award status: ' . $e->getMessage());
         }
     }
 

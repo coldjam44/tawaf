@@ -15,7 +15,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Tawaf</title>
+    <title>Aura Home</title>
 
     <meta name="description" content="" />
 
@@ -72,6 +72,90 @@
     @include('admin.includes.scripts')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-c1kX9RXD4y5Rbj6SUgo5xB9dzGCuI9QqSnCtkcu0F0lF5CqtK4Vb9mT6AwDgk6p3" crossorigin="anonymous"></script>
+
+    <style>
+        /* Search Projects Styling */
+        #projectSearch {
+            background: transparent !important;
+            border: none !important;
+            color: inherit !important;
+            font-size: 0.875rem !important;
+            padding: 0.25rem 0 !important;
+            width: 100% !important;
+        }
+        
+        #projectSearch:focus {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+        
+        #projectSearch::placeholder {
+            color: rgba(255, 255, 255, 0.7) !important;
+        }
+        
+        .menu-item .menu-link:hover #projectSearch::placeholder {
+            color: rgba(255, 255, 255, 0.9) !important;
+        }
+    </style>
+
+    <script>
+        // Project Search Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('projectSearch');
+            
+            if (searchInput) {
+                searchInput.addEventListener('input', function() {
+                    const searchTerm = this.value.trim();
+                    
+                    if (searchTerm.length >= 2) {
+                        // Search in current page projects
+                        searchProjectsInPage(searchTerm);
+                    } else {
+                        // Show all projects if search term is too short
+                        showAllProjects();
+                    }
+                });
+
+                // Add enter key functionality to redirect to projects page with search
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        const searchTerm = this.value.trim();
+                        if (searchTerm) {
+                            window.location.href = '{{ route("projects.index") }}?search=' + encodeURIComponent(searchTerm);
+                        }
+                    }
+                });
+            }
+
+            function searchProjectsInPage(searchTerm) {
+                // This function will search in the current page if we're on projects page
+                const projectRows = document.querySelectorAll('[data-project-name]');
+                
+                projectRows.forEach(row => {
+                    const projectName = row.getAttribute('data-project-name').toLowerCase();
+                    const projectDescription = row.getAttribute('data-project-description')?.toLowerCase() || '';
+                    const projectNumber = row.getAttribute('data-project-number')?.toLowerCase() || '';
+                    const projectPermit = row.getAttribute('data-project-permit')?.toLowerCase() || '';
+                    
+                    if (projectName.includes(searchTerm.toLowerCase()) || 
+                        projectDescription.includes(searchTerm.toLowerCase()) ||
+                        projectNumber.includes(searchTerm.toLowerCase()) ||
+                        projectPermit.includes(searchTerm.toLowerCase())) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            }
+
+            function showAllProjects() {
+                const projectRows = document.querySelectorAll('[data-project-name]');
+                projectRows.forEach(row => {
+                    row.style.display = '';
+                });
+            }
+        });
+    </script>
 
   </body>
 </html>

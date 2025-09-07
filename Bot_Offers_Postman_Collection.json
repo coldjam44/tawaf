@@ -1,0 +1,181 @@
+{
+	"info": {
+		"_postman_id": "bot-offers-api-collection",
+		"name": "Real Estate Bot Offers API",
+		"description": "API collection for Real Estate Bot Offers endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "realestate-bot-api"
+	},
+	"item": [
+		{
+			"name": "Bot Offers",
+			"item": [
+				{
+					"name": "Get Bot Offers List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/bot/offers",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"bot",
+								"offers"
+							]
+						},
+						"description": "Retrieves all projects that are in the bot offer list (where is_sent_to_bot = true). Returns formatted project data with images, developer info, and area details."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/bot/offers",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"bot",
+										"offers"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"success\": true,\n  \"message\": \"Bot offers retrieved successfully\",\n  \"data\": [\n    {\n      \"display_text_ar\": \"برج خليفة ريزيدنس 7 في جزيرة الريم\",\n      \"display_text_en\": \"Burj Khalifa Residences 7 in Al Reem Island\"\n    },\n    {\n      \"display_text_ar\": \"أبراج هايدرا أفنيو في جزيرة الريم\",\n      \"display_text_en\": \"Hydra Avenue Towers in Al Reem Island\"\n    }\n  ],\n  \"count\": 2,\n  \"timestamp\": \"2025-09-06T22:31:08.155754Z\"\n}"
+						},
+						{
+							"name": "Empty Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/bot/offers",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"bot",
+										"offers"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"success\": true,\n  \"message\": \"Bot offers retrieved successfully\",\n  \"data\": [],\n  \"count\": 0,\n  \"timestamp\": \"2025-09-06T22:23:35.000000Z\"\n}"
+						},
+						{
+							"name": "Error Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/bot/offers",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"bot",
+										"offers"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"success\": false,\n  \"message\": \"Error retrieving bot offers\",\n  \"error\": \"Detailed error message\"\n}"
+						}
+					]
+				}
+			],
+			"description": "Collection of endpoints for managing bot offers"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://realestate.azsystems.tech",
+			"type": "string"
+		}
+	]
+}

@@ -36,7 +36,7 @@ class SliderController extends Controller
     $validator = Validator::make($request->all(), [
         'title_en'        => 'nullable|string|max:255',
         'title_ar'        => 'nullable|string|max:255',
-        'project_logo'    => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+        'project_logo'    => 'nullable|image|mimes:jpg,jpeg,png,webp',
         'button1_text_en' => 'nullable|string|max:255',
         'button1_text_ar' => 'nullable|string|max:255',
         'button1_link'    => 'nullable|string|max:255',
@@ -46,9 +46,8 @@ class SliderController extends Controller
         'features_en'     => 'nullable|string',
         'features_ar'     => 'nullable|string',
         'brochure_link'   => 'nullable|file|mimes:pdf,doc,docx|max:5120', // 5MB
-        'status'          => 'required|boolean',
         'order'           => 'required|integer',
-        'background_image'=> 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
+        'background_image'=> 'required|image|mimes:jpg,jpeg,png,webp',
     ]);
 
     if ($validator->fails()) {
@@ -97,7 +96,6 @@ class SliderController extends Controller
     $slider->features_en      = $features_en;
     $slider->features_ar      = $features_ar;
     $slider->brochure_link    = $brochureFile;
-    $slider->status           = $request->status;
     $slider->order            = $request->order;
     $slider->save();
 
@@ -144,10 +142,9 @@ class SliderController extends Controller
         'features_en'     => 'nullable|string',
         'features_ar'     => 'nullable|string',
         'brochure_link'   => 'nullable|file|mimes:pdf,doc,docx|max:5120',
-        'status'          => 'required|boolean',
         'order'           => 'required|integer',
-        'background_image'=> 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-        'project_logo'    => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+        'background_image'=> 'nullable|image|mimes:jpg,jpeg,png,webp',
+        'project_logo'    => 'nullable|image|mimes:jpg,jpeg,png,webp',
     ]);
 
     if ($validator->fails()) {
@@ -188,7 +185,6 @@ class SliderController extends Controller
     $slider->button2_text_en = $request->button2_text_en;
     $slider->button2_text_ar = $request->button2_text_ar;
     $slider->button2_link    = $request->button2_link;
-    $slider->status          = $request->status;
     $slider->order           = $request->order;
 
     $slider->save();

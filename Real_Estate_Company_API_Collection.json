@@ -1,0 +1,378 @@
+{
+  "info": {
+    "name": "Real Estate Company API Collection",
+    "description": "Complete API collection for Real Estate Company management including CRUD operations and search functionality",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://realestate.azsystems.tech",
+      "type": "string"
+    },
+    {
+      "key": "company_id",
+      "value": "1",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Get All Real Estate Companies",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/real-estate-company",
+          "host": ["{{base_url}}"],
+          "path": ["api", "real-estate-company"]
+        },
+        "description": "Retrieve all real estate companies ordered by localized name"
+      },
+      "response": []
+    },
+    {
+      "name": "Get Real Estate Company by ID",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/real-estate-company/{{company_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "real-estate-company", "{{company_id}}"]
+        },
+        "description": "Retrieve a specific real estate company with its developers and projects"
+      },
+      "response": []
+    },
+    {
+      "name": "Create Real Estate Company",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "company_name_ar",
+              "value": "شركة العقارات التجريبية",
+              "type": "text",
+              "description": "Company name in Arabic (required)"
+            },
+            {
+              "key": "company_name_en",
+              "value": "Test Real Estate Company",
+              "type": "text",
+              "description": "Company name in English (required)"
+            },
+            {
+              "key": "short_description_ar",
+              "value": "وصف مختصر للشركة باللغة العربية",
+              "type": "text",
+              "description": "Short description in Arabic"
+            },
+            {
+              "key": "short_description_en",
+              "value": "Short company description in English",
+              "type": "text",
+              "description": "Short description in English"
+            },
+            {
+              "key": "about_company_ar",
+              "value": "معلومات مفصلة عن الشركة باللغة العربية",
+              "type": "text",
+              "description": "About company in Arabic"
+            },
+            {
+              "key": "about_company_en",
+              "value": "Detailed information about the company in English",
+              "type": "text",
+              "description": "About company in English"
+            },
+            {
+              "key": "contact_number",
+              "value": "+971501234567",
+              "type": "text",
+              "description": "Contact phone number"
+            },
+            {
+              "key": "features_ar",
+              "value": "مميزات الشركة باللغة العربية",
+              "type": "text",
+              "description": "Company features in Arabic"
+            },
+            {
+              "key": "features_en",
+              "value": "Company features in English",
+              "type": "text",
+              "description": "Company features in English"
+            },
+            {
+              "key": "properties_communities_ar",
+              "value": "المجتمعات والعقارات باللغة العربية",
+              "type": "text",
+              "description": "Properties and communities in Arabic"
+            },
+            {
+              "key": "properties_communities_en",
+              "value": "Properties and communities in English",
+              "type": "text",
+              "description": "Properties and communities in English"
+            },
+            {
+              "key": "adm_number",
+              "value": "ADM123456789",
+              "type": "text",
+              "description": "Administrative number"
+            },
+            {
+              "key": "cn_number",
+              "value": "CN987654321",
+              "type": "text",
+              "description": "Commercial number"
+            },
+            {
+              "key": "company_logo",
+              "type": "file",
+              "description": "Company logo (JPEG, PNG, JPG, GIF)"
+            },
+            {
+              "key": "company_images[]",
+              "type": "file",
+              "description": "Company images (JPEG, PNG, JPG, GIF) - can upload multiple files"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}/api/real-estate-company",
+          "host": ["{{base_url}}"],
+          "path": ["api", "real-estate-company"]
+        },
+        "description": "Create a new real estate company with all required and optional fields"
+      },
+      "response": []
+    },
+    {
+      "name": "Update Real Estate Company",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "company_name_ar",
+              "value": "شركة العقارات المحدثة",
+              "type": "text",
+              "description": "Updated company name in Arabic"
+            },
+            {
+              "key": "company_name_en",
+              "value": "Updated Real Estate Company",
+              "type": "text",
+              "description": "Updated company name in English"
+            },
+            {
+              "key": "short_description_ar",
+              "value": "وصف مختصر محدث للشركة",
+              "type": "text",
+              "description": "Updated short description in Arabic"
+            },
+            {
+              "key": "short_description_en",
+              "value": "Updated short description in English",
+              "type": "text",
+              "description": "Updated short description in English"
+            },
+            {
+              "key": "about_company_ar",
+              "value": "معلومات محدثة عن الشركة",
+              "type": "text",
+              "description": "Updated about company in Arabic"
+            },
+            {
+              "key": "about_company_en",
+              "value": "Updated company information",
+              "type": "text",
+              "description": "Updated about company in English"
+            },
+            {
+              "key": "contact_number",
+              "value": "+971509876543",
+              "type": "text",
+              "description": "Updated contact number"
+            },
+            {
+              "key": "features_ar",
+              "value": "مميزات محدثة للشركة",
+              "type": "text",
+              "description": "Updated features in Arabic"
+            },
+            {
+              "key": "features_en",
+              "value": "Updated company features",
+              "type": "text",
+              "description": "Updated features in English"
+            },
+            {
+              "key": "properties_communities_ar",
+              "value": "مجتمعات محدثة للشركة",
+              "type": "text",
+              "description": "Updated properties in Arabic"
+            },
+            {
+              "key": "properties_communities_en",
+              "value": "Updated company properties",
+              "type": "text",
+              "description": "Updated properties in English"
+            },
+            {
+              "key": "adm_number",
+              "value": "ADM987654321",
+              "type": "text",
+              "description": "Updated administrative number"
+            },
+            {
+              "key": "cn_number",
+              "value": "CN123456789",
+              "type": "text",
+              "description": "Updated commercial number"
+            },
+            {
+              "key": "company_logo",
+              "type": "file",
+              "description": "Updated company logo (JPEG, PNG, JPG, GIF)"
+            },
+            {
+              "key": "company_images[]",
+              "type": "file",
+              "description": "Updated company images (JPEG, PNG, JPG, GIF) - can upload multiple files"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}/api/real-estate-company/{{company_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "real-estate-company", "{{company_id}}"]
+        },
+        "description": "Update an existing real estate company with new information"
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Real Estate Company",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/real-estate-company/{{company_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "real-estate-company", "{{company_id}}"]
+        },
+        "description": "Delete a real estate company and all associated files"
+      },
+      "response": []
+    },
+    {
+      "name": "Search Real Estate Companies",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/search/real-estate-company?q=test",
+          "host": ["{{base_url}}"],
+          "path": ["api", "search", "real-estate-company"],
+          "query": [
+            {
+              "key": "q",
+              "value": "test",
+              "description": "Search term (minimum 2 characters)"
+            }
+          ]
+        },
+        "description": "Search real estate companies by name, description, contact number, or registration numbers"
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Pre-request script to set up environment variables",
+          "if (pm.environment.get('base_url') === undefined) {",
+          "    pm.environment.set('base_url', 'https://realestate.azsystems.tech');",
+          "}",
+          "",
+          "// Set default company ID if not exists",
+          "if (pm.environment.get('company_id') === undefined) {",
+          "    pm.environment.set('company_id', '1');",
+          "}"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Test script to validate responses",
+          "pm.test('Status code is 200 or 201', function () {",
+          "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+          "});",
+          "",
+          "pm.test('Response has required fields', function () {",
+          "    const response = pm.response.json();",
+          "    pm.expect(response).to.have.property('status');",
+          "    pm.expect(response).to.have.property('message');",
+          "});",
+          "",
+          "pm.test('Status is success', function () {",
+          "    const response = pm.response.json();",
+          "    pm.expect(response.status).to.eql('success');",
+          "});",
+          "",
+          "// Store company ID for subsequent requests",
+          "if (pm.response.code === 201) {",
+          "    const response = pm.response.json();",
+          "    if (response.data && response.data.id) {",
+          "        pm.environment.set('company_id', response.data.id.toString());",
+          "    }",
+          "}"
+        ]
+      }
+    }
+  ]
+}

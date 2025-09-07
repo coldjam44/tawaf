@@ -103,14 +103,7 @@
 
 
 
-                            {{-- Status --}}
-                            <div class="mb-3">
-                                <label>{{ trans('main_trans.status') }}</label>
-                                <select name="status" class="form-control">
-                                    <option value="1">{{ trans('main_trans.active') }}</option>
-                                    <option value="0">{{ trans('main_trans.inactive') }}</option>
-                                </select>
-                            </div>
+
 
                             {{-- Order --}}
                             <div class="mb-3">

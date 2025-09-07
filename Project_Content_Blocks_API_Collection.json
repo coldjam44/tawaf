@@ -1,0 +1,283 @@
+{
+  "info": {
+    "name": "Project Content Blocks API",
+    "description": "Complete API collection for managing project content blocks (text sections with optional images) for real estate projects",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://realestate.azsystems.tech",
+      "type": "string"
+    },
+    {
+      "key": "project_id",
+      "value": "12",
+      "type": "string"
+    },
+    {
+      "key": "block_id",
+      "value": "1",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Get All Project Content Blocks",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/projects/{{project_id}}/content-blocks",
+          "host": ["{{base_url}}"],
+          "path": ["api", "projects", "{{project_id}}", "content-blocks"]
+        },
+        "description": "Retrieve all content blocks for a specific project. Returns blocks ordered by their display order."
+      },
+      "response": []
+    },
+    {
+      "name": "Create Project Content Block",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "title_ar",
+              "value": "وصف المشروع",
+              "type": "text",
+              "description": "Content block title in Arabic - required"
+            },
+            {
+              "key": "title_en",
+              "value": "Project Description",
+              "type": "text",
+              "description": "Content block title in English - required"
+            },
+            {
+              "key": "content_ar",
+              "value": "هذا وصف تفصيلي للمشروع باللغة العربية. يتضمن جميع المعلومات المهمة عن المشروع ومميزاته.",
+              "type": "text",
+              "description": "Content block content in Arabic - required"
+            },
+            {
+              "key": "content_en",
+              "value": "This is a detailed project description in English. It includes all important information about the project and its features.",
+              "type": "text",
+              "description": "Content block content in English - required"
+            },
+            {
+              "key": "images[]",
+              "type": "file",
+              "description": "Content block images (JPEG, PNG, JPG, GIF) - optional, max 5 images"
+            },
+            {
+              "key": "order",
+              "value": "1",
+              "type": "text",
+              "description": "Display order - optional (auto-generated if not provided)"
+            },
+            {
+              "key": "is_active",
+              "value": "true",
+              "type": "text",
+              "description": "Is active (true/false) - optional (default: true)"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}/api/projects/{{project_id}}/content-blocks",
+          "host": ["{{base_url}}"],
+          "path": ["api", "projects", "{{project_id}}", "content-blocks"]
+        },
+        "description": "Create a new content block for a project. Examples of content blocks: project description, payment policy, features, terms & conditions, location details, etc."
+      },
+      "response": []
+    },
+    {
+      "name": "Get Project Content Block",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/projects/{{project_id}}/content-blocks/{{block_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "projects", "{{project_id}}", "content-blocks", "{{block_id}}"]
+        },
+        "description": "Retrieve a specific content block for a project by its ID."
+      },
+      "response": []
+    },
+    {
+      "name": "Update Project Content Block",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "title_ar",
+              "value": "عنوان القسم المحدث",
+              "type": "text",
+              "description": "Content block title in Arabic - optional"
+            },
+            {
+              "key": "title_en",
+              "value": "Updated Section Title",
+              "type": "text",
+              "description": "Content block title in English - optional"
+            },
+            {
+              "key": "content_ar",
+              "value": "محتوى القسم المحدث باللغة العربية",
+              "type": "text",
+              "description": "Content block content in Arabic - optional"
+            },
+            {
+              "key": "content_en",
+              "value": "Updated section content in English",
+              "type": "text",
+              "description": "Content block content in English - optional"
+            },
+            {
+              "key": "images[]",
+              "type": "file",
+              "description": "Content block images (JPEG, PNG, JPG, GIF) - optional, will replace existing images"
+            },
+            {
+              "key": "order",
+              "value": "2",
+              "type": "text",
+              "description": "Display order - optional"
+            },
+            {
+              "key": "is_active",
+              "value": "true",
+              "type": "text",
+              "description": "Is active (true/false) - optional"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}/api/projects/{{project_id}}/content-blocks/{{block_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "projects", "{{project_id}}", "content-blocks", "{{block_id}}"]
+        },
+        "description": "Update a specific content block for a project. Only include fields you want to update."
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Project Content Block",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/projects/{{project_id}}/content-blocks/{{block_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "projects", "{{project_id}}", "content-blocks", "{{block_id}}"]
+        },
+        "description": "Delete a specific content block for a project. This will also delete associated images."
+      },
+      "response": []
+    },
+    {
+      "name": "Toggle Content Block Status",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/projects/{{project_id}}/content-blocks/{{block_id}}/toggle",
+          "host": ["{{base_url}}"],
+          "path": ["api", "projects", "{{project_id}}", "content-blocks", "{{block_id}}", "toggle"]
+        },
+        "description": "Toggle active/inactive status of a content block. If active, it becomes inactive and vice versa."
+      },
+      "response": []
+    },
+    {
+      "name": "Update Content Blocks Order",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"blocks\": [\n    {\n      \"id\": 1,\n      \"order\": 1\n    },\n    {\n      \"id\": 2,\n      \"order\": 2\n    },\n    {\n      \"id\": 3,\n      \"order\": 3\n    }\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/projects/{{project_id}}/content-blocks/update-order",
+          "host": ["{{base_url}}"],
+          "path": ["api", "projects", "{{project_id}}", "content-blocks", "update-order"]
+        },
+        "description": "Update the display order of multiple content blocks at once. Send array of objects with id and order."
+      },
+      "response": []
+    },
+    {
+      "name": "Get Active Content Blocks",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/projects/{{project_id}}/content-blocks/active",
+          "host": ["{{base_url}}"],
+          "path": ["api", "projects", "{{project_id}}", "content-blocks", "active"]
+        },
+        "description": "Retrieve only active content blocks for a project. Useful for frontend display."
+      },
+      "response": []
+    }
+  ]
+}

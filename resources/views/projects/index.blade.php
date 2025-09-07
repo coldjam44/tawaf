@@ -61,6 +61,19 @@
                     </div>
                 @endif
 
+                {{-- رسالة البحث --}}
+                @if(request('search'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <i class="fas fa-search"></i>
+                        <strong>{{ trans('main_trans.search_results_for') }}:</strong> 
+                        "{{ request('search') }}"
+                        <a href="{{ route('projects.index') }}" class="btn btn-sm btn-outline-success ms-2">
+                            <i class="fas fa-times"></i> {{ trans('main_trans.clear_search') }}
+                        </a>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
                 {{-- فورم الإضافة --}}
                 <div class="collapse" id="addProjectForm">
                     <div class="card card-body">
@@ -244,7 +257,7 @@
                         </thead>
                         <tbody>
                             @forelse ($projects as $project)
-                            <tr>
+                            <tr data-project-name="{{ $project->getTitle() }}" data-project-description="{{ $project->getDescription() }}" data-project-number="{{ $project->prj_projectNumber }}" data-project-permit="{{ $project->prj_MadhmounPermitNumber }}">
                                 <td>{{ $project->id }}</td>
                                 <td>
                                     <div class="text-start">
@@ -270,14 +283,17 @@
                                         <a href="{{ route('project-details.index', $project->id) }}" class="btn btn-warning btn-sm" title="{{ trans('main_trans.manage_project_details') }}">
                                             <i class="fas fa-list"></i>
                                         </a>
-                                        <a href="{{ route('project-descriptions.index', $project->id) }}" class="btn btn-secondary btn-sm" title="{{ trans('main_trans.project_descriptions_management') }}">
+                                        {{-- <a href="{{ route('project-descriptions.index', $project->id) }}" class="btn btn-secondary btn-sm" title="{{ trans('main_trans.project_descriptions_management') }}">
                                             <i class="fas fa-file-alt"></i>
-                                        </a>
+                                        </a> --}}
                                         <a href="{{ route('project-amenities.index', $project->id) }}" class="btn btn-warning btn-sm" title="{{ trans('main_trans.project_amenities_management') }}">
                                             <i class="fas fa-concierge-bell"></i>
                                         </a>
                                         <a href="{{ route('project-images.index', $project->id) }}" class="btn btn-primary btn-sm" title="{{ trans('main_trans.manage_project_images') }}">
                                             <i class="fas fa-images"></i>
+                                        </a>
+                                        <a href="{{ route('project-content-blocks.index', $project->id) }}" class="btn btn-success btn-sm" title="إدارة أقسام المحتوى">
+                                            <i class="fas fa-file-text"></i>
                                         </a>
                                         <a href="{{ route('projects.edit', $project->id) }}" class="btn btn-info btn-sm" title="{{ trans('main_trans.edit') }}">
                                             <i class="fa fa-edit"></i>

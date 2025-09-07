@@ -22,10 +22,11 @@ class Property extends Model
         'propertyquantity',
         'propertyloaction',
         'propertypaymentplan',
+        'employee_id',
         'propertyhandover',
         'propertyfeatures',
-        'propertyfulldetils',
-        'propertyinformation',
+        'propertyfulldetils_ar',
+        'propertyfulldetils_en',
     ];
 
     protected $casts = [
@@ -46,6 +47,11 @@ class Property extends Model
     public function paymentPlan()
     {
         return $this->belongsTo(PaymentPlan::class, 'propertypaymentplan');
+    }
+
+    public function employee()
+    {
+        return $this->belongsTo(Developer::class, 'employee_id');
     }
 
     // Helper methods
