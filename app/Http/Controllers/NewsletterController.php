@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Newsletter;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\NewsletterExport;
 
 class NewsletterController extends Controller
 {
@@ -85,5 +87,18 @@ class NewsletterController extends Controller
 
         return redirect()->route('newsletter.index')
             ->with('success', trans('main_trans.newsletter_deleted_successfully'));
+    }
+
+    /**
+     * Export newsletter data to Excel
+     */
+    public function export()
+    {
+        try {
+            $fileName = 'newsletter_' . date('Y-m-d_H-i-s') . '.xlsx';
+            return Excel::download(new NewsletterExport, $fileName);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred while exporting data: ' . $e->getMessage());
+        }
     }
 }

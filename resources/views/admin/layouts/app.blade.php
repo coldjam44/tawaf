@@ -8,7 +8,7 @@
   data-template="vertical-menu-template-starter">
   <head>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MQ6DdL+gkOIvyg4ezOJS+r6g7g6UpCq5siCw
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <meta charset="utf-8" />
     <meta
@@ -71,7 +71,44 @@
     </form>
     @include('admin.includes.scripts')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-c1kX9RXD4y5Rbj6SUgo5xB9dzGCuI9QqSnCtkcu0F0lF5CqtK4Vb9mT6AwDgk6p3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Language toggle function
+        function toggleLanguage() {
+            const currentPath = window.location.pathname;
+            const currentLang = currentPath.split('/')[1];
+            
+            // Determine target language
+            let targetLang = 'ar';
+            if (currentLang === 'ar' || !currentLang) {
+                targetLang = 'en';
+            }
+            
+            // Get the localized URL
+            const baseUrl = window.location.origin;
+            const pathWithoutLang = currentPath.replace(/^\/[a-z]{2}\//, '/');
+            const targetUrl = baseUrl + '/' + targetLang + pathWithoutLang;
+            
+            // Redirect to target language
+            window.location.href = targetUrl;
+        }
+        
+        // Update button text on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentLangSpan = document.getElementById('currentLang');
+            if (currentLangSpan) {
+                const currentPath = window.location.pathname;
+                const currentLang = currentPath.split('/')[1];
+                
+                if (currentLang === 'ar') {
+                    currentLangSpan.textContent = 'العربية';
+                } else {
+                    currentLangSpan.textContent = 'English';
+                }
+            }
+        });
+    </script>
 
     <style>
         /* Search Projects Styling */

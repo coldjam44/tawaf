@@ -34,6 +34,7 @@ class AreaController extends Controller
             'name_ar' => 'required|string|max:255',
             'name_en' => 'required|string|max:255',
             'slug' => 'required|string|max:255|unique:areas,slug',
+            'main_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'about_community_overview_ar' => 'nullable|string',
             'about_community_overview_en' => 'nullable|string',
             'rental_sales_trends_ar' => 'nullable|string',
@@ -49,7 +50,7 @@ class AreaController extends Controller
         }
 
         try {
-            Area::create([
+            $data = [
                 'name_ar' => $request->name_ar,
                 'name_en' => $request->name_en,
                 'slug' => $request->slug,
@@ -61,7 +62,17 @@ class AreaController extends Controller
                 'roi_en' => $request->roi_en,
                 'things_to_do_perks_ar' => $request->things_to_do_perks_ar,
                 'things_to_do_perks_en' => $request->things_to_do_perks_en
-            ]);
+            ];
+
+            // Handle image upload
+            if ($request->hasFile('main_image')) {
+                $image = $request->file('main_image');
+                $imageName = time() . '_' . $image->getClientOriginalName();
+                $image->move(public_path('areas/images'), $imageName);
+                $data['main_image'] = $imageName;
+            }
+
+            Area::create($data);
 
             return redirect()->route('areas.index')->with('success', trans('main_trans.area_created_successfully'));
 
@@ -99,6 +110,7 @@ class AreaController extends Controller
             'name_ar' => 'required|string|max:255',
             'name_en' => 'required|string|max:255',
             'slug' => 'required|string|max:255|unique:areas,slug,' . $id,
+            'main_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'about_community_overview_ar' => 'nullable|string',
             'about_community_overview_en' => 'nullable|string',
             'rental_sales_trends_ar' => 'nullable|string',
@@ -114,7 +126,7 @@ class AreaController extends Controller
         }
 
         try {
-            $area->update([
+            $data = [
                 'name_ar' => $request->name_ar,
                 'name_en' => $request->name_en,
                 'slug' => $request->slug,
@@ -126,7 +138,22 @@ class AreaController extends Controller
                 'roi_en' => $request->roi_en,
                 'things_to_do_perks_ar' => $request->things_to_do_perks_ar,
                 'things_to_do_perks_en' => $request->things_to_do_perks_en
-            ]);
+            ];
+
+            // Handle image upload
+            if ($request->hasFile('main_image')) {
+                // Delete old image if exists
+                if ($area->main_image && file_exists(public_path('areas/images/' . $area->main_image))) {
+                    unlink(public_path('areas/images/' . $area->main_image));
+                }
+                
+                $image = $request->file('main_image');
+                $imageName = time() . '_' . $image->getClientOriginalName();
+                $image->move(public_path('areas/images'), $imageName);
+                $data['main_image'] = $imageName;
+            }
+
+            $area->update($data);
 
             return redirect()->route('areas.index')->with('success', trans('main_trans.area_updated_successfully'));
 

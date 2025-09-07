@@ -44,7 +44,7 @@ class BlogController extends Controller
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
             'status' => 'nullable|in:draft,published',
             'order_index' => 'nullable|integer|min:0',
-            'is_active' => 'nullable|boolean'
+            'is_active' => 'nullable'
         ]);
 
         if ($validator->fails()) {
@@ -58,7 +58,7 @@ class BlogController extends Controller
                 $image = $request->file('main_image');
                 $mainImageName = time() . '_main_' . Str::slug($request->title_en) . '.' . $image->getClientOriginalExtension();
                 
-                $uploadPath = public_path('blog/main-images');
+                $uploadPath = public_path('blogsfiles/main-images');
                 if (!file_exists($uploadPath)) {
                     mkdir($uploadPath, 0755, true);
                 }
@@ -75,13 +75,13 @@ class BlogController extends Controller
                 'main_image' => $mainImageName,
                 'status' => $request->status ?: 'draft',
                 'order_index' => $request->order_index ?: 0,
-                'is_active' => $request->has('is_active'),
+                'is_active' => $request->has('is_active') ? $request->boolean('is_active') : false,
                 'published_at' => $request->status === 'published' ? now() : null
             ]);
 
             // Handle additional images
             if ($request->hasFile('images')) {
-                $uploadPath = public_path('blog/images');
+                $uploadPath = public_path('blogsfiles/images');
                 if (!file_exists($uploadPath)) {
                     mkdir($uploadPath, 0755, true);
                 }
@@ -105,7 +105,7 @@ class BlogController extends Controller
                 }
             }
 
-            return redirect()->route('blogs.index')
+            return redirect()->route('blogsection.index')
                            ->with('success', trans('main_trans.blog_created_successfully'));
 
         } catch (\Exception $e) {
@@ -137,7 +137,7 @@ class BlogController extends Controller
             return view('blogs.edit', compact('blog'));
         } catch (\Exception $e) {
             \Log::error('Blog Edit Error: ' . $e->getMessage());
-            return redirect()->route('blogs.index')->with('error', 'Blog not found');
+            return redirect()->route('blogsection.index')->with('error', 'Blog not found');
         }
     }
 
@@ -157,7 +157,7 @@ class BlogController extends Controller
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
             'status' => 'nullable|in:draft,published',
             'order_index' => 'nullable|integer|min:0',
-            'is_active' => 'nullable|boolean'
+            'is_active' => 'nullable'
         ]);
 
         if ($validator->fails()) {
@@ -176,7 +176,7 @@ class BlogController extends Controller
             if ($request->hasFile('main_image')) {
                 // Delete old main image
                 if ($blog->main_image) {
-                    $oldImagePath = public_path('blog/main-images/' . $blog->main_image);
+                    $oldImagePath = public_path('blogsfiles/main-images/' . $blog->main_image);
                     if (file_exists($oldImagePath)) {
                         unlink($oldImagePath);
                     }
@@ -185,7 +185,7 @@ class BlogController extends Controller
                 $image = $request->file('main_image');
                 $mainImageName = time() . '_main_' . Str::slug($request->title_en) . '.' . $image->getClientOriginalExtension();
                 
-                $uploadPath = public_path('blog/main-images');
+                $uploadPath = public_path('blogsfiles/main-images');
                 if (!file_exists($uploadPath)) {
                     mkdir($uploadPath, 0755, true);
                 }
@@ -202,7 +202,7 @@ class BlogController extends Controller
                 'main_image' => $mainImageName,
                 'status' => $request->status ?: 'draft',
                 'order_index' => $request->order_index ?: 0,
-                'is_active' => $request->has('is_active')
+                'is_active' => $request->has('is_active') ? $request->boolean('is_active') : false
             ];
 
             // Handle published_at
@@ -213,12 +213,10 @@ class BlogController extends Controller
             }
 
             $blog->update($updateData);
-            
-            \Log::info('Blog Updated Successfully: ' . $blog->id . ' - ' . $blog->title_ar);
 
             // Handle additional images
             if ($request->hasFile('images')) {
-                $uploadPath = public_path('blog/images');
+                $uploadPath = public_path('blogsfiles/images');
                 if (!file_exists($uploadPath)) {
                     mkdir($uploadPath, 0755, true);
                 }
@@ -242,7 +240,7 @@ class BlogController extends Controller
                 }
             }
 
-            return redirect()->route('blogs.index')
+            return redirect()->route('blogsection.index')
                            ->with('success', trans('main_trans.blog_updated_successfully'));
 
         } catch (\Exception $e) {
@@ -262,7 +260,7 @@ class BlogController extends Controller
             
             // Delete main image
             if ($blog->main_image) {
-                $mainImagePath = public_path('blog/main-images/' . $blog->main_image);
+                $mainImagePath = public_path('blogsfiles/main-images/' . $blog->main_image);
                 if (file_exists($mainImagePath)) {
                     unlink($mainImagePath);
                 }
@@ -270,7 +268,7 @@ class BlogController extends Controller
             
             // Delete additional images
             foreach ($blog->images as $image) {
-                $imagePath = public_path('blog/images/' . $image->image_path);
+                $imagePath = public_path('blogsfiles/images/' . $image->image_path);
                 if (file_exists($imagePath)) {
                     unlink($imagePath);
                 }
@@ -278,7 +276,7 @@ class BlogController extends Controller
             
             $blog->delete();
             
-            return redirect()->route('blogs.index')
+            return redirect()->route('blogsection.index')
                            ->with('success', trans('main_trans.blog_deleted_successfully'));
             
         } catch (\Exception $e) {
@@ -295,7 +293,7 @@ class BlogController extends Controller
             $image = BlogImage::where('blog_id', $blogId)->findOrFail($imageId);
             
             // Delete image file
-            $imagePath = public_path('blog/images/' . $image->image_path);
+            $imagePath = public_path('blogsfiles/images/' . $image->image_path);
             if (file_exists($imagePath)) {
                 unlink($imagePath);
             }

@@ -30,6 +30,18 @@
                     </div>
                 </div>
 
+                {{-- الصورة الرئيسية --}}
+                @if($area->main_image)
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h6 class="text-muted">{{ trans('main_trans.main_image') }}</h6>
+                        <div class="text-center">
+                            <img src="{{ $area->main_image_url }}" alt="{{ $area->name_ar }}" class="img-fluid rounded shadow" style="max-width: 400px; max-height: 300px; object-fit: cover;">
+                        </div>
+                    </div>
+                </div>
+                @endif
+
                 <div class="row mb-4">
                     <div class="col-md-6">
                         <h6 class="text-muted">{{ trans('main_trans.area_slug') }}</h6>

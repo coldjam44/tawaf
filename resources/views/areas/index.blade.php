@@ -48,7 +48,7 @@
                 {{-- فورم الإضافة --}}
                 <div class="collapse" id="addAreaForm">
                     <div class="card card-body">
-                        <form action="{{ route('areas.store') }}" method="POST">
+                        <form action="{{ route('areas.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <div class="row">
@@ -78,6 +78,19 @@
                                         <input type="text" name="slug" id="slug" class="form-control @error('slug') is-invalid @enderror" value="{{ old('slug') }}" required>
                                         <small class="form-text text-muted">مثال: downtown-dubai, dubai-marina</small>
                                         @error('slug')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label for="main_image" class="form-label">{{ trans('main_trans.main_image') }}</label>
+                                        <input type="file" name="main_image" id="main_image" class="form-control @error('main_image') is-invalid @enderror" accept="image/*">
+                                        <small class="form-text text-muted">الصور المسموحة: JPG, PNG, GIF (حد أقصى 2MB)</small>
+                                        @error('main_image')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -159,6 +172,7 @@
                         <thead>
                             <tr>
                                 <th>{{ trans('main_trans.id') }}</th>
+                                <th>{{ trans('main_trans.main_image') }}</th>
                                 <th>{{ trans('main_trans.area_name') }}</th>
                                 <th>{{ trans('main_trans.area_slug') }}</th>
                                 <th>{{ trans('main_trans.area_projects_count') }}</th>
@@ -170,6 +184,15 @@
                             @forelse ($areas as $area)
                             <tr>
                                 <td>{{ $area->id }}</td>
+                                <td>
+                                    @if($area->main_image)
+                                        <img src="{{ $area->main_image_url }}" alt="{{ $area->name_ar }}" class="img-thumbnail" style="width: 60px; height: 60px; object-fit: cover;">
+                                    @else
+                                        <div class="bg-light d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                                            <i class="fas fa-image text-muted"></i>
+                                        </div>
+                                    @endif
+                                </td>
                                 <td>
                                     <div class="text-start">
                                         <div class="fw-bold">{{ app()->getLocale() == 'ar' ? $area->name_ar : $area->name_en }}</div>
@@ -210,7 +233,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="6" class="text-center">{{ trans('main_trans.no_areas_found') }}</td>
+                                <td colspan="7" class="text-center">{{ trans('main_trans.no_areas_found') }}</td>
                             </tr>
                             @endforelse
                         </tbody>

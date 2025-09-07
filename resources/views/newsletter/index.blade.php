@@ -24,6 +24,23 @@
                                 </div>
                             @endif
 
+                            {{-- أزرار التصدير --}}
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <a href="{{ route('newsletter.export') }}" class="btn btn-success">
+                                                <i class="fas fa-file-excel me-1"></i>
+                                                {{ trans('main_trans.export_to_excel') }}
+                                            </a>
+                                        </div>
+                                        <div>
+                                            <span class="badge bg-info">{{ $newsletters->total() }} {{ trans('main_trans.total_newsletters') }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="table-responsive">
                                 <table class="table table-bordered">
                                     <thead>
@@ -79,11 +96,12 @@
                                 </table>
                             </div>
 
-                            @if($newsletters->hasPages())
+                            {{-- Pagination hidden as requested --}}
+                            {{-- @if($newsletters->hasPages())
                                 <div class="d-flex justify-content-center">
                                     {{ $newsletters->links() }}
                                 </div>
-                            @endif
+                            @endif --}}
                         </div>
                     </div>
                 </div>

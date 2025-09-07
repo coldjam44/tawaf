@@ -28,43 +28,44 @@
 <div class="menu-inner-shadow"></div>
 
 <ul class="menu-inner py-1">
-    <!-- Page -->
+    <!-- Main Navigation -->
 
+    {{-- Website Link --}}
     <li class="menu-item active">
-    <a href="https://aurahome.ae/" target="_blank" class="menu-link">
-        <i class="menu-icon tf-icons ti ti-external-link"></i>
-        <div data-i18n="visit_website">Aura Home</div>
-    </a>
+        <a href="https://aurahome.ae/" target="_blank" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-external-link"></i>
+            <div data-i18n="visit_website">Aura Home</div>
+        </a>
     </li>
 
-    {{-- <li class="menu-item active">
-    <a href="{{ route('home') }}" class="menu-link">
-        <i class="menu-icon tf-icons ti ti-smart-home"></i>
-        <div data-i18n="Home">Home</div>
-    </a>
-    </li> --}}
-    <li class="menu-item active">
-    <a href="{{ route('sliders.index') }}" class="menu-link">
-        <i class="menu-icon tf-icons ti ti-layout-grid"></i>
-        <div data-i18n="Slider">{{ trans('main_trans.slider') }}</div>
-    </a>
-</li>
-    <li class="menu-item active">
-    <a href="{{ route('projects.index') }}" class="menu-link">
-        <i class="menu-icon tf-icons ti ti-archive"></i>
-        <div data-i18n="Projects">{{ trans('main_trans.section_project') }}</div>
-    </a>
-</li>
+    {{-- Separator --}}
+    <li class="menu-header small text-uppercase">
+        <span class="menu-header-text">{{ trans('main_trans.content_management') }}</span>
+    </li>
 
-    {{-- Properties Menu Item --}}
+    {{-- Slider --}}
+    <li class="menu-item active">
+        <a href="{{ route('sliders.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-layout-grid"></i>
+            <div data-i18n="Slider">{{ trans('main_trans.slider') }}</div>
+        </a>
+    </li>
+
+    {{-- Projects --}}
+    <li class="menu-item active">
+        <a href="{{ route('projects.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-archive"></i>
+            <div data-i18n="Projects">{{ trans('main_trans.section_project') }}</div>
+        </a>
+    </li>
+
+    {{-- Properties --}}
     <li class="menu-item active">
         <a href="{{ route('properties.index') }}" class="menu-link">
             <i class="menu-icon tf-icons ti ti-home"></i>
             <div data-i18n="Properties">{{ trans('main_trans.property') }}</div>
         </a>
     </li>
-
-
 
     {{-- Search Projects --}}
     <li class="menu-item active">
@@ -80,8 +81,8 @@
         </div>
     </li>
 
-    {{-- Project Details Dropdown --}}
-    <li class="menu-item active dropdown {{ request()->routeIs('project-details.*') ? 'active' : '' }}">
+    {{-- Project Details Dropdown - Hidden --}}
+    {{-- <li class="menu-item active dropdown {{ request()->routeIs('project-details.*') ? 'active' : '' }}">
         <a href="javascript:void(0)" class="menu-link dropdown-toggle" data-bs-toggle="dropdown">
             <i class="menu-icon tf-icons ti ti-list-details"></i>
             <div data-i18n="Project Details">{{ trans('main_trans.project_details_management') }}</div>
@@ -112,10 +113,10 @@
                 </a>
             </li>
         </ul>
-    </li>
+    </li> --}}
 
-    {{-- Project Images Dropdown --}}
-    <li class="menu-item active dropdown {{ request()->routeIs('project-images.*') ? 'active' : '' }}">
+    {{-- Project Images Dropdown - Hidden --}}
+    {{-- <li class="menu-item active dropdown {{ request()->routeIs('project-images.*') ? 'active' : '' }}">
         <a href="javascript:void(0)" class="menu-link dropdown-toggle" data-bs-toggle="dropdown">
             <i class="menu-icon tf-icons ti ti-photo"></i>
             <div data-i18n="Project Images">{{ trans('main_trans.project_images_management') }}</div>
@@ -146,9 +147,14 @@
                 </a>
             </li>
         </ul>
+    </li> --}}
+
+    {{-- Separator --}}
+    <li class="menu-header small text-uppercase">
+        <span class="menu-header-text">{{ trans('main_trans.reference_data') }}</span>
     </li>
 
-    {{-- Areas Menu Item --}}
+    {{-- Areas --}}
     <li class="menu-item active {{ request()->routeIs('areas.*') ? 'active' : '' }}">
         <a href="{{ route('areas.index') }}" class="menu-link">
             <i class="menu-icon tf-icons ti ti-map-pin"></i>
@@ -156,71 +162,91 @@
         </a>
     </li>
 
+    {{-- Developers --}}
     <li class="menu-item active">
-    <a href="{{ route('developers.index') }}" class="menu-link">
-        <i class="menu-icon tf-icons ti ti-smart-home"></i>
-        <div data-i18n="Home">{{ trans('main_trans.section_developer') }}</div>
-    </a>
+        <a href="{{ route('developers.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-building-community"></i>
+            <div data-i18n="Developers">{{ trans('main_trans.section_developer') }}</div>
+        </a>
     </li>
 
+    {{-- Real Estate Company --}}
     <li class="menu-item active">
-    <a href="{{ route('real-estate-company.index') }}" class="menu-link">
-        <i class="menu-icon tf-icons ti ti-building"></i>
-        <div data-i18n="real_estate_company">{{ trans('main_trans.real_estate_company') }}</div>
-    </a>
+        <a href="{{ route('real-estate-company.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-building"></i>
+            <div data-i18n="Real Estate Company">{{ trans('main_trans.real_estate_company') }}</div>
+        </a>
     </li>
 
-          <li class="menu-item active">
-      <a href="{{ route('about-us.index') }}" class="menu-link">
-          <i class="menu-icon tf-icons ti ti-building"></i>
-          <div data-i18n="About Us">{{ trans('main_trans.about_us') }}</div>
-      </a>
-      </li>
+    {{-- Separator --}}
+    <li class="menu-header small text-uppercase">
+        <span class="menu-header-text">{{ trans('main_trans.website_content') }}</span>
+    </li>
 
-      <li class="menu-item active">
-      <a href="{{ route('blogs.index') }}" class="menu-link">
-          <i class="menu-icon tf-icons ti ti-article"></i>
-          <div data-i18n="Blog">{{ trans('main_trans.blog') }}</div>
-      </a>
-      </li>
+    {{-- About Us --}}
+    <li class="menu-item active">
+        <a href="{{ route('about-us.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-info-circle"></i>
+            <div data-i18n="About Us">{{ trans('main_trans.about_us') }}</div>
+        </a>
+    </li>
 
-      {{-- <li class="menu-item active">
-      <a href="{{ route('awards.index') }}" class="menu-link">
-          <i class="menu-icon tf-icons ti ti-trophy"></i>
-          <div data-i18n="Awards">{{ trans('main_trans.awards') }}</div>
-      </a>
-      </li> --}}
+    {{-- Blog --}}
+    <li class="menu-item active">
+        <a href="{{ route('blogsection.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-article"></i>
+            <div data-i18n="Blog">{{ trans('main_trans.blog') }}</div>
+        </a>
+    </li>
 
-      <li class="menu-item active">
-      <a href="{{ route('contact-us.index') }}" class="menu-link">
-          <i class="menu-icon tf-icons ti ti-phone"></i>
-          <div data-i18n="Contact Us">{{ trans('main_trans.contact_us') }}</div>
-      </a>
-      </li>
+    {{-- Contact Us --}}
+    <li class="menu-item active">
+        <a href="{{ route('contact-us.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-phone"></i>
+            <div data-i18n="Contact Us">{{ trans('main_trans.contact_us') }}</div>
+        </a>
+    </li>
 
-      <li class="menu-item active">
-      <a href="{{ route('newsletter.index') }}" class="menu-link">
-          <i class="menu-icon tf-icons ti ti-mail"></i>
-          <div data-i18n="Newsletter">{{ trans('main_trans.newsletter') }}</div>
-      </a>
-      </li>
+    {{-- Separator --}}
+    <li class="menu-header small text-uppercase">
+        <span class="menu-header-text">{{ trans('main_trans.communication') }}</span>
+    </li>
 
-      <li class="menu-item active">
-      <a href="{{ route('bot-offers.index') }}" class="menu-link">
-          <i class="menu-icon tf-icons ti ti-robot"></i>
-          <div data-i18n="Bot Offers">{{ trans('main_trans.bot_offers_link') }}</div>
-      </a>
-      </li>
+    {{-- Newsletter --}}
+    <li class="menu-item active">
+        <a href="{{ route('newsletter.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-mail"></i>
+            <div data-i18n="Newsletter">{{ trans('main_trans.newsletter') }}</div>
+        </a>
+    </li>
+
+    {{-- Bot Offers --}}
+    <li class="menu-item active">
+        <a href="{{ route('bot-offers.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-robot"></i>
+            <div data-i18n="Bot Offers">{{ trans('main_trans.bot_offers_link') }}</div>
+        </a>
+    </li>
+
+    {{-- Contact Messages --}}
+    <li class="menu-item active">
+        <a href="{{ route('contact-messages.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-message-circle"></i>
+            <div data-i18n="Contact Messages">{{ trans('main_trans.contact_messages') }}</div>
+        </a>
+    </li>
       
-      <br>
-    
+    {{-- Separator --}}
+    <li class="menu-header small text-uppercase">
+        <span class="menu-header-text">{{ trans('main_trans.account') }}</span>
+    </li>
 
-
+    {{-- Logout --}}
     <li class="menu-item active">
-    <a href="javascript::void(0);" onclick="$('#logout_form').submit();" class="menu-link">
-        <i class="menu-icon tf-icons ti ti-app-window"></i>
-        <div data-i18n="Page 2">Logout</div>
-    </a>
+        <a href="javascript::void(0);" onclick="$('#logout_form').submit();" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-logout"></i>
+            <div data-i18n="Logout">{{ trans('main_trans.logout') }}</div>
+        </a>
     </li>
 </ul>
 </aside>

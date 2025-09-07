@@ -96,13 +96,16 @@
                                         </td>
                                         <td>
                                             <div class="btn-group" role="group">
-                                                <a href="{{ route('about-us.edit', $section->id) }}" class="btn btn-sm btn-warning">
+                                                <a href="{{ route('about-us.show', $section->id) }}" class="btn btn-sm btn-info" title="{{ trans('main_trans.actions_view') }}">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                                <a href="{{ route('about-us.edit', $section->id) }}" class="btn btn-sm btn-warning" title="{{ trans('main_trans.actions_edit') }}">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                                 <form action="{{ route('about-us.destroy', $section->id) }}" method="POST" class="d-inline" onsubmit="return confirm('{{ trans('main_trans.confirm_delete') }}')">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger">
+                                                    <button type="submit" class="btn btn-sm btn-danger" title="{{ trans('main_trans.actions_delete') }}">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
                                                 </form>

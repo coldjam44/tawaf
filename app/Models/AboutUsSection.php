@@ -64,7 +64,7 @@ class AboutUsSection extends Model
     public function getMainImageUrlAttribute()
     {
         if ($this->main_image) {
-            return asset('uploads/aboutus/' . $this->main_image);
+            return asset('about-us/main-images/' . $this->main_image);
         }
         return null;
     }

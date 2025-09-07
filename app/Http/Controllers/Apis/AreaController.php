@@ -17,6 +17,19 @@ class AreaController extends Controller
         try {
             $areas = Area::orderBy('name_' . app()->getLocale())->get();
             
+            // Transform main_image to full URL
+            $areas->each(function ($area) {
+                if ($area->main_image) {
+                    // Check if main image file exists
+                    $mainImagePath = public_path('areas/images/' . $area->main_image);
+                    if (file_exists($mainImagePath)) {
+                        $area->main_image = asset('areas/images/' . $area->main_image);
+                    } else {
+                        $area->main_image = null; // Set to null if file doesn't exist
+                    }
+                }
+            });
+            
             return response()->json([
                 'status' => 'success',
                 'message' => 'Areas retrieved successfully',
@@ -41,6 +54,7 @@ class AreaController extends Controller
                 'name_ar' => 'required|string|max:255',
                 'name_en' => 'required|string|max:255',
                 'slug' => 'required|string|max:255|unique:areas,slug',
+                'main_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
                 'about_community_overview_ar' => 'nullable|string',
                 'about_community_overview_en' => 'nullable|string',
                 'rental_sales_trends_ar' => 'nullable|string',
@@ -51,7 +65,22 @@ class AreaController extends Controller
                 'things_to_do_perks_en' => 'nullable|string'
             ]);
 
-            $area = Area::create($request->all());
+            $data = $request->except('main_image');
+            
+            // Handle image upload
+            if ($request->hasFile('main_image')) {
+                $image = $request->file('main_image');
+                $imageName = time() . '_' . $image->getClientOriginalName();
+                $image->move(public_path('areas/images'), $imageName);
+                $data['main_image'] = $imageName;
+            }
+
+            $area = Area::create($data);
+
+            // Transform main_image to full URL for response
+            if ($area->main_image) {
+                $area->main_image = asset('areas/images/' . $area->main_image);
+            }
 
             return response()->json([
                 'status' => 'success',
@@ -74,6 +103,17 @@ class AreaController extends Controller
     {
         try {
             $area = Area::findOrFail($id);
+            
+            // Transform main_image to full URL
+            if ($area->main_image) {
+                // Check if main image file exists
+                $mainImagePath = public_path('areas/images/' . $area->main_image);
+                if (file_exists($mainImagePath)) {
+                    $area->main_image = asset('areas/images/' . $area->main_image);
+                } else {
+                    $area->main_image = null; // Set to null if file doesn't exist
+                }
+            }
             
             return response()->json([
                 'status' => 'success',
@@ -101,6 +141,7 @@ class AreaController extends Controller
                 'name_ar' => 'sometimes|required|string|max:255',
                 'name_en' => 'sometimes|required|string|max:255',
                 'slug' => 'sometimes|required|string|max:255|unique:areas,slug,' . $id,
+                'main_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
                 'about_community_overview_ar' => 'nullable|string',
                 'about_community_overview_en' => 'nullable|string',
                 'rental_sales_trends_ar' => 'nullable|string',
@@ -111,7 +152,27 @@ class AreaController extends Controller
                 'things_to_do_perks_en' => 'nullable|string'
             ]);
 
-            $area->update($request->all());
+            $data = $request->except('main_image');
+            
+            // Handle image upload
+            if ($request->hasFile('main_image')) {
+                // Delete old image if exists
+                if ($area->main_image && file_exists(public_path('areas/images/' . $area->main_image))) {
+                    unlink(public_path('areas/images/' . $area->main_image));
+                }
+                
+                $image = $request->file('main_image');
+                $imageName = time() . '_' . $image->getClientOriginalName();
+                $image->move(public_path('areas/images'), $imageName);
+                $data['main_image'] = $imageName;
+            }
+
+            $area->update($data);
+
+            // Transform main_image to full URL for response
+            if ($area->main_image) {
+                $area->main_image = asset('areas/images/' . $area->main_image);
+            }
 
             return response()->json([
                 'status' => 'success',
@@ -164,6 +225,19 @@ class AreaController extends Controller
                         ->orWhere('name_en', 'LIKE', "%{$searchTerm}%")
                         ->get();
 
+            // Transform main_image to full URL
+            $areas->each(function ($area) {
+                if ($area->main_image) {
+                    // Check if main image file exists
+                    $mainImagePath = public_path('areas/images/' . $area->main_image);
+                    if (file_exists($mainImagePath)) {
+                        $area->main_image = asset('areas/images/' . $area->main_image);
+                    } else {
+                        $area->main_image = null; // Set to null if file doesn't exist
+                    }
+                }
+            });
+
             return response()->json([
                 'status' => 'success',
                 'message' => 'Search completed successfully',
@@ -212,6 +286,7 @@ class AreaController extends Controller
                 'name_en' => $area->name_en,
                 'name_ar' => $area->name_ar,
                 'slug' => $area->slug,
+                'main_image' => $area->main_image_url,
                 'about_community_overview_ar' => $area->about_community_overview_ar,
                 'about_community_overview_en' => $area->about_community_overview_en,
                 'rental_sales_trends_ar' => $area->rental_sales_trends_ar,

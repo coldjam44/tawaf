@@ -6,15 +6,31 @@
     <div class="col-xl">
         <div class="card mb-4">
 
-            {{-- عنوان الصفحة وزر الإضافة --}}
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <h3 class="text-center my-4">{{ trans('main_trans.projects') }}</h3>
-                <div class="text-right mb-3">
-                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#addProjectForm" aria-expanded="false" aria-controls="addProjectForm">
-                        <i class="fas fa-plus-circle"></i> {{ trans('main_trans.add') }}
-                    </button>
+                {{-- عنوان الصفحة وزر الإضافة --}}
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <div>
+                        <h3 class="text-center my-4">{{ trans('main_trans.projects') }}</h3>
+                        @if(request('area') || request('search'))
+                            <div class="text-muted small">
+                                <i class="fas fa-info-circle"></i>
+                                {{ trans('main_trans.showing') }} {{ $projects->total() }} {{ trans('main_trans.projects') }}
+                                @if(request('area'))
+                                    {{ trans('main_trans.in') }} {{ \App\Models\Area::find(request('area'))->name_en ?? 'Unknown' }}
+                                @endif
+                            </div>
+                        @else
+                            <div class="text-muted small">
+                                <i class="fas fa-info-circle"></i>
+                                {{ trans('main_trans.total') }}: {{ $projects->total() }} {{ trans('main_trans.projects') }}
+                            </div>
+                        @endif
+                    </div>
+                    <div class="text-right mb-3">
+                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#addProjectForm" aria-expanded="false" aria-controls="addProjectForm">
+                            <i class="fas fa-plus-circle"></i> {{ trans('main_trans.add') }}
+                        </button>
+                    </div>
                 </div>
-            </div>
 
             <div class="card-body">
 
@@ -73,6 +89,55 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
+
+                {{-- فورم الفلتر والبحث --}}
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-filter"></i> {{ trans('main_trans.filters') }}
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <form method="GET" action="{{ route('projects.index') }}" class="row g-3">
+                            {{-- فلتر المنطقة --}}
+                            <div class="col-md-4">
+                                <label for="area" class="form-label">
+                                    <i class="fas fa-map-marker-alt"></i> {{ trans('main_trans.area') }}
+                                </label>
+                                <select name="area" id="area" class="form-select">
+                                    <option value="">{{ trans('main_trans.all_areas') }}</option>
+                                    @foreach($areas as $area)
+                                        <option value="{{ $area->id }}" {{ request('area') == $area->id ? 'selected' : '' }}>
+                                            {{ app()->getLocale() == 'ar' ? $area->name_ar : $area->name_en }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            {{-- البحث --}}
+                            <div class="col-md-4">
+                                <label for="search" class="form-label">
+                                    <i class="fas fa-search"></i> {{ trans('main_trans.search') }}
+                                </label>
+                                <input type="text" name="search" id="search" class="form-control" 
+                                       value="{{ request('search') }}" 
+                                       placeholder="{{ trans('main_trans.search_placeholder') }}">
+                            </div>
+
+                            {{-- أزرار الإجراءات --}}
+                            <div class="col-md-4 d-flex align-items-end">
+                                <div class="btn-group w-100" role="group">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-search"></i> {{ trans('main_trans.filter') }}
+                                    </button>
+                                    <a href="{{ route('projects.index') }}" class="btn btn-outline-secondary">
+                                        <i class="fas fa-times"></i> {{ trans('main_trans.clear') }}
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
 
                 {{-- فورم الإضافة --}}
                 <div class="collapse" id="addProjectForm">

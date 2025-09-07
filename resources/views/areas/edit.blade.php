@@ -46,7 +46,7 @@
                 @endif
 
                 {{-- فورم التعديل --}}
-                <form action="{{ route('areas.update', $area->id) }}" method="POST">
+                <form action="{{ route('areas.update', $area->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -79,6 +79,28 @@
                                 @error('slug')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label for="main_image" class="form-label">{{ trans('main_trans.main_image') }}</label>
+                                <input type="file" name="main_image" id="main_image" class="form-control @error('main_image') is-invalid @enderror" accept="image/*">
+                                <small class="form-text text-muted">الصور المسموحة: JPG, PNG, GIF (حد أقصى 2MB)</small>
+                                @error('main_image')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                                
+                                @if($area->main_image)
+                                    <div class="mt-2">
+                                        <label class="form-label">الصورة الحالية:</label>
+                                        <div>
+                                            <img src="{{ $area->main_image_url }}" alt="{{ $area->name_ar }}" class="img-thumbnail" style="width: 150px; height: 150px; object-fit: cover;">
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>

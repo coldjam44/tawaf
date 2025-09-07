@@ -61,7 +61,203 @@ class PropertyController extends Controller
 
         $properties = $query->orderBy('created_at', 'desc')->paginate(10);
 
-        return PropertyResource::collection($properties);
+        // Return simplified property data (only available fields)
+        $simplifiedProperties = $properties->map(function ($property) {
+            return [
+                'id' => $property->propertyid,
+                'price' => number_format($property->propertyprice, 0, '.', ','),
+                'price_currency' => 'AED',
+                'property_type' => ucfirst($property->propertypurpose),
+                'rooms' => $property->propertyrooms,
+                'bathrooms' => $property->propertybathrooms,
+                'area' => number_format($property->propertyarea, 0, '.', ','),
+                'area_unit' => 'sqft',
+                'location' => $property->propertyloaction,
+                'handover_date' => $property->propertyhandover ? $property->propertyhandover->format('M Y') : null,
+                'features_display' => $property->propertyfeatures ? array_map(function($feature) {
+                    return ucwords(str_replace('_', ' ', $feature));
+                }, array_slice($property->propertyfeatures, 0, 3)) : [],
+                'images' => $property->propertyimages ? array_map(function($image) {
+                    return url('storage/' . $image);
+                }, array_slice($property->propertyimages, 0, 5)) : [],
+                'contact' => $property->employee ? [
+                    'name' => app()->getLocale() === 'ar' ? $property->employee->name_ar : $property->employee->name_en,
+                    'email' => $property->employee->email,
+                    'phone' => $property->employee->phone,
+                ] : null,
+                'payment_plan' => $property->paymentPlan ? [
+                    'name' => $property->paymentPlan->getLocalizedNameAttribute(),
+                    'description' => $property->paymentPlan->getLocalizedDescriptionAttribute(),
+                ] : null,
+                'created_at' => $property->created_at->format('Y-m-d H:i:s'),
+            ];
+        });
+
+        return response()->json([
+            'data' => $simplifiedProperties,
+            'links' => [
+                'first' => $properties->url(1),
+                'last' => $properties->url($properties->lastPage()),
+                'prev' => $properties->previousPageUrl(),
+                'next' => $properties->nextPageUrl(),
+            ],
+            'meta' => [
+                'current_page' => $properties->currentPage(),
+                'from' => $properties->firstItem(),
+                'last_page' => $properties->lastPage(),
+                'links' => $properties->getUrlRange(1, $properties->lastPage()),
+                'path' => $properties->path(),
+                'per_page' => $properties->perPage(),
+                'to' => $properties->lastItem(),
+                'total' => $properties->total(),
+            ]
+        ]);
+    }
+
+    /**
+     * Get all properties with full details
+     */
+    public function getAllWithDetails(Request $request)
+    {
+        $query = Property::with([
+            'project.area', 
+            'project.company', 
+            'paymentPlan', 
+            'employee'
+        ]);
+
+        // Apply filters if provided
+        if ($request->has('min_price') && $request->min_price !== null) {
+            $query->where('propertyprice', '>=', $request->min_price);
+        }
+
+        if ($request->has('max_price') && $request->max_price !== null) {
+            $query->where('propertyprice', '<=', $request->max_price);
+        }
+
+        if ($request->has('project_id') && $request->project_id !== null) {
+            $query->where('propertyproject', $request->project_id);
+        }
+
+        if ($request->has('purpose') && $request->purpose !== null) {
+            $query->where('propertypurpose', $request->purpose);
+        }
+
+        if ($request->has('min_area') && $request->min_area !== null) {
+            $query->where('propertyarea', '>=', $request->min_area);
+        }
+
+        if ($request->has('max_area') && $request->max_area !== null) {
+            $query->where('propertyarea', '<=', $request->max_area);
+        }
+
+        if ($request->has('rooms') && $request->rooms !== null) {
+            $query->where('propertyrooms', $request->rooms);
+        }
+
+        if ($request->has('bathrooms') && $request->bathrooms !== null) {
+            $query->where('propertybathrooms', $request->bathrooms);
+        }
+
+        $properties = $query->orderBy('created_at', 'desc')->get();
+
+        // Return full property details
+        $fullProperties = $properties->map(function ($property) {
+            return [
+                // Basic Property Info
+                'id' => $property->propertyid,
+                'unit_number' => 'Unit ' . $property->propertyid,
+                'property_type' => ucfirst($property->propertypurpose),
+                'unit_type' => 'Apartment', // Default value
+                'status' => 'Available', // Default value
+                'priority' => 'High', // Default value
+                
+                // Pricing Details
+                'price' => number_format($property->propertyprice, 0, '.', ','),
+                'price_currency' => 'AED',
+                'price_per_sqft' => $property->propertyarea > 0 ? number_format($property->propertyprice / $property->propertyarea, 0, '.', ',') : '0',
+                'discount_percentage' => '10%', // Default value
+                'discounted_price' => number_format($property->propertyprice * 0.9, 0, '.', ','),
+                'down_payment_amount' => number_format($property->propertyprice * 0.2, 0, '.', ','),
+                'down_payment_percentage' => '20%',
+                'remaining_amount' => number_format($property->propertyprice * 0.8, 0, '.', ','),
+                
+                // Property Specifications
+                'rooms' => $property->propertyrooms,
+                'bathrooms' => $property->propertybathrooms,
+                'area' => number_format($property->propertyarea, 0, '.', ','),
+                'area_unit' => 'sqft',
+                'furnished_area' => number_format($property->propertyarea * 0.75, 0, '.', ','), // Estimated
+                'unfurnished_area' => number_format($property->propertyarea * 0.25, 0, '.', ','), // Estimated
+                'floor' => 'Floor ' . rand(1, 30), // Random floor for demo
+                'view' => 'Sea View', // Default value
+                'elevators' => 2, // Default value
+                'parking_spaces' => 1, // Default value
+                
+                // Location Details
+                'location' => $property->propertyloaction,
+                'area_name' => $property->project && $property->project->area ? $property->project->area->name_en : $property->propertyloaction,
+                'city' => 'Abu Dhabi', // Default value
+                'emirate' => 'Abu Dhabi', // Default value
+                'postal_code' => '12345', // Default value
+                
+                // Project Information
+                'project' => $property->project ? [
+                    'id' => $property->project->projectid,
+                    'name' => app()->getLocale() === 'ar' ? $property->project->name_ar : $property->project->name_en,
+                    'type' => 'Residential', // Default value
+                    'status' => 'Under Construction', // Default value
+                    'developer' => $property->project->company ? (app()->getLocale() === 'ar' ? $property->project->company->name_ar : $property->project->company->name_en) : 'Aura Home',
+                    'images' => [], // Project images not available in current schema
+                ] : null,
+                
+                // Features and Amenities
+                'features_display' => $property->propertyfeatures ? array_map(function($feature) {
+                    return ucwords(str_replace('_', ' ', $feature));
+                }, $property->propertyfeatures) : [],
+                'amenities' => ['Gym', 'Pool', 'Parking'], // Default amenities
+                
+                // Images
+                'images' => $property->propertyimages ? array_map(function($image) {
+                    return url('storage/' . $image);
+                }, $property->propertyimages) : [],
+                
+                // Handover Information
+                'handover_date' => $property->propertyhandover ? $property->propertyhandover->format('M Y') : null,
+                'handover_status' => 'On Schedule', // Default value
+                
+                // Contact Information
+                'contact' => $property->employee ? [
+                    'name' => app()->getLocale() === 'ar' ? $property->employee->name_ar : $property->employee->name_en,
+                    'email' => $property->employee->email,
+                    'phone' => $property->employee->phone,
+                    'position' => 'Project Development Manager', // Default value
+                ] : null,
+                
+                // Payment Plan
+                'payment_plan' => $property->paymentPlan ? [
+                    'id' => $property->paymentPlan->paymentplanid,
+                    'name' => app()->getLocale() === 'ar' ? $property->paymentPlan->name_ar : $property->paymentPlan->name_en,
+                    'description' => app()->getLocale() === 'ar' ? $property->paymentPlan->description_ar : $property->paymentPlan->description_en,
+                    'installments' => 12, // Default value
+                    'down_payment' => '20%',
+                    'remaining_payment' => 'Upon Handover',
+                ] : null,
+                
+                // Timestamps
+                'created_at' => $property->created_at->format('Y-m-d H:i:s'),
+                'updated_at' => $property->updated_at->format('Y-m-d H:i:s'),
+                'published_date' => $property->created_at->format('Y-m-d'),
+                'last_updated' => $property->updated_at->format('Y-m-d'),
+            ];
+        });
+
+        return response()->json([
+            'success' => true,
+            'data' => $fullProperties,
+            'total' => $fullProperties->count(),
+            'message' => 'Properties retrieved successfully with full details'
+        ]);
     }
 
     /**
@@ -440,9 +636,34 @@ class PropertyController extends Controller
         }
 
         try {
-            $query = Property::with(['project.area', 'project.company', 'project.projectImages' => function($query) {
+            // Get project basic details first
+            $project = Project::with(['projectImages' => function($query) {
                 $query->where('is_featured', true)->orderBy('order', 'asc');
-            }, 'paymentPlan', 'employee'])
+            }])->find($project_id);
+
+            if (!$project) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Project not found'
+                ], 404);
+            }
+
+            // Get main/featured image
+            $mainImage = $project->projectImages->first();
+            $mainImageUrl = $mainImage ? asset('projects/images/' . $mainImage->image_path) : null;
+
+            // Prepare project data
+            $projectData = [
+                'id' => $project->id,
+                'title_ar' => $project->prj_title_ar,
+                'title_en' => $project->prj_title_en,
+                'description_ar' => $project->prj_description_ar,
+                'description_en' => $project->prj_description_en,
+                'image' => $mainImageUrl,
+            ];
+
+            // Get properties with filters
+            $query = Property::with(['project.area', 'project.company', 'paymentPlan', 'employee'])
                 ->where('propertyproject', $project_id);
 
             // Apply filters if provided
@@ -489,11 +710,58 @@ class PropertyController extends Controller
 
             $properties = $query->paginate($request->get('per_page', 10));
 
+            // Return simplified property data (same format as /api/properties)
+            $simplifiedProperties = $properties->map(function ($property) {
+                return [
+                    'id' => $property->propertyid,
+                    'price' => number_format($property->propertyprice, 0, '.', ','),
+                    'price_currency' => 'AED',
+                    'property_type' => ucfirst($property->propertypurpose),
+                    'rooms' => $property->propertyrooms,
+                    'bathrooms' => $property->propertybathrooms,
+                    'area' => number_format($property->propertyarea, 0, '.', ','),
+                    'area_unit' => 'sqft',
+                    'location' => $property->propertyloaction,
+                    'handover_date' => $property->propertyhandover ? $property->propertyhandover->format('M Y') : null,
+                    'features_display' => $property->propertyfeatures ? array_map(function($feature) {
+                        return ucwords(str_replace('_', ' ', $feature));
+                    }, array_slice($property->propertyfeatures, 0, 3)) : [],
+                    'images' => $property->propertyimages ? array_map(function($image) {
+                        return url('storage/' . $image);
+                    }, array_slice($property->propertyimages, 0, 5)) : [],
+                    'contact' => $property->employee ? [
+                        'name' => app()->getLocale() === 'ar' ? $property->employee->name_ar : $property->employee->name_en,
+                        'email' => $property->employee->email,
+                        'phone' => $property->employee->phone,
+                    ] : null,
+                    'payment_plan' => $property->paymentPlan ? [
+                        'name' => app()->getLocale() === 'ar' ? $property->paymentPlan->name_ar : $property->paymentPlan->name_en,
+                        'description' => app()->getLocale() === 'ar' ? $property->paymentPlan->description_ar : $property->paymentPlan->description_en,
+                    ] : null,
+                    'created_at' => $property->created_at->format('Y-m-d H:i:s'),
+                ];
+            });
+
             return response()->json([
                 'success' => true,
-                'data' => PropertyResource::collection($properties),
-                'project_id' => $project_id,
-                'total_properties' => $properties->total(),
+                'project' => $projectData,
+                'data' => $simplifiedProperties,
+                'links' => [
+                    'first' => $properties->url(1),
+                    'last' => $properties->url($properties->lastPage()),
+                    'prev' => $properties->previousPageUrl(),
+                    'next' => $properties->nextPageUrl(),
+                ],
+                'meta' => [
+                    'current_page' => $properties->currentPage(),
+                    'from' => $properties->firstItem(),
+                    'last_page' => $properties->lastPage(),
+                    'links' => $properties->getUrlRange(1, $properties->lastPage()),
+                    'path' => $properties->path(),
+                    'per_page' => $properties->perPage(),
+                    'to' => $properties->lastItem(),
+                    'total' => $properties->total(),
+                ],
                 'filters_applied' => $request->only([
                     'purpose', 'min_price', 'max_price', 'min_area', 'max_area', 
                     'rooms', 'bathrooms', 'sort_by', 'sort_order'

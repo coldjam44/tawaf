@@ -37,7 +37,7 @@ class BlogImage extends Model
      */
     public function getImageUrlAttribute()
     {
-        return asset('uploads/blog/images/' . $this->image_path);
+        return asset('blogsfiles/images/' . $this->image_path);
     }
 
     /**

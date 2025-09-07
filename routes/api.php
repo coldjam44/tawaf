@@ -164,7 +164,7 @@ Route::prefix('about-us')->group(function () {
 // ========================================
 // BLOG API ROUTES
 // ========================================
-Route::prefix('blogs')->group(function () {
+Route::prefix('blogsection')->group(function () {
     Route::get('/', [BlogController::class, 'index']);
     Route::post('/', [BlogController::class, 'store']);
     Route::get('/{id}', [BlogController::class, 'show']);
@@ -272,7 +272,7 @@ Route::prefix('search')->group(function () {
     Route::get('/areas', [AreaController::class, 'search']);
     
     // Search blogs
-    Route::get('/blogs', [BlogController::class, 'search']);
+    Route::get('/blogsection', [BlogController::class, 'search']);
     
     // Search real estate companies
     Route::get('/real-estate-company', [RealEstateCompanyController::class, 'search']);
@@ -297,6 +297,7 @@ Route::prefix('dashboard')->group(function () {
 // Property API Routes
 Route::prefix('properties')->group(function () {
     Route::get('/', [PropertyController::class, 'index']);
+    Route::get('/all-details', [PropertyController::class, 'getAllWithDetails']);
     Route::get('/search', [PropertyController::class, 'search']);
     Route::post('/', [PropertyController::class, 'store']);
     Route::get('/{property}', [PropertyController::class, 'show']);
@@ -322,4 +323,13 @@ Route::get('/project/basic-details', [PropertyController::class, 'getAllProjects
 Route::prefix('bot')->group(function () {
     // Get all projects that are in the bot offer list
     Route::get('/offers', [BotOffersController::class, 'getBotProjects']);
+});
+
+// ========================================
+// CONTACT MESSAGES API ROUTES
+// ========================================
+Route::prefix('contact-messages')->group(function () {
+    Route::post('/', [App\Http\Controllers\Api\ContactMessageController::class, 'store']);
+    Route::get('/', [App\Http\Controllers\Api\ContactMessageController::class, 'index']);
+    Route::get('/{id}', [App\Http\Controllers\Api\ContactMessageController::class, 'show']);
 });

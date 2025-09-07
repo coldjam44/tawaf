@@ -17,25 +17,47 @@ class BlogController extends Controller
     public function index(): JsonResponse
     {
         try {
-            $blogs = Blog::with(['images' => function($query) {
-                $query->orderBy('order_index', 'asc');
-            }])->orderBy('order_index', 'asc')->orderBy('created_at', 'desc')->get();
+            // Only get published and active blogs
+            $blogs = Blog::where('status', 'published')
+            ->where('is_active', true)
+            ->orderBy('order_index', 'asc')
+            ->orderBy('created_at', 'desc')
+            ->get();
             
-            // Transform main_image to full URL
+            // Transform main_image and images to full URLs
             $blogs->each(function ($blog) {
                 if ($blog->main_image) {
-                    $blog->main_image = asset('uploads/blog/main-images/' . $blog->main_image);
+                    // Check if main image file exists
+                    $mainImagePath = public_path('blogsfiles/main-images/' . $blog->main_image);
+                    if (file_exists($mainImagePath)) {
+                        $blog->main_image = asset('blogsfiles/main-images/' . $blog->main_image);
+                    } else {
+                        $blog->main_image = null; // Set to null if file doesn't exist
+                    }
                 }
+                
+                // Load and transform additional images to just URLs
+                $blogImages = BlogImage::where('blog_id', $blog->id)
+                    ->where('is_active', true)
+                    ->orderBy('order_index', 'asc')
+                    ->get();
+                
+                $blog->images = $blogImages->filter(function ($image) {
+                    $imagePath = public_path('blogsfiles/images/' . $image->image_path);
+                    return file_exists($imagePath);
+                })->map(function ($image) {
+                    return asset('blogsfiles/images/' . $image->image_path);
+                })->values(); // Reset array keys
             });
             
             return response()->json([
-                'status' => 'success',
+                'success' => true,
                 'message' => 'Blogs retrieved successfully',
                 'data' => $blogs
             ], 200);
         } catch (\Exception $e) {
             return response()->json([
-                'status' => 'error',
+                'success' => false,
                 'message' => 'Failed to retrieve blogs',
                 'error' => $e->getMessage()
             ], 500);
@@ -72,7 +94,7 @@ class BlogController extends Controller
                 $mainImage = $request->file('main_image');
                 $mainImageName = time() . '_main_' . Str::slug($request->title_en ?: $request->title_ar) . '.' . $mainImage->getClientOriginalExtension();
                 
-                $uploadPath = public_path('uploads/blog/main-images');
+                $uploadPath = public_path('blogsfiles/main-images');
                 if (!file_exists($uploadPath)) {
                     mkdir($uploadPath, 0755, true);
                 }
@@ -102,7 +124,7 @@ class BlogController extends Controller
                 $captionsAr = $request->input('caption_ar', []);
                 $captionsEn = $request->input('caption_en', []);
 
-                $uploadPath = public_path('uploads/blog/images');
+                $uploadPath = public_path('blogsfiles/images');
                 if (!file_exists($uploadPath)) {
                     mkdir($uploadPath, 0755, true);
                 }
@@ -131,7 +153,7 @@ class BlogController extends Controller
 
             // Transform main_image to full URL
             if ($blog->main_image) {
-                $blog->main_image = asset('uploads/blog/main-images/' . $blog->main_image);
+                $blog->main_image = asset('blogsfiles/main-images/' . $blog->main_image);
             }
 
             return response()->json([
@@ -160,7 +182,23 @@ class BlogController extends Controller
             
             // Transform main_image to full URL
             if ($blog->main_image) {
-                $blog->main_image = asset('uploads/blog/main-images/' . $blog->main_image);
+                // Check if main image file exists
+                $mainImagePath = public_path('blogsfiles/main-images/' . $blog->main_image);
+                if (file_exists($mainImagePath)) {
+                    $blog->main_image = asset('blogsfiles/main-images/' . $blog->main_image);
+                } else {
+                    $blog->main_image = null; // Set to null if file doesn't exist
+                }
+            }
+            
+            // Transform additional images to just URLs
+            if ($blog->images) {
+                $blog->images = $blog->images->filter(function ($image) {
+                    $imagePath = public_path('blogsfiles/images/' . $image->image_path);
+                    return file_exists($imagePath);
+                })->map(function ($image) {
+                    return asset('blogsfiles/images/' . $image->image_path);
+                });
             }
             
             return response()->json([
@@ -206,14 +244,14 @@ class BlogController extends Controller
             // Handle main image upload
             if ($request->hasFile('main_image')) {
                 // Delete old main image if exists
-                if ($blog->main_image && file_exists(public_path('uploads/blog/main-images/' . $blog->main_image))) {
-                    unlink(public_path('uploads/blog/main-images/' . $blog->main_image));
+                if ($blog->main_image && file_exists(public_path('blogsfiles/main-images/' . $blog->main_image))) {
+                    unlink(public_path('blogsfiles/main-images/' . $blog->main_image));
                 }
 
                 $mainImage = $request->file('main_image');
                 $mainImageName = time() . '_main_' . Str::slug($request->title_en ?: $request->title_ar) . '.' . $mainImage->getClientOriginalExtension();
                 
-                $uploadPath = public_path('uploads/blog/main-images');
+                $uploadPath = public_path('blogsfiles/main-images');
                 if (!file_exists($uploadPath)) {
                     mkdir($uploadPath, 0755, true);
                 }
@@ -243,7 +281,7 @@ class BlogController extends Controller
                 $captionsAr = $request->input('caption_ar', []);
                 $captionsEn = $request->input('caption_en', []);
 
-                $uploadPath = public_path('uploads/blog/images');
+                $uploadPath = public_path('blogsfiles/images');
                 if (!file_exists($uploadPath)) {
                     mkdir($uploadPath, 0755, true);
                 }
@@ -272,7 +310,7 @@ class BlogController extends Controller
 
             // Transform main_image to full URL
             if ($blog->main_image) {
-                $blog->main_image = asset('uploads/blog/main-images/' . $blog->main_image);
+                $blog->main_image = asset('blogsfiles/main-images/' . $blog->main_image);
             }
 
             return response()->json([
@@ -298,14 +336,14 @@ class BlogController extends Controller
             $blog = Blog::with('images')->findOrFail($id);
             
             // Delete main image if exists
-            if ($blog->main_image && file_exists(public_path('uploads/blog/main-images/' . $blog->main_image))) {
-                unlink(public_path('uploads/blog/main-images/' . $blog->main_image));
+            if ($blog->main_image && file_exists(public_path('blogsfiles/main-images/' . $blog->main_image))) {
+                unlink(public_path('blogsfiles/main-images/' . $blog->main_image));
             }
 
             // Delete additional images
             foreach ($blog->images as $image) {
-                if (file_exists(public_path('uploads/blog/images/' . $image->image_path))) {
-                    unlink(public_path('uploads/blog/images/' . $image->image_path));
+                if (file_exists(public_path('blogsfiles/images/' . $image->image_path))) {
+                    unlink(public_path('blogsfiles/images/' . $image->image_path));
                 }
             }
 
@@ -335,8 +373,8 @@ class BlogController extends Controller
             $image = BlogImage::where('blog_id', $blogId)->findOrFail($imageId);
             
             // Delete image file
-            if (file_exists(public_path('uploads/blog/images/' . $image->image_path))) {
-                unlink(public_path('uploads/blog/images/' . $image->image_path));
+            if (file_exists(public_path('blogsfiles/images/' . $image->image_path))) {
+                unlink(public_path('blogsfiles/images/' . $image->image_path));
             }
 
             $image->delete();
@@ -363,6 +401,27 @@ class BlogController extends Controller
             $blog = Blog::with(['images' => function($query) {
                 $query->orderBy('order_index', 'asc');
             }])->where('slug', $slug)->firstOrFail();
+            
+            // Transform main_image to full URL
+            if ($blog->main_image) {
+                // Check if main image file exists
+                $mainImagePath = public_path('blogsfiles/main-images/' . $blog->main_image);
+                if (file_exists($mainImagePath)) {
+                    $blog->main_image = asset('blogsfiles/main-images/' . $blog->main_image);
+                } else {
+                    $blog->main_image = null; // Set to null if file doesn't exist
+                }
+            }
+            
+            // Transform additional images to just URLs
+            if ($blog->images) {
+                $blog->images = $blog->images->filter(function ($image) {
+                    $imagePath = public_path('blogsfiles/images/' . $image->image_path);
+                    return file_exists($imagePath);
+                })->map(function ($image) {
+                    return asset('blogsfiles/images/' . $image->image_path);
+                });
+            }
             
             return response()->json([
                 'status' => 'success',

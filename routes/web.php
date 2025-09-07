@@ -31,6 +31,7 @@ use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\ContactMessageController;
 
 
 use App\Models\customerreview;
@@ -156,15 +157,16 @@ Route::group(
         Route::get('about-us', [AboutUsController::class, 'index'])->name('about-us.index');
         Route::get('about-us/create', [AboutUsController::class, 'create'])->name('about-us.create');
         Route::post('about-us', [AboutUsController::class, 'store'])->name('about-us.store');
+        Route::get('about-us/{id}', [AboutUsController::class, 'show'])->name('about-us.show');
         Route::get('about-us/{id}/edit', [AboutUsController::class, 'edit'])->name('about-us.edit');
         Route::put('about-us/{id}', [AboutUsController::class, 'update'])->name('about-us.update');
         Route::delete('about-us/{id}', [AboutUsController::class, 'destroy'])->name('about-us.destroy');
-        Route::get('about-us/show', [AboutUsController::class, 'show'])->name('about-us.show');
+        Route::get('about-us/public/show', [AboutUsController::class, 'showPublic'])->name('about-us.public.show');
         Route::delete('about-us/{sectionId}/images/{imageId}', [AboutUsController::class, 'deleteImage'])->name('about-us.delete-image');
 
         // Blog Routes
-        Route::resource('blogs', BlogController::class);
-        Route::delete('blogs/{blogId}/images/{imageId}', [BlogController::class, 'deleteImage'])->name('blogs.delete-image');
+        Route::resource('blogsection', BlogController::class);
+        Route::delete('blogsection/{blogId}/images/{imageId}', [BlogController::class, 'deleteImage'])->name('blogsection.delete-image');
 
         // Awards Routes
         Route::get('awards', [App\Http\Controllers\AwardController::class, 'index'])->name('awards.index');
@@ -178,6 +180,11 @@ Route::group(
         // Bot Offers Routes
         Route::get('bot-offers', [App\Http\Controllers\BotOffersController::class, 'index'])->name('bot-offers.index');
         Route::post('bot-offers/{id}/toggle', [App\Http\Controllers\BotOffersController::class, 'toggle'])->name('bot-offers.toggle');
+
+        // Contact Messages Routes
+        Route::resource('contact-messages', ContactMessageController::class);
+        Route::post('contact-messages/{id}/toggle-read', [ContactMessageController::class, 'toggleRead'])->name('contact-messages.toggle-read');
+        Route::get('contact-messages/export/excel', [ContactMessageController::class, 'export'])->name('contact-messages.export');
 
         // Expert Team Routes
         Route::get('expert-team', [App\Http\Controllers\ExpertTeamController::class, 'index'])->name('expert-team.index');
@@ -216,6 +223,7 @@ Route::group(
 
         // Newsletter Routes
         Route::resource('newsletter', NewsletterController::class);
+        Route::get('newsletter/export/excel', [NewsletterController::class, 'export'])->name('newsletter.export');
 
         // Properties Routes
 Route::resource('properties', PropertyController::class);

@@ -40,8 +40,8 @@ class ProjectController extends Controller
             });
         }
         
-        $projects = $query->paginate(10);
-        $areas = Area::all();
+        $projects = $query->orderBy('created_at', 'desc')->paginate(10);
+        $areas = Area::orderBy('name_en')->get();
         
         return view('projects.index', compact('projects', 'areas'));
     }

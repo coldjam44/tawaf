@@ -34,22 +34,14 @@ id="layout-navbar">
   </div>
 
   <ul class="navbar-nav flex-row align-items-center ms-auto">
-       <!-- Language -->
-       <li class="nav-item dropdown-language dropdown me-2 me-xl-0">
-        <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-          <i class="ti ti-language rounded-circle ti-md"></i>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-end">
-            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                <li>
-                    <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-                        <span class="align-middle">{{ $properties['native'] }}</span>
-                    </a>
-                </li>
-            @endforeach
-        </ul>
+       <!-- Language Toggle -->
+       <li class="nav-item me-2 me-xl-0">
+        <button class="btn btn-outline-secondary btn-sm" id="languageToggle" onclick="toggleLanguage()">
+          <i class="ti ti-language me-1"></i>
+          <span id="currentLang">{{ app()->getLocale() == 'ar' ? 'العربية' : 'English' }}</span>
+        </button>
       </li>
-      <!--/ Language -->
+      <!--/ Language Toggle -->
 
     <!-- User -->
     <li class="nav-item navbar-dropdown dropdown-user dropdown">
