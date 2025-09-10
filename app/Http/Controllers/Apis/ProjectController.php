@@ -323,6 +323,9 @@ class ProjectController extends Controller
                 
                 // Organize images by type - only image_path URLs
                 $project->images = [
+                    'main' => $projectImages->where('type', 'main')->pluck('image_path')->map(function ($path) {
+                        return asset('projects/images/' . $path);
+                    })->values(),
                     'interior' => $projectImages->where('type', 'interior')->pluck('image_path')->map(function ($path) {
                         return asset('projects/images/' . $path);
                     })->values(),
@@ -640,6 +643,9 @@ class ProjectController extends Controller
                 
                 // Organize images by type - only image_path URLs
                 $project->images = [
+                    'main' => $projectImages->where('type', 'main')->pluck('image_path')->map(function ($path) {
+                        return asset('projects/images/' . $path);
+                    })->values(),
                     'interior' => $projectImages->where('type', 'interior')->pluck('image_path')->map(function ($path) {
                         return asset('projects/images/' . $path);
                     })->values(),

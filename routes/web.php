@@ -29,6 +29,7 @@ use App\Http\Controllers\ProjectContentBlockController;
 use App\Http\Controllers\ProjectContentBlockImageController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\ContactMessageController;
@@ -167,6 +168,9 @@ Route::group(
         // Blog Routes
         Route::resource('blogsection', BlogController::class);
         Route::delete('blogsection/{blogId}/images/{imageId}', [BlogController::class, 'deleteImage'])->name('blogsection.delete-image');
+
+        // Messages Routes
+        Route::resource('messages', MessagesController::class);
 
         // Awards Routes
         Route::get('awards', [App\Http\Controllers\AwardController::class, 'index'])->name('awards.index');

@@ -24,9 +24,13 @@
                             <i class="fas fa-award me-1"></i>
                             {{ trans('main_trans.our_achievement') }}
                         </a>
-                        <a href="{{ route('expert-team.index') }}" class="btn btn-info">
+                        <a href="{{ route('expert-team.index') }}" class="btn btn-info me-2">
                             <i class="fas fa-users me-1"></i>
                             {{ trans('main_trans.expert_team') }}
+                        </a>
+                        <a href="{{ route('messages.index') }}" class="btn btn-dark">
+                            <i class="fas fa-envelope me-1"></i>
+                            {{ trans('main_trans.our_messages') }}
                         </a>
                     </div>
                 </div>

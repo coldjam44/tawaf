@@ -15,6 +15,7 @@ use App\Http\Controllers\Apis\DeveloperController;
 use App\Http\Controllers\Apis\RealEstateCompanyController;
 use App\Http\Controllers\Apis\AboutUsController;
 use App\Http\Controllers\Apis\BlogController;
+use App\Http\Controllers\Apis\MessagesController;
 use App\Http\Controllers\Apis\AwardController;
 use App\Http\Controllers\Apis\ExpertTeamController;
 use App\Http\Controllers\Apis\AchievementController;
@@ -174,6 +175,15 @@ Route::prefix('blogsection')->group(function () {
 });
 
 // ========================================
+// MESSAGES API ROUTES
+// ========================================
+Route::prefix('messages')->group(function () {
+    Route::get('/', [MessagesController::class, 'apiIndex']);
+    Route::get('/list', [MessagesController::class, 'apiList']);
+    Route::get('/{id}', [MessagesController::class, 'apiShow']);
+});
+
+// ========================================
 // AWARDS API ROUTES
 // ========================================
 Route::prefix('awards')->group(function () {
@@ -298,6 +308,7 @@ Route::prefix('dashboard')->group(function () {
 Route::prefix('properties')->group(function () {
     Route::get('/', [PropertyController::class, 'index']);
     Route::get('/all-details', [PropertyController::class, 'getAllWithDetails']);
+    Route::get('/all-details/{id}', [PropertyController::class, 'getAllWithDetailsbyid']);
     Route::get('/search', [PropertyController::class, 'search']);
     Route::post('/', [PropertyController::class, 'store']);
     Route::get('/{property}', [PropertyController::class, 'show']);

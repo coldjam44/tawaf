@@ -1,0 +1,180 @@
+{
+	"info": {
+		"_postman_id": "messages-api-collection",
+		"name": "Messages API Collection",
+		"description": "Basic API endpoints for Messages management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Messages",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/messages",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"messages"
+					]
+				},
+				"description": "Get all messages with full details and images"
+			},
+			"response": [
+				{
+					"name": "Success Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/messages",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"messages"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Messages retrieved successfully\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name_ar\": \"خالد منصور\",\n            \"name_en\": \"Khaled Mansour\",\n            \"position_ar\": \"المدير العام\",\n            \"position_en\": \"General Manager\",\n            \"message_ar\": \"مرحباً بكم في شركة منصور العقارية...\",\n            \"message_en\": \"Welcome to Mansour Real Estate...\",\n            \"created_at\": \"2025-09-08T06:11:40.000000Z\",\n            \"updated_at\": \"2025-09-08T06:12:56.000000Z\",\n            \"image_url\": \"https://realestate.azsystems.tech/messagesfiles/1757312077_main_Layan_Abdulrahman.jpg\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Messages List (IDs & Names)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/messages/list",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"messages",
+						"list"
+					]
+				},
+				"description": "Get list of all messages with ID and names only"
+			},
+			"response": [
+				{
+					"name": "Success Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/messages/list",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"messages",
+								"list"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Messages list retrieved successfully\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name_ar\": \"خالد منصور\",\n            \"name_en\": \"Khaled Mansour\"\n        },\n        {\n            \"id\": 2,\n            \"name_ar\": \"ليان عبدالرحمن\",\n            \"name_en\": \"Layan Abdulrahman\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Message by ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/messages/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"messages",
+						"1"
+					]
+				},
+				"description": "Get specific message by ID with full details"
+			},
+			"response": [
+				{
+					"name": "Success Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/messages/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"messages",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Message retrieved successfully\",\n    \"data\": {\n        \"id\": 1,\n        \"name_ar\": \"خالد منصور\",\n        \"name_en\": \"Khaled Mansour\",\n        \"position_ar\": \"المدير العام\",\n        \"position_en\": \"General Manager\",\n        \"message_ar\": \"مرحباً بكم في شركة منصور العقارية...\",\n        \"message_en\": \"Welcome to Mansour Real Estate...\",\n        \"created_at\": \"2025-09-08T06:11:40.000000Z\",\n        \"updated_at\": \"2025-09-08T06:12:56.000000Z\",\n        \"image_url\": \"https://realestate.azsystems.tech/messagesfiles/1757312077_main_Layan_Abdulrahman.jpg\"\n    }\n}"
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://realestate.azsystems.tech",
+			"type": "string"
+		}
+	]
+}

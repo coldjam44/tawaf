@@ -261,6 +261,166 @@ class PropertyController extends Controller
     }
 
     /**
+     * Get property with full details by ID
+     */
+    public function getAllWithDetailsbyid(Request $request, $id)
+    {
+        $validator = Validator::make(['id' => $id], [
+            'id' => 'required|exists:properties,propertyid'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation failed',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        try {
+            $property = Property::with([
+                'project.area', 
+                'project.company', 
+                'paymentPlan', 
+                'employee'
+            ])->where('propertyid', $id)->first();
+
+            if (!$property) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Property not found'
+                ], 404);
+            }
+
+            // Get property images from JSON field
+            $images = [];
+            if ($property->propertyimages && is_array($property->propertyimages)) {
+                foreach ($property->propertyimages as $image) {
+                    if ($image) {
+                        $images[] = asset('properties/images/' . $image);
+                    }
+                }
+            }
+
+            // Calculate pricing details
+            $price = $property->propertyprice;
+            $discountPercentage = 10; // Default discount
+            $discountedPrice = $price * (1 - $discountPercentage / 100);
+            $downPaymentPercentage = 20; // Default down payment percentage
+            $downPaymentAmount = $discountedPrice * ($downPaymentPercentage / 100);
+            $remainingAmount = $discountedPrice - $downPaymentAmount;
+            $pricePerSqft = $property->propertyarea > 0 ? $price / $property->propertyarea : 0;
+
+            // Get property features
+            $features = $property->propertyfeatures ?? [];
+            $featuresDisplay = is_array($features) ? $features : [];
+
+            // Build full property details
+            $fullProperty = [
+                'id' => $property->propertyid,
+                'unit_number' => 'Unit ' . $property->propertyid,
+                'property_type' => ucfirst($property->propertypurpose ?? 'Sale'),
+                'unit_type' => 'Apartment', // Default value
+                'status' => 'Available', // Default value
+                'priority' => 'High', // Default value
+                'price' => number_format($price, 0, '.', ','),
+                'price_currency' => 'AED',
+                'price_per_sqft' => number_format($pricePerSqft, 0, '.', ','),
+                'discount_percentage' => $discountPercentage . '%',
+                'discounted_price' => number_format($discountedPrice, 0, '.', ','),
+                'down_payment_amount' => number_format($downPaymentAmount, 0, '.', ','),
+                'down_payment_percentage' => $downPaymentPercentage . '%',
+                'remaining_amount' => number_format($remainingAmount, 0, '.', ','),
+                'rooms' => $property->propertyrooms,
+                'bathrooms' => $property->propertybathrooms,
+                'area' => number_format($property->propertyarea, 0, '.', ','),
+                'area_unit' => 'sqft',
+                'furnished_area' => number_format($property->propertyarea * 0.75, 0, '.', ','), // 75% furnished
+                'unfurnished_area' => number_format($property->propertyarea * 0.25, 0, '.', ','), // 25% unfurnished
+                'floor' => 'Floor ' . rand(1, 30), // Random floor for demo
+                'view' => 'Sea View', // Default value
+                'elevators' => 2, // Default value
+                'parking_spaces' => 1, // Default value
+                'location' => $property->propertyloaction ?? 'Al Reem Island',
+                'area_name' => $property->project && $property->project->area ? 
+                    (app()->getLocale() === 'ar' ? $property->project->area->area_name_ar : $property->project->area->area_name_en) : 
+                    'Al Reem Island',
+                'city' => 'Abu Dhabi', // Default value
+                'emirate' => 'Abu Dhabi', // Default value
+                'postal_code' => '12345', // Default value
+                
+                // Project Information
+                'project' => [
+                    'id' => $property->project ? $property->project->id : null,
+                    'name' => $property->project ? (app()->getLocale() === 'ar' ? $property->project->prj_title_ar : $property->project->prj_title_en) : null,
+                    'type' => 'Residential', // Default value
+                    'status' => 'Under Construction', // Default value
+                    'developer' => $property->project && $property->project->company ? 
+                        (app()->getLocale() === 'ar' ? $property->project->company->company_name_ar : $property->project->company->company_name_en) : null,
+                    'images' => [] // Default empty array
+                ],
+                
+                'features_display' => $featuresDisplay,
+                'amenities' => ['Gym', 'Pool', 'Parking'], // Default amenities
+                'images' => $images,
+                'handover_date' => $property->propertyhandover ? $property->propertyhandover->format('M Y') : 'Sep 2025',
+                'handover_status' => 'On Schedule', // Default value
+                
+                // Contact Information
+                'contact' => $property->employee ? [
+                    'name' => (app()->getLocale() === 'ar' ? $property->employee->name_ar : $property->employee->name_en) . ' – Project Development Manager',
+                    'email' => $property->employee->email,
+                    'phone' => $property->employee->phone,
+                    'position' => 'Project Development Manager',
+                    'urlimage' => $property->employee->image ? url('storage/developers/' . $property->employee->image) : null,
+                ] : [
+                    'name' => 'Mohamed Ali – Project Development Manager',
+                    'email' => 'mohamed.ali@aurahome.ae',
+                    'phone' => '+971 50 123 4567',
+                    'position' => 'Project Development Manager',
+                    'urlimage' => null,
+                ],
+                
+                // Payment Plan
+                'payment_plan' => $property->paymentPlan ? [
+                    'id' => $property->paymentPlan->paymentplanid,
+                    'name' => app()->getLocale() === 'ar' ? $property->paymentPlan->name_ar : $property->paymentPlan->name_en,
+                    'description' => app()->getLocale() === 'ar' ? $property->paymentPlan->description_ar : $property->paymentPlan->description_en,
+                    'installments' => 12,
+                    'down_payment' => '20%',
+                    'remaining_payment' => 'Upon Handover',
+                ] : [
+                    'id' => null,
+                    'name' => '12 Months Installments',
+                    'description' => 'Pay the amount over 12 monthly installments',
+                    'installments' => 12,
+                    'down_payment' => '20%',
+                    'remaining_payment' => 'Upon Handover',
+                ],
+                
+                // Timestamps
+                'created_at' => $property->created_at->format('Y-m-d H:i:s'),
+                'updated_at' => $property->updated_at->format('Y-m-d H:i:s'),
+                'published_date' => $property->created_at->format('Y-m-d'),
+                'last_updated' => $property->updated_at->format('Y-m-d'),
+            ];
+
+            return response()->json([
+                'success' => true,
+                'data' => $fullProperty,
+                'message' => 'Property retrieved successfully with full details'
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error loading property details',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
